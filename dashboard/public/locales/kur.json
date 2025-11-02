@@ -1,0 +1,348 @@
+{
+  "name": "Naw",
+  "status": "Dox",
+  "address": "Edrês",
+  "users": "Bekarhêneran",
+  "nodes": "Nodekan",
+  "services": "Rajekan",
+  "hosts": "Hostkan",
+  "username": "Nawî Bekarhêneran",
+  "password": "Têperrewişe",
+  "inbounds": "înbawendkan",
+  "submit": "Nardin",
+  "login": "Çûnejûrewe",
+  "edit": "Desitkarîkirdn",
+  "actions": "Fermankan",
+  "settings": "Sazkarîyekan",
+  "logs": "Tomarekan",
+  "note": "Têbînî",
+  "config": "Kanfîg",
+  "tag": "Tag",
+  "protocol": "Konûs",
+  "online": "Serhêll",
+  "offline": "Derhêll",
+  "not_connected": "Piçrraw",
+  "apply": "Guncandin",
+  "port": "Port",
+  "mux": "Mux",
+  "fragment": "Fragment",
+  "enabled": "Çalake",
+  "activated": "Bizvandî",
+  "unlimited": "bêsnûr",
+  "left": "Mawe",
+  "reached": "Tewawbowe",
+  "inactive": "Nabizvand",
+  "active": "Bizvandî",
+  "cancel": "Hellweşênerewe",
+  "disabled": "Naçalak",
+  "language": "Ziman",
+  "theme": "Wapêşandan",
+  "pattern": "Şêwe",
+  "result": "Berhem",
+  "create": "Dirust kirdin",
+  "path": "Path",
+  "host": "Host",
+  "alpn": "ALPN",
+  "security": "Asayiş",
+  "sni": "SNI",
+  "user_info": "Zanyarî bekarhêneran",
+  "subscription": "Beşdarî",
+  "subscription_link": "Link Beşdarî",
+  "fingerprint": "Fingerprint",
+  "enable": "Çalakî ke",
+  "disable": "Naçalakî ke",
+  "close": "Dayixe",
+  "save": "Seyv Bike",
+  "days": "Roj",
+  "home": "Malê",
+  "light": "Runak",
+  "dark": "Tarîk",
+  "system": "Sîstim",
+  "advanced-options": "Bijardikanî pêşkewtû",
+  "deselect": "Hellweşandinewey",
+  "view": "Şêwey",
+  "certificate": "certificate",
+  "valid": "Mawe",
+  "finished": "Tewawbowe",
+  "expired": "Katî beserçun",
+  "support-us": {
+    "title": "piştgîrîman biken",
+    "desc": "marznêşîn nermekallayekî serçawekirawe û azad, legellman bin û be bexşîn pişitgîrî xotan nîşan biden.",
+    "donate": "pêşkeş"
+  },
+  "page": {
+    "settings": {
+      "subscription-settings": {
+        "template-on-acceptance": "template on acceptance",
+        "placeholder-remark": "placeholder remark",
+        "placeholder-if-disabled": "placeholder if disabled",
+        "shuffle-configs": "rêkixstnekanî têkellaw",
+        "url-prefix": "url prefix",
+        "profile-title": "nawnîşanî pirrofaylî",
+        "support-link": "lînkî pişitgîrî",
+        "update-interval": "update interval",
+        "add-rule": "add rule",
+        "reset-local-changes": "reset changes",
+        "title": "rêkixstnekanî beşdarîkirdin",
+        "subscription-title": "subscription rules",
+        "subscription-desc": "yasakanî beşdarîkirdinit be rêkupêkî ziyad bike.",
+        "alert": {
+          "title": "hîç yasayek nîye",
+          "desc": "hîç yasayek bo beşdarîkirdin diyarî nekirawe"
+        }
+      },
+      "certificate": {
+        "copy": "kopî birrwaname",
+        "error": "birrwaname berdest nîye",
+        "copied": "birrwaname kopî kira"
+      }
+    },
+    "login": {
+      "username": {
+        "error": {
+          "isrequired": "nawî bekarhêner pêwîste"
+        }
+      },
+      "password": {
+        "error": {
+          "is-required": "têperwişe pêwîste"
+        }
+      }
+    },
+    "nodes": {
+      "settings": {
+        "title": "sazkarîyekanî node",
+        "detail": "zanyarî ziyatir",
+        "log-container": {
+          "title": "tomarî xray"
+        }
+      },
+      "dialogs": {
+        "creation": {
+          "title": "ziyad kirdin node"
+        },
+        "deletion": {
+          "title": "labirdin node"
+        },
+        "edition": {
+          "title": "gorîn node"
+        }
+      },
+      "usage_coefficient": "rêjey bekarhênan",
+      "connection_backend": "peywendî backend",
+      "connection_backend_desc": "eme bo peywendîyekanî tls le dûrewe bekardêt",
+      "certificate-alert": {
+        "title": "rêkixstnî birrwanamey girêkan",
+        "desc": "eger amanict eweye birrwanamey girêkant rêkbxeyt, laperrey rêkixstnekanî pişkinîn bike.",
+        "click": "destirrageyiştin be certificate"
+      }
+    },
+    "services": {
+      "settings": {
+        "title": "rêkixstnekanî services",
+        "detail": "zanyarî ziyatir"
+      },
+      "dialogs": {
+        "creation": {
+          "title": "dirust kirdin service"
+        },
+        "deletion": {
+          "title": "sirînewey service"
+        },
+        "edition": {
+          "title": "gorîn service"
+        }
+      }
+    },
+    "users": {
+      "data_limit_reached": "Sinûrî data geyişte",
+      "traffic": "Traffic",
+      "never": "Hergîz",
+      "fixed_date": "Berwarî cêgîr",
+      "on_first_use": "Ragîraw",
+      "usage_duration": "Mawey Bekarhênan",
+      "activation_deadline": "Diwamollet",
+      "note-placeholder": "Têbînî leser bekarhêner",
+      "data_limit": "sinûrî data",
+      "used_traffic": "Traffic bekarhêndiraw",
+      "data_limit_reset_strategy": "Şêwazî sirrinewey sinûrî data",
+      "online_at": "Serhêll Le",
+      "expire_date": "Katî beserçûn",
+      "unlimited": "Bêsinûr",
+      "limited": "Sinûrdar",
+      "data_limit_method": "Çonêtî Sinûrî Data",
+      "determined_expire": "Diyarî kiraw",
+      "expire_method": "Sêwazî beserçûn",
+      "onhold_expire": "Ragîraw",
+      "reset_usage": "Rêsitkirdinî bekarhênraw",
+      "revoke_subscription": "Hellweşandinewey Beşdarîkirdn",
+      "on_hold_expire_duration": "Ragîraw",
+      "on_hold_timeout": "Kotayî hatinî ragirtin",
+      "settings": {
+        "subscription_link": {
+          "copied": "Lînkî beşdarîkirdn kopî kira",
+          "copy": "Lînkî beşdarîkirdn kopî bike",
+          "error": "Natwanrêt besterî beşdarîkirdin kopî bikrêt"
+        }
+      },
+      "services-alert": {
+        "title": "Hîç service nedozrawetewe",
+        "desc": "Dillnyabe ke Service dirust dekeyt bo ewey bekarhênerant ke inboundis yan heye bitwanin peywendîyan pêwe biken.",
+        "click": "Kirtey êre bike"
+      },
+      "dialogs": {
+        "edition": {
+          "title": "Gorîn Bekarhêner"
+        },
+        "creation": {
+          "title": "Dirust kirdin Bekarhêner"
+        },
+        "deletion": {
+          "title": "Sirînewey Bekarhêner"
+        },
+        "mutation": {
+          "note": {
+            "desc": "Têbînîyek leser bekarhênereket becêbhêlle"
+          }
+        }
+      }
+    },
+    "hosts": {
+      "fragment": {
+        "interval": "Interval",
+        "length": "Length",
+        "packets": "Packets",
+        "length-error": "Length natwanêt le 32 pît zyatir bêt û debêt be şewey jimare-jimare bêt",
+        "interval-error": "Interval natwanêt le 32 pît zyatir bêt û debêt be şewey jimare-jimare bêt",
+        "packets-error": "Packets natwanêt le 32 pît zyatir bêt û debêt be şewey jimare-jimare bêt yan tlshello"
+      },
+      "popover-guide": {
+        "title": "Using this setting, you are able to assign specific address for each inbound.",
+        "desc": "Use these variables to make it dynamic",
+        "username": "The username of the user",
+        "dataUsage": "The current usage of the user",
+        "remainingData": "Remaining data of the user",
+        "dataLimit": "The usage limit of the user",
+        "remainingDays": "Remaining days of the user",
+        "expireDate": "Expiry date of the user",
+        "jalaliExpireDate": "Expiry date of the user in solar calendar",
+        "remainingTime": "Remaining time of the user",
+        "statusEmoji": "User status as an emoji (✅,⌛,🪫,❌,🔌)",
+        "proxyProtocol": "Proxy protocol (e.g. VMess)",
+        "proxyMethod": "Proxy transport method (e.g. ws)",
+        "currentServer": "Current server ip address",
+        "security": "Security Layer",
+        "host": "Request Host",
+        "port": "Port",
+        "path": "Path",
+        "sni": "SNI",
+        "advancedOptions": "Advanced options",
+        "addHost": "Add host",
+        "savedSuccess": "Hosts saved successfully",
+        "loading": "loading...",
+        "apply": "Apply",
+        "port.info": "By default, a host uses the default port of the inbound. You can set a custom port in case this host is a server that forwards traffic from a port that differs from your server's port. For example, the server may forward traffic from port 8443 to the default port of your inbound server.",
+        "path.info": "Set a path for host users, useful behind a reverse proxy.",
+        "sni.info": "By default, a host uses the default SNI of the inbound. You can set a custom SNI in case this host is a server that has a different SNI. For example, the server may receive traffic with a different SSL certificate, perform SSL termination, and forward it to your inbound server.",
+        "host.info": "By default, if a request host is set in the Xray config, this host is used. However, you can set a custom request host here if needed.",
+        "security.info": "If the middleware server of this host uses a different security layer than the inbound's default, you can set a custom security layer here.",
+        "alpn": "ALPN",
+        "fingerprint": "Fingerprint",
+        "host.multiHost": "To set multiple addresses, separate them with <badge>,</badge> Each time an address is chosen randomly.",
+        "host.wildcard": "Use <badge>*</badge> to generate a random string (works for wildcard domain names)"
+      },
+      "mux": {
+        "title": "Connection multiplexing",
+        "desc": "Currently supported by v2rayng while using custom config"
+      },
+      "no-inbound-selection-alert": {
+        "title": "Hîç înbawendêk hell nebijardirawe",
+        "desc": "Debêt înbawendêk hell bibjêrî ta we ku hostêk dirust bikey."
+      },
+      "allowinsecure": "Allow insecure",
+      "dialogs": {
+        "edition": {
+          "title": "Gorînî Host"
+        },
+        "creation": {
+          "title": "Dirust kirdin Host"
+        },
+        "deletion": {
+          "title": "Sirînewey Host"
+        },
+        "mutation": {
+          "allowinsecure": {
+            "alert": "Behoy nîgeranîye emnîyekanewe, pêşinyar dekrêt em bijardeye çalak bêt"
+          }
+        }
+      }
+    }
+  },
+  "events": {
+    "delete": {
+      "error": "Failed to delete {{name}}",
+      "success": {
+        "title": "{{name}} is successfully deleted",
+        "desc": ""
+      }
+    },
+    "create": {
+      "error": "Failed to create {{name}}",
+      "success": {
+        "title": "{{name}} is successfully created",
+        "desc": ""
+      }
+    },
+    "update": {
+      "error": "Failed to update {{name}}",
+      "success": {
+        "title": "{{name}} is successfully updated",
+        "desc": ""
+      }
+    },
+    "user_revoke": {
+      "error": "Failed to revoke {{name}} subscription",
+      "success": {
+        "title": "{{name}} is successfully created",
+        "desc": ""
+      }
+    },
+    "user_reset": {
+      "error": "Failed to reset {{name}} data usage",
+      "success": {
+        "title": "{{name}} data usage is successfully reset",
+        "desc": ""
+      }
+    },
+    "user_status": {
+      "error": "Şikistî hêna le gorrînî doxî çalak kirdinî {{name}}",
+      "success": {
+        "title": "Doxî çalakî {{name}} nwêkirawe",
+        "desc": "Doxî çalak kirdin be serkewtûyî nwêkirawe"
+      }
+    }
+  },
+  "delete-confirmation": {
+    "title": "Are you sure of this?",
+    "desc": "This action cannot be undone. This will permanently delete your account and remove your data from our servers."
+  },
+  "table": {
+    "row-per-page": "Rows per page",
+    "no-result": "No results",
+    "selected": "Selected",
+    "toggle-column": "Toggle columns",
+    "filter-placeholder": "Filter {{name}}"
+  },
+  "statuses": {
+    "active": "Active",
+    "connected": "Connected",
+    "healthy": "Healthy",
+    "disabled": "Disabled",
+    "expired": "Expired",
+    "on_hold": "On Hold",
+    "connecting": "Connecting",
+    "unhealthy": "Unhealthy",
+    "limited": "Limited",
+    "error": "Error"
+  }
+}
