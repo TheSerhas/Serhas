@@ -30,9 +30,7 @@ def upgrade() -> None:
         sa.Column("password_reset_at", sa.DateTime(), nullable=True),
         sa.PrimaryKeyConstraint("id"),
     )
-    op.create_index(
-        op.f("ix_admins_username"), "admins", ["username"], unique=True
-    )
+    op.create_index(op.f("ix_admins_username"), "admins", ["username"], unique=True)
 
     jwttable = op.create_table(
         "jwt",
@@ -106,18 +104,14 @@ def upgrade() -> None:
         sa.PrimaryKeyConstraint("id"),
     )
     tls = generate_certificate()
-    op.bulk_insert(
-        tlstable, [{"id": 1, "key": tls["key"], "certificate": tls["cert"]}]
-    )
+    op.bulk_insert(tlstable, [{"id": 1, "key": tls["key"], "certificate": tls["cert"]}])
 
     op.create_table(
         "inbounds",
         sa.Column("id", sa.Integer(), nullable=False),
         sa.Column(
             "protocol",
-            sa.Enum(
-                "VMess", "VLESS", "Trojan", "Shadowsocks", name="proxytypes"
-            ),
+            sa.Enum("VMess", "VLESS", "Trojan", "Shadowsocks", name="proxytypes"),
             nullable=True,
         ),
         sa.Column("tag", sa.String(length=256), nullable=False),
@@ -130,9 +124,7 @@ def upgrade() -> None:
         sa.PrimaryKeyConstraint("id"),
         sa.UniqueConstraint("node_id", "tag"),
     )
-    op.create_index(
-        op.f("ix_inbounds_node_id"), "inbounds", ["node_id"], unique=False
-    )
+    op.create_index(op.f("ix_inbounds_node_id"), "inbounds", ["node_id"], unique=False)
     op.create_table(
         "node_usages",
         sa.Column("id", sa.Integer(), nullable=False),
@@ -154,9 +146,7 @@ def upgrade() -> None:
         sa.Column("key", sa.String(length=64), nullable=True),
         sa.Column(
             "status",
-            sa.Enum(
-                "active", "limited", "expired", "on_hold", name="userstatus"
-            ),
+            sa.Enum("active", "limited", "expired", "on_hold", name="userstatus"),
             nullable=False,
         ),
         sa.Column("used_traffic", sa.BigInteger(), nullable=True),
@@ -192,9 +182,7 @@ def upgrade() -> None:
         sa.PrimaryKeyConstraint("id"),
         sa.UniqueConstraint("key"),
     )
-    op.create_index(
-        op.f("ix_users_username"), "users", ["username"], unique=True
-    )
+    op.create_index(op.f("ix_users_username"), "users", ["username"], unique=True)
     op.create_table(
         "hosts",
         sa.Column("id", sa.Integer(), nullable=False),
@@ -206,16 +194,12 @@ def upgrade() -> None:
         sa.Column("host", sa.String(length=1024), nullable=True),
         sa.Column(
             "security",
-            sa.Enum(
-                "inbound_default", "none", "tls", name="inboundhostsecurity"
-            ),
+            sa.Enum("inbound_default", "none", "tls", name="inboundhostsecurity"),
             nullable=False,
         ),
         sa.Column(
             "alpn",
-            sa.Enum(
-                "none", "h2", "http/1.1", "h2,http/1.1", name="proxyhostalpn"
-            ),
+            sa.Enum("none", "h2", "http/1.1", "h2,http/1.1", name="proxyhostalpn"),
             server_default="none",
             nullable=False,
         ),

@@ -36,14 +36,10 @@ def get_default_shell() -> Shells:
     return Shells.bash
 
 
-@app_completion.command(
-    help="Show completion for the specified shell, to copy or customize it."
-)
+@app_completion.command(help="Show completion for the specified shell, to copy or customize it.")
 def show(
     ctx: typer.Context,
-    shell: Shells = typer.Option(
-        None, help="The shell to install completion for.", case_sensitive=False
-    ),
+    shell: Shells = typer.Option(None, help="The shell to install completion for.", case_sensitive=False),
 ) -> None:
     if shell is None:
         shell = get_default_shell()
@@ -53,9 +49,7 @@ def show(
 @app_completion.command(help="Install completion for the specified shell.")
 def install(
     ctx: typer.Context,
-    shell: Shells = typer.Option(
-        None, help="The shell to install completion for.", case_sensitive=False
-    ),
+    shell: Shells = typer.Option(None, help="The shell to install completion for.", case_sensitive=False),
 ) -> None:
     if shell is None:
         shell = get_default_shell()

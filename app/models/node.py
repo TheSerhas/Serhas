@@ -46,9 +46,7 @@ class Node(BaseModel):
     name: str
     address: str
     port: int = 53042
-    connection_backend: NodeConnectionBackend = Field(
-        default=NodeConnectionBackend.grpclib
-    )
+    connection_backend: NodeConnectionBackend = Field(default=NodeConnectionBackend.grpclib)
     usage_coefficient: float = Field(ge=0, default=1.0)
     model_config = ConfigDict(from_attributes=True)
 

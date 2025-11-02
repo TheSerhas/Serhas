@@ -84,9 +84,7 @@ def get_users(
                 if len(username) > 1:
                     query = query.filter(User.username.in_(username))
                 else:
-                    query = query.filter(
-                        User.username.ilike(f"%{username[0]}%")
-                    )
+                    query = query.filter(User.username.ilike(f"%{username[0]}%"))
             elif name == "owner_username":
                 if not dbadmin.is_sudo:
                     raise HTTPException(403, "You're not allowed.")
@@ -125,11 +123,7 @@ async def add_user(new_user: UserCreate, db: DBDep, admin: AdminDep):
             db,
             new_user,
             admin=crud.get_admin(db, admin.username),
-            allowed_services=(
-                admin.service_ids
-                if not admin.is_sudo and not admin.all_services_access
-                else None
-            ),
+            allowed_services=(admin.service_ids if not admin.is_sudo and not admin.all_services_access else None),
         )
     except sqlalchemy.exc.IntegrityError:
         db.rollback()
@@ -138,11 +132,7 @@ async def add_user(new_user: UserCreate, db: DBDep, admin: AdminDep):
     user = UserResponse.model_validate(db_user)
     marznode.operations.update_user(user=db_user)
 
-    asyncio.ensure_future(
-        notify(
-            action=UserNotification.Action.user_created, user=user, by=admin
-        )
-    )
+    asyncio.ensure_future(notify(action=UserNotification.Action.user_created, user=user, by=admin))
 
     logger.info("New user `%s` added", db_user.username)
     return user
@@ -182,12 +172,7 @@ async def delete_expired(
 
     current_time = datetime.utcnow()
     expiration_threshold = current_time - timedelta(seconds=passed_time)
-    expired_users = [
-        user
-        for user in db_users
-        if user.expire_date is not None
-        and user.expire_date <= expiration_threshold
-    ]
+    expired_users = [user for user in db_users if user.expire_date is not None and user.expire_date <= expiration_threshold]
     if not expired_users:
         raise HTTPException(status_code=404, detail="No expired user found.")
 
@@ -227,23 +212,15 @@ async def modify_user(
         db,
         db_user,
         modifications,
-        allowed_services=(
-            admin.service_ids
-            if not admin.is_sudo and not admin.all_services_access
-            else None
-        ),
+        allowed_services=(admin.service_ids if not admin.is_sudo and not admin.all_services_access else None),
     )
     active_after = new_user.is_active
     new_inbounds = {(i.node_id, i.protocol, i.tag) for i in new_user.inbounds}
 
     inbound_change = old_inbounds != new_inbounds
 
-    if (
-        inbound_change and new_user.is_active
-    ) or active_before != active_after:
-        marznode.operations.update_user(
-            new_user, old_inbounds, remove=not db_user.is_active
-        )
+    if (inbound_change and new_user.is_active) or active_before != active_after:
+        marznode.operations.update_user(new_user, old_inbounds, remove=not db_user.is_active)
         db_user.activated = db_user.is_active
         db.commit()
 
@@ -258,11 +235,7 @@ async def modify_user(
     logger.info("User `%s` modified", db_user.username)
 
     if active_before != active_after:
-        action = (
-            UserNotification.Action.user_activated
-            if active_after
-            else UserNotification.Action.user_deactivated
-        )
+        action = UserNotification.Action.user_activated if active_after else UserNotification.Action.user_deactivated
 
         asyncio.ensure_future(
             notify(
@@ -301,11 +274,7 @@ async def remove_user(
     user = UserResponse.model_validate(db_user)
     db.expunge(db_user)
 
-    asyncio.ensure_future(
-        notify(
-            action=UserNotification.Action.user_deleted, user=user, by=admin
-        )
-    )
+    asyncio.ensure_future(notify(action=UserNotification.Action.user_deleted, user=user, by=admin))
 
     logger.info("User %s deleted", db_user.username)
     return {}
@@ -317,11 +286,7 @@ def get_user_services(user: UserDep, db: DBDep, admin: AdminDep):
     Get user services
     """
 
-    query = (
-        db.query(Service)
-        .join(Service.users)
-        .where(User.username == user.username)
-    )
+    query = db.query(Service).join(Service.users).where(User.username == user.username)
 
     if not admin.is_sudo and not admin.all_services_access:
         query.filter(Service.id.in_(admin.service_ids))
@@ -385,11 +350,7 @@ async def enable_user(
 
     user = UserResponse.model_validate(db_user)
 
-    asyncio.ensure_future(
-        notify(
-            action=UserNotification.Action.user_enabled, user=user, by=admin
-        )
-    )
+    asyncio.ensure_future(notify(action=UserNotification.Action.user_enabled, user=user, by=admin))
 
     logger.info("User `%s` has been enabled", db_user.username)
 
@@ -416,11 +377,7 @@ async def disable_user(
 
     user = UserResponse.model_validate(db_user)
 
-    asyncio.ensure_future(
-        notify(
-            action=UserNotification.Action.user_disabled, user=user, by=admin
-        )
-    )
+    asyncio.ensure_future(notify(action=UserNotification.Action.user_disabled, user=user, by=admin))
 
     logger.info("User `%s` has been disabled", db_user.username)
 
@@ -459,9 +416,7 @@ async def revoke_user_subscription(
 
 
 @router.get("/{username}/usage", response_model=UserUsageSeriesResponse)
-def get_user_usage(
-    db: DBDep, db_user: UserDep, start_date: StartDateDep, end_date: EndDateDep
-):
+def get_user_usage(db: DBDep, db_user: UserDep, start_date: StartDateDep, end_date: EndDateDep):
     """
     Get users usage
     """
@@ -470,9 +425,7 @@ def get_user_usage(
 
 
 @router.put("/{username}/set-owner", response_model=UserResponse)
-def set_owner(
-    username: str, admin_username: str, db: DBDep, admin: SudoAdminDep
-):
+def set_owner(username: str, admin_username: str, db: DBDep, admin: SudoAdminDep):
     db_user = crud.get_user(db, username)
     if not db_user:
         raise HTTPException(status_code=404, detail="User not found")
@@ -484,8 +437,6 @@ def set_owner(
     db_user = crud.set_owner(db, db_user, new_admin)
     user = UserResponse.model_validate(db_user)
 
-    logger.info(
-        "`%s`'s owner successfully set to `%s`", user.username, admin.username
-    )
+    logger.info("`%s`'s owner successfully set to `%s`", user.username, admin.username)
 
     return user

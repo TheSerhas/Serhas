@@ -74,15 +74,9 @@ class XrayNoise(BaseModel):
 
 
 class XMuxSettings(BaseModel):
-    max_concurrency: str | None = Field(
-        None, pattern=r"^\d{1,10}(-\d{1,10})?$"
-    )
-    max_connections: str | None = Field(
-        None, pattern=r"^\d{1,10}(-\d{1,10})?$"
-    )
-    max_reuse_times: str | None = Field(
-        None, pattern=r"^\d{1,10}(-\d{1,10})?$"
-    )
+    max_concurrency: str | None = Field(None, pattern=r"^\d{1,10}(-\d{1,10})?$")
+    max_connections: str | None = Field(None, pattern=r"^\d{1,10}(-\d{1,10})?$")
+    max_reuse_times: str | None = Field(None, pattern=r"^\d{1,10}(-\d{1,10})?$")
     max_lifetime: str | None = Field(None, pattern=r"^\d{1,10}(-\d{1,10})?$")
     max_request_times: str | None = Field(None)
     keep_alive_period: int | None = Field(None)

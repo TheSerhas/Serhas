@@ -58,16 +58,11 @@ async def review_users():
             # If the user didn't connect until activation_deadline; change status to "Active"
             if not (
                 (user.online_at and base_time <= user.online_at)
-                or (
-                    user.activation_deadline
-                    and (user.activation_deadline <= now)
-                )
+                or (user.activation_deadline and (user.activation_deadline <= now))
             ):
                 continue
 
-            user.expire_date = datetime.utcnow() + timedelta(
-                seconds=user.usage_duration
-            )
+            user.expire_date = datetime.utcnow() + timedelta(seconds=user.usage_duration)
             user.expire_strategy = UserExpireStrategy.FIXED_DATE
             db.commit()
             db.refresh(user)

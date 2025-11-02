@@ -40,11 +40,7 @@ def get_subscription_user_info(user: UserResponse) -> dict:
         "upload": 0,
         "download": user.used_traffic,
         "total": user.data_limit or 0,
-        "expire": (
-            int(user.expire_date.timestamp())
-            if user.expire_strategy == "fixed_date"
-            else 0
-        ),
+        "expire": (int(user.expire_date.timestamp()) if user.expire_strategy == "fixed_date" else 0),
     }
 
 
@@ -63,17 +59,10 @@ def user_subscription(
 
     crud.update_user_sub(db, db_user, user_agent)
 
-    subscription_settings = SubscriptionSettings.model_validate(
-        db.query(Settings.subscription).first()[0]
-    )
+    subscription_settings = SubscriptionSettings.model_validate(db.query(Settings.subscription).first()[0])
 
-    if (
-        subscription_settings.template_on_acceptance
-        and "text/html" in request.headers.get("Accept", [])
-    ):
-        return HTMLResponse(
-            generate_subscription_template(db_user, subscription_settings)
-        )
+    if subscription_settings.template_on_acceptance and "text/html" in request.headers.get("Accept", []):
+        return HTMLResponse(generate_subscription_template(db_user, subscription_settings))
 
     response_headers = {
         "content-disposition": f'attachment; filename="{user.username}"',
@@ -81,20 +70,13 @@ def user_subscription(
         "support-url": subscription_settings.support_link,
         "profile-title": encode_title(subscription_settings.profile_title),
         "profile-update-interval": str(subscription_settings.update_interval),
-        "subscription-userinfo": "; ".join(
-            f"{key}={val}"
-            for key, val in get_subscription_user_info(user).items()
-        ),
+        "subscription-userinfo": "; ".join(f"{key}={val}" for key, val in get_subscription_user_info(user).items()),
     }
 
     for rule in subscription_settings.rules:
         if re.match(rule.pattern, user_agent):
             if rule.result.value == "template":
-                return HTMLResponse(
-                    generate_subscription_template(
-                        db_user, subscription_settings
-                    )
-                )
+                return HTMLResponse(generate_subscription_template(db_user, subscription_settings))
             elif rule.result.value == "block":
                 raise HTTPException(404)
             elif rule.result.value == "base64-links":
@@ -108,8 +90,7 @@ def user_subscription(
                 user=db_user,
                 config_format=config_format,
                 as_base64=b64,
-                use_placeholder=not user.is_active
-                and subscription_settings.placeholder_if_disabled,
+                use_placeholder=not user.is_active and subscription_settings.placeholder_if_disabled,
                 placeholder_remark=subscription_settings.placeholder_remark,
                 shuffle=subscription_settings.shuffle_configs,
             )
@@ -133,9 +114,7 @@ def user_get_usage(
     end_date: EndDateDep,
 ):
     per_day = (end_date - start_date).total_seconds() > 3 * 86400
-    return crud.get_user_total_usage(
-        db, db_user, start_date, end_date, per_day=per_day
-    )
+    return crud.get_user_total_usage(db, db_user, start_date, end_date, per_day=per_day)
 
 
 client_type_mime_type = {
@@ -154,9 +133,7 @@ def user_subscription_with_client_type(
     db: DBDep,
     db_user: SubUserDep,
     request: Request,
-    client_type: str = Path(
-        regex="^(sing-box|clash-meta|clash|xray|v2ray|links|wireguard)$"
-    ),
+    client_type: str = Path(regex="^(sing-box|clash-meta|clash|xray|v2ray|links|wireguard)$"),
 ):
     """
     Subscription by client type; v2ray, xray, sing-box, clash and clash-meta formats supported
@@ -164,9 +141,7 @@ def user_subscription_with_client_type(
 
     user: UserResponse = UserResponse.model_validate(db_user)
 
-    subscription_settings = SubscriptionSettings.model_validate(
-        db.query(Settings.subscription).first()[0]
-    )
+    subscription_settings = SubscriptionSettings.model_validate(db.query(Settings.subscription).first()[0])
 
     response_headers = {
         "content-disposition": f'attachment; filename="{user.username}"',
@@ -174,18 +149,14 @@ def user_subscription_with_client_type(
         "support-url": subscription_settings.support_link,
         "profile-title": encode_title(subscription_settings.profile_title),
         "profile-update-interval": str(subscription_settings.update_interval),
-        "subscription-userinfo": "; ".join(
-            f"{key}={val}"
-            for key, val in get_subscription_user_info(user).items()
-        ),
+        "subscription-userinfo": "; ".join(f"{key}={val}" for key, val in get_subscription_user_info(user).items()),
     }
 
     conf = generate_subscription(
         user=db_user,
         config_format="links" if client_type == "v2ray" else client_type,
         as_base64=client_type == "v2ray",
-        use_placeholder=not user.is_active
-        and subscription_settings.placeholder_if_disabled,
+        use_placeholder=not user.is_active and subscription_settings.placeholder_if_disabled,
         placeholder_remark=subscription_settings.placeholder_remark,
         shuffle=subscription_settings.shuffle_configs,
     )

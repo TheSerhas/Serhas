@@ -37,16 +37,12 @@ channel_options = [
 
 
 class MarzNodeGRPCIO(MarzNodeBase, MarzNodeDB):
-    def __init__(
-        self, node_id: int, address: str, port: int, usage_coefficient: int = 1
-    ):
+    def __init__(self, node_id: int, address: str, port: int, usage_coefficient: int = 1):
         self.id = node_id
         self._address = address
         self._port = port
 
-        self._channel = insecure_channel(
-            f"{self._address}:{self._port}", channel_options
-        )
+        self._channel = insecure_channel(f"{self._address}:{self._port}", channel_options)
         self._stub = MarzServiceStub(self._channel)
         self._monitor_task = asyncio.create_task(self._monitor_channel())
         self._streaming_task = None
@@ -75,9 +71,7 @@ class MarzNodeGRPCIO(MarzNodeBase, MarzNodeDB):
                 if state != ChannelConnectivity.READY:
                     raise RpcError
                 await self._sync()
-                self._streaming_task = asyncio.create_task(
-                    self._stream_user_updates()
-                )
+                self._streaming_task = asyncio.create_task(self._stream_user_updates())
             except RpcError:
                 self.synced = False
                 self.set_status(NodeStatus.unhealthy)
@@ -99,12 +93,8 @@ class MarzNodeGRPCIO(MarzNodeBase, MarzNodeDB):
             try:
                 await stream.write(
                     UserData(
-                        user=User(
-                            id=user.id, username=user.username, key=user.key
-                        ),
-                        inbounds=[
-                            Inbound(tag=t) for t in user_update["inbounds"]
-                        ],
+                        user=User(id=user.id, username=user.username, key=user.key),
+                        inbounds=[Inbound(tag=t) for t in user_update["inbounds"]],
                     )
                 )
             except RpcError:
@@ -145,22 +135,16 @@ class MarzNodeGRPCIO(MarzNodeBase, MarzNodeDB):
 
     async def get_logs(self, name: str = "xray", include_buffer=True):
         async for response in self._stub.StreamBackendLogs(
-            BackendLogsRequest(
-                backend_name=name, include_buffer=include_buffer
-            )
+            BackendLogsRequest(backend_name=name, include_buffer=include_buffer)
         ):
             yield response.line
 
-    async def restart_backend(
-        self, name: str, config: str, config_format: int
-    ):
+    async def restart_backend(self, name: str, config: str, config_format: int):
         try:
             await self._stub.RestartBackend(
                 RestartBackendRequest(
                     backend_name=name,
-                    config=BackendConfig(
-                        configuration=config, config_format=config_format
-                    ),
+                    config=BackendConfig(configuration=config, config_format=config_format),
                 )
             )
             await self._sync()
@@ -176,7 +160,5 @@ class MarzNodeGRPCIO(MarzNodeBase, MarzNodeDB):
         return response.configuration, response.config_format
 
     async def get_backend_stats(self, name: str):
-        response: BackendStats = await self._stub.GetBackendStats(
-            Backend(name=name)
-        )
+        response: BackendStats = await self._stub.GetBackendStats(Backend(name=name))
         return response

@@ -37,9 +37,7 @@ class AdminNotificationFactory(NotificationFactory):
 class UserNotificationFactory(NotificationFactory):
     Action = UserNotification.Action
 
-    notification_classes: Dict[
-        UserNotification.Action, Type[UserNotification]
-    ] = {
+    notification_classes: Dict[UserNotification.Action, Type[UserNotification]] = {
         Action.user_created: UserCreated,
         Action.user_updated: UserUpdated,
         Action.user_activated: UserActivated,
@@ -54,11 +52,7 @@ class UserNotificationFactory(NotificationFactory):
     }
 
     def create_notification(
-        self,
-        action: UserNotification.Action,
-        user: UserResponse,
-        by: Optional[Admin] = None,
-        **kwargs: Any
+        self, action: UserNotification.Action, user: UserResponse, by: Optional[Admin] = None, **kwargs: Any
     ) -> UserNotification:
         notification_class = self.notification_classes.get(action)
         return notification_class(user=user, by=by, **kwargs)
@@ -69,9 +63,7 @@ class NotificationStrategy:
         self.user_factory = UserNotificationFactory()
         self.admin_factory = AdminNotificationFactory()
 
-    def create_notification(
-        self, action: Enum, **kwargs: Any
-    ) -> Union[UserNotification, AdminNotif]:
+    def create_notification(self, action: Enum, **kwargs: Any) -> Union[UserNotification, AdminNotif]:
         if isinstance(action, UserNotification.Action):
             return self.user_factory.create_notification(action, **kwargs)
         elif isinstance(action, AdminNotif.Action):

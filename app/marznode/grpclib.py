@@ -89,9 +89,7 @@ class MarzNodeGRPCLIB(MarzNodeBase, MarzNodeDB):
                     except:
                         pass
                     else:
-                        self._streaming_task = asyncio.create_task(
-                            self._stream_user_updates()
-                        )
+                        self._streaming_task = asyncio.create_task(self._stream_user_updates())
                         self.set_status(NodeStatus.healthy)
                         logger.info("Connected to node %i", self.id)
             await asyncio.sleep(10)
@@ -111,9 +109,7 @@ class MarzNodeGRPCLIB(MarzNodeBase, MarzNodeDB):
                                 username=user.username,
                                 key=user.key,
                             ),
-                            inbounds=[
-                                Inbound(tag=t) for t in user_update["inbounds"]
-                            ],
+                            inbounds=[Inbound(tag=t) for t in user_update["inbounds"]],
                         )
                     )
         except (OSError, ConnectionError, GRPCError, StreamTerminatedError):
@@ -153,25 +149,17 @@ class MarzNodeGRPCLIB(MarzNodeBase, MarzNodeDB):
 
     async def get_logs(self, name: str = "xray", include_buffer=True):
         async with self._stub.StreamBackendLogs.open() as stm:
-            await stm.send_message(
-                BackendLogsRequest(
-                    backend_name=name, include_buffer=include_buffer
-                )
-            )
+            await stm.send_message(BackendLogsRequest(backend_name=name, include_buffer=include_buffer))
             while True:
                 response = await stm.recv_message()
                 yield response.line
 
-    async def restart_backend(
-        self, name: str, config: str, config_format: int
-    ):
+    async def restart_backend(self, name: str, config: str, config_format: int):
         try:
             await self._stub.RestartBackend(
                 RestartBackendRequest(
                     backend_name=name,
-                    config=BackendConfig(
-                        configuration=config, config_format=config_format
-                    ),
+                    config=BackendConfig(configuration=config, config_format=config_format),
                 )
             )
             await self._sync()
@@ -183,13 +171,9 @@ class MarzNodeGRPCLIB(MarzNodeBase, MarzNodeDB):
             self.set_status(NodeStatus.healthy)
 
     async def get_backend_config(self, name: str):
-        response: BackendConfig = await self._stub.FetchBackendConfig(
-            Backend(name=name)
-        )
+        response: BackendConfig = await self._stub.FetchBackendConfig(Backend(name=name))
         return response.configuration, response.config_format
 
     async def get_backend_stats(self, name: str):
-        response: BackendStats = await self._stub.GetBackendStats(
-            Backend(name=name)
-        )
+        response: BackendStats = await self._stub.GetBackendStats(Backend(name=name))
         return response

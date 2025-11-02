@@ -24,9 +24,7 @@ def generate_certificate():
 
     subject = issuer = x509.Name([])
 
-    subject_key_id = x509.SubjectKeyIdentifier.from_public_key(
-        key.public_key()
-    )
+    subject_key_id = x509.SubjectKeyIdentifier.from_public_key(key.public_key())
 
     cert = (
         x509.CertificateBuilder()
@@ -36,9 +34,7 @@ def generate_certificate():
         .serial_number(x509.random_serial_number())
         .not_valid_before(datetime.utcnow())
         .not_valid_after(datetime.utcnow() + timedelta(days=3650))
-        .add_extension(
-            x509.BasicConstraints(ca=False, path_length=None), critical=True
-        )
+        .add_extension(x509.BasicConstraints(ca=False, path_length=None), critical=True)
         .add_extension(
             x509.KeyUsage(
                 digital_signature=True,

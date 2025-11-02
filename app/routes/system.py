@@ -29,9 +29,7 @@ def get_subscription_settings(db: DBDep, admin: SudoAdminDep):
 
 
 @router.put("/settings/subscription", response_model=SubscriptionSettings)
-def update_subscription_settings(
-    db: DBDep, modifications: SubscriptionSettings, admin: SudoAdminDep
-):
+def update_subscription_settings(db: DBDep, modifications: SubscriptionSettings, admin: SudoAdminDep):
     settings = db.query(Settings).first()
     settings.subscription = modifications.model_dump(mode="json")
     db.commit()
@@ -44,9 +42,7 @@ def get_telegram_settings(db: DBDep, admin: SudoAdminDep):
 
 
 @router.put("/settings/telegram", response_model=TelegramSettings | None)
-def update_telegram_settings(
-    db: DBDep, new_telegram: TelegramSettings | None, admin: SudoAdminDep
-):
+def update_telegram_settings(db: DBDep, new_telegram: TelegramSettings | None, admin: SudoAdminDep):
     settings = db.query(Settings.telegram).first()
     settings.telegram = new_telegram
     db.commit()
@@ -62,31 +58,21 @@ def get_admins_stats(db: DBDep, admin: SudoAdminDep):
 def get_nodes_stats(db: DBDep, admin: SudoAdminDep):
     return NodesStats(
         total=db.query(Node).count(),
-        healthy=db.query(Node)
-        .filter(Node.status == NodeStatus.healthy)
-        .count(),
-        unhealthy=db.query(Node)
-        .filter(Node.status == NodeStatus.unhealthy)
-        .count(),
+        healthy=db.query(Node).filter(Node.status == NodeStatus.healthy).count(),
+        unhealthy=db.query(Node).filter(Node.status == NodeStatus.unhealthy).count(),
     )
 
 
 @router.get("/stats/traffic", response_model=TrafficUsageSeries)
-def get_total_traffic_stats(
-    db: DBDep, admin: AdminDep, start_date: StartDateDep, end_date: EndDateDep
-):
+def get_total_traffic_stats(db: DBDep, admin: AdminDep, start_date: StartDateDep, end_date: EndDateDep):
     return crud.get_total_usages(db, admin, start_date, end_date)
 
 
 @router.get("/stats/users", response_model=UsersStats)
 def get_users_stats(db: DBDep, admin: AdminDep):
     return UsersStats(
-        total=crud.get_users_count(
-            db, admin=admin if not admin.is_sudo else None
-        ),
-        active=crud.get_users_count(
-            db, admin=admin if not admin.is_sudo else None, is_active=True
-        ),
+        total=crud.get_users_count(db, admin=admin if not admin.is_sudo else None),
+        active=crud.get_users_count(db, admin=admin if not admin.is_sudo else None, is_active=True),
         on_hold=crud.get_users_count(
             db,
             admin=admin if not admin.is_sudo else None,
@@ -102,7 +88,5 @@ def get_users_stats(db: DBDep, admin: AdminDep):
             admin=admin if not admin.is_sudo else None,
             data_limit_reached=True,
         ),
-        online=crud.get_users_count(
-            db, admin=admin if not admin.is_sudo else None, online=True
-        ),
+        online=crud.get_users_count(db, admin=admin if not admin.is_sudo else None, online=True),
     )

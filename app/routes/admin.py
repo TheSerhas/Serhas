@@ -26,18 +26,12 @@ from app.utils.auth import create_admin_token
 router = APIRouter(tags=["Admin"], prefix="/admins")
 
 
-def authenticate_admin(
-    db: Session, username: str, password: str
-) -> Optional[Admin]:
+def authenticate_admin(db: Session, username: str, password: str) -> Optional[Admin]:
     dbadmin = crud.get_admin(db, username)
     if not dbadmin:
         return None
 
-    return (
-        dbadmin
-        if AdminInDB.model_validate(dbadmin).verify_password(password)
-        else None
-    )
+    return dbadmin if AdminInDB.model_validate(dbadmin).verify_password(password) else None
 
 
 @router.get("", response_model=Page[AdminResponse])
@@ -65,17 +59,11 @@ def get_current_admin(admin: AdminDep):
 
 
 @router.post("/token", response_model=Token)
-def admin_token(
-    form_data: Annotated[OAuth2PasswordRequestForm, Depends()], db: DBDep
-):
-    if dbadmin := authenticate_admin(
-        db, form_data.username, form_data.password
-    ):
+def admin_token(form_data: Annotated[OAuth2PasswordRequestForm, Depends()], db: DBDep):
+    if dbadmin := authenticate_admin(db, form_data.username, form_data.password):
         return Token(
             is_sudo=dbadmin.is_sudo,
-            access_token=create_admin_token(
-                form_data.username, is_sudo=dbadmin.is_sudo
-            ),
+            access_token=create_admin_token(form_data.username, is_sudo=dbadmin.is_sudo),
         )
 
     raise HTTPException(
@@ -131,11 +119,7 @@ def get_admin_services(username: str, db: DBDep, admin: SudoAdminDep):
     if db_admin.is_sudo or db_admin.all_services_access:
         query = db.query(Service)
     else:
-        query = (
-            db.query(Service)
-            .join(Service.admins)
-            .where(DBAdmin.id == db_admin.id)
-        )
+        query = db.query(Service).join(Service.admins).where(DBAdmin.id == db_admin.id)
 
     return paginate(query)
 
@@ -149,11 +133,7 @@ def get_admin_users(username: str, db: DBDep, admin: SudoAdminDep):
     if not db_admin:
         raise HTTPException(status_code=404, detail="Admin not found")
 
-    query = (
-        db.query(User)
-        .where(User.admin_id == db_admin.id)
-        .filter(User.username.isnot(None))
-    )
+    query = db.query(User).where(User.admin_id == db_admin.id).filter(User.username.isnot(None))
 
     return paginate(query)
 

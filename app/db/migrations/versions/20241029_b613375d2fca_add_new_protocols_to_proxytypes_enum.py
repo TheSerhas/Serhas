@@ -34,6 +34,4 @@ def downgrade() -> None:
     dialect = bind.dialect.name
 
     if dialect in ("mysql", "mariadb"):
-        op.execute(
-            "ALTER TABLE inbounds MODIFY protocol ENUM('VMess', 'VLESS', 'Shadowsocks', 'Trojan', 'Hysteria2')"
-        )
+        op.execute("ALTER TABLE inbounds MODIFY protocol ENUM('VMess', 'VLESS', 'Shadowsocks', 'Trojan', 'Hysteria2')")

@@ -1,0 +1,26 @@
+name: Code Format Check with Black
+
+on:
+  push:
+    branches: "master"
+  pull_request:
+    branches: "master"
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+        
+    - name: Install black
+      run: pip install black
+        
+    - name: Check code formatting with black
+      run: black --check --diff .

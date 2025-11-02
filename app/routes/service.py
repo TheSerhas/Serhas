@@ -40,9 +40,7 @@ def add_service(new_service: ServiceCreate, db: DBDep, admin: SudoAdminDep):
         return crud.create_service(db, new_service)
     except sqlalchemy.exc.IntegrityError:
         db.rollback()
-        raise HTTPException(
-            status_code=409, detail="Service by this name already exists"
-        )
+        raise HTTPException(status_code=409, detail="Service by this name already exists")
 
 
 @router.get("/{id}", response_model=ServiceResponse)
@@ -50,9 +48,7 @@ def get_service(service: ServiceDep, db: DBDep, admin: AdminDep):
     """
     Get Service information with id
     """
-    if not (
-        admin.is_sudo or admin.all_services_access or id in admin.service_ids
-    ):
+    if not (admin.is_sudo or admin.all_services_access or id in admin.service_ids):
         raise HTTPException(status_code=403, detail="You're not allowed")
 
     return service
@@ -63,12 +59,7 @@ def get_service_users(service: ServiceDep, db: DBDep, admin: SudoAdminDep):
     """
     Get service users
     """
-    query = (
-        db.query(User)
-        .join(User.services)
-        .where(Service.id == service.id)
-        .filter(User.removed != True)
-    )
+    query = db.query(User).join(User.services).where(Service.id == service.id).filter(User.removed != True)
 
     return paginate(query)
 
@@ -78,11 +69,7 @@ def get_service_inbounds(service: ServiceDep, db: DBDep, admin: SudoAdminDep):
     """
     Get service inbounds
     """
-    query = (
-        db.query(Inbound)
-        .join(Inbound.services)
-        .where(Service.id == service.id)
-    )
+    query = db.query(Inbound).join(Inbound.services).where(Service.id == service.id)
 
     return paginate(query)
 
@@ -106,15 +93,11 @@ async def modify_service(
         response = crud.update_service(db, service, modification)
     except sqlalchemy.exc.IntegrityError:
         db.rollback()
-        raise HTTPException(
-            status_code=409, detail="problem updating the service"
-        )
+        raise HTTPException(status_code=409, detail="problem updating the service")
     else:
         for user in response.users:
             if user.activated:
-                marznode.operations.update_user(
-                    user, old_inbounds=old_inbounds
-                )
+                marznode.operations.update_user(user, old_inbounds=old_inbounds)
         return response
 
 

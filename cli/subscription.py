@@ -19,9 +19,7 @@ class ConfigFormat(StrEnum):
 
 
 @app.command(name="get-link")
-def get_link(
-    username: str = typer.Option(..., *utils.FLAGS["username"], prompt=True)
-):
+def get_link(username: str = typer.Option(..., *utils.FLAGS["username"], prompt=True)):
     """
     Prints the given user's subscription link.
 
@@ -29,18 +27,14 @@ def get_link(
       in order to work correctly.
     """
     with GetDB() as db:
-        user: UserResponse = UserResponse.from_orm(
-            utils.get_user(db, username)
-        )
+        user: UserResponse = UserResponse.from_orm(utils.get_user(db, username))
         print(user.subscription_url)
 
 
 @app.command(name="get-config")
 def get_config(
     username: str = typer.Option(..., *utils.FLAGS["username"], prompt=True),
-    config_format: ConfigFormat = typer.Option(
-        ..., *utils.FLAGS["format"], prompt=True
-    ),
+    config_format: ConfigFormat = typer.Option(..., *utils.FLAGS["format"], prompt=True),
     output_file: Optional[str] = typer.Option(
         None,
         *utils.FLAGS["output_file"],
@@ -62,25 +56,19 @@ def get_config(
       otherwise will be shown in the terminal.
     """
     with GetDB() as db:
-        user: UserResponse = UserResponse.from_orm(
-            utils.get_user(db, username)
-        )
-        conf: str = generate_subscription(
-            user=user, config_format=config_format.name, as_base64=as_base64
-        )
+        user: UserResponse = UserResponse.from_orm(utils.get_user(db, username))
+        conf: str = generate_subscription(user=user, config_format=config_format.name, as_base64=as_base64)
 
         if output_file:
             with open(output_file, "w") as out_file:
                 out_file.write(conf)
 
             utils.success(
-                f'{username}\'s configuration in "{config_format.value}" format'
-                f' successfully save to "{output_file}".'
+                f'{username}\'s configuration in "{config_format.value}" format' f' successfully save to "{output_file}".'
             )
         else:
             utils.success(
-                "No output file specified."
-                f' using pager for {username}\'s config in "{config_format}" format.',
+                "No output file specified." f' using pager for {username}\'s config in "{config_format}" format.',
                 auto_exit=False,
             )
             utils.paginate(conf)

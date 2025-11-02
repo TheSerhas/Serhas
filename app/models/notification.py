@@ -74,16 +74,12 @@ class UserDataUsageReset(UserNotification):
 
 
 class UserSubscriptionRevoked(UserNotification):
-    action: UserNotification.Action = (
-        UserNotification.Action.subscription_revoked
-    )
+    action: UserNotification.Action = UserNotification.Action.subscription_revoked
     by: Admin
 
 
 class ReachedUsagePercent(UserNotification):
-    action: UserNotification.Action = (
-        UserNotification.Action.reached_usage_percent
-    )
+    action: UserNotification.Action = UserNotification.Action.reached_usage_percent
 
 
 class ReachedDaysLeft(UserNotification):

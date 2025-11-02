@@ -99,11 +99,7 @@ def upgrade() -> None:
     )
 
     connection = op.get_bind()
-    results = connection.execute(
-        sa.select(
-            users_table.c.id, users_table.c.status, users_table.c.expire_date
-        )
-    )
+    results = connection.execute(sa.select(users_table.c.id, users_table.c.status, users_table.c.expire_date))
 
     for user in results:
         status = user[1]
@@ -115,11 +111,7 @@ def upgrade() -> None:
             expire_strategy = "FIXED_DATE"
         else:
             expire_strategy = "NEVER"
-        connection.execute(
-            users_table.update()
-            .where(users_table.c.id == user[0])
-            .values(expire_strategy=expire_strategy)
-        )
+        connection.execute(users_table.update().where(users_table.c.id == user[0]).values(expire_strategy=expire_strategy))
 
     op.drop_column("users", "status")
 
@@ -130,9 +122,7 @@ def downgrade() -> None:
         "users",
         sa.Column(
             "status",
-            postgresql.ENUM(
-                "active", "limited", "expired", "on_hold", name="userstatus"
-            ),
+            postgresql.ENUM("active", "limited", "expired", "on_hold", name="userstatus"),
             autoincrement=False,
             nullable=False,
             server_default="active",

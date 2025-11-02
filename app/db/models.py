@@ -128,15 +128,9 @@ class Service(Base):
     __tablename__ = "services"
     id = Column(Integer, primary_key=True)
     name = Column(String(64))
-    admins = relationship(
-        "Admin", secondary=admins_services, back_populates="services"
-    )
-    users = relationship(
-        "User", secondary=users_services, back_populates="services"
-    )
-    inbounds = relationship(
-        "Inbound", secondary=inbounds_services, back_populates="services"
-    )
+    admins = relationship("Admin", secondary=admins_services, back_populates="services")
+    users = relationship("User", secondary=users_services, back_populates="services")
+    inbounds = relationship("Inbound", secondary=inbounds_services, back_populates="services")
 
     @property
     def inbound_ids(self):
@@ -180,9 +174,7 @@ class User(Base):
         distinct_target_key=True,
     )
     used_traffic = Column(BigInteger, default=0)
-    lifetime_used_traffic = Column(
-        BigInteger, default=0, server_default="0", nullable=False
-    )
+    lifetime_used_traffic = Column(BigInteger, default=0, server_default="0", nullable=False)
     traffic_reset_at = Column(DateTime)
     node_usages = relationship(
         "NodeUserUsage",
@@ -227,9 +219,7 @@ class User(Base):
 
     @expired.expression
     def expired(cls):
-        return and_(
-            cls.expire_strategy == "fixed_date", cls.expire_date < func.now()
-        )
+        return and_(cls.expire_strategy == "fixed_date", cls.expire_date < func.now())
 
     @hybrid_property
     def data_limit_reached(self):
@@ -239,18 +229,11 @@ class User(Base):
 
     @data_limit_reached.expression
     def data_limit_reached(cls):
-        return and_(
-            cls.data_limit.isnot(None), cls.used_traffic >= cls.data_limit
-        )
+        return and_(cls.data_limit.isnot(None), cls.used_traffic >= cls.data_limit)
 
     @hybrid_property
     def is_active(self):
-        return (
-            self.enabled
-            and not self.expired
-            and not self.data_limit_reached
-            and not self.removed
-        )
+        return self.enabled and not self.expired and not self.data_limit_reached and not self.removed
 
     @is_active.expression
     def is_active(cls):
@@ -267,13 +250,8 @@ class User(Base):
 
     @property
     def subscription_url(self):
-        prefix = (
-            self.admin.subscription_url_prefix if self.admin else None
-        ) or SUBSCRIPTION_URL_PREFIX
-        return (
-            prefix.replace("*", secrets.token_hex(8))
-            + f"/sub/{self.username}/{self.key}"
-        )
+        prefix = (self.admin.subscription_url_prefix if self.admin else None) or SUBSCRIPTION_URL_PREFIX
+        return prefix.replace("*", secrets.token_hex(8)) + f"/sub/{self.username}/{self.key}"
 
     @hybrid_property
     def owner_username(self):
@@ -302,9 +280,7 @@ class Inbound(Base):
     config = Column(String(512), nullable=False)
     node_id = Column(Integer, ForeignKey("nodes.id"), index=True)
     node = relationship("Node", back_populates="inbounds")
-    services = relationship(
-        "Service", secondary=inbounds_services, back_populates="inbounds"
-    )
+    services = relationship("Service", secondary=inbounds_services, back_populates="inbounds")
     hosts = relationship(
         "InboundHost",
         back_populates="inbound",
@@ -323,9 +299,7 @@ class HostChain(Base):
     chained_host_id = Column(Integer, ForeignKey("hosts.id"))
     seq = Column(Integer, primary_key=True)
 
-    host = relationship(
-        "InboundHost", foreign_keys=[host_id], back_populates="chain"
-    )
+    host = relationship("InboundHost", foreign_keys=[host_id], back_populates="chain")
     chained_host = relationship(
         "InboundHost",
         foreign_keys=[chained_host_id],
@@ -434,9 +408,7 @@ class JWT(Base):
     __tablename__ = "jwt"
 
     id = Column(Integer, primary_key=True)
-    secret_key = Column(
-        String(64), nullable=False, default=lambda: os.urandom(32).hex()
-    )
+    secret_key = Column(String(64), nullable=False, default=lambda: os.urandom(32).hex())
 
 
 class TLS(Base):
@@ -456,15 +428,9 @@ class Node(Base):
     address = Column(String(256))
     port = Column(Integer)
     xray_version = Column(String(32))
-    inbounds = relationship(
-        "Inbound", back_populates="node", cascade="all, delete"
-    )
-    backends = relationship(
-        "Backend", back_populates="node", cascade="all, delete"
-    )
-    status = Column(
-        Enum(NodeStatus), nullable=False, default=NodeStatus.unhealthy
-    )
+    inbounds = relationship("Inbound", back_populates="node", cascade="all, delete")
+    backends = relationship("Backend", back_populates="node", cascade="all, delete")
+    status = Column(Enum(NodeStatus), nullable=False, default=NodeStatus.unhealthy)
     last_status_change = Column(DateTime, default=datetime.utcnow)
     message = Column(String(1024))
     created_at = Column(DateTime, default=datetime.utcnow)
@@ -480,9 +446,7 @@ class Node(Base):
         back_populates="node",
         cascade="save-update, merge",
     )
-    usage_coefficient = Column(
-        Float, nullable=False, server_default=text("1.0"), default=1
-    )
+    usage_coefficient = Column(Float, nullable=False, server_default=text("1.0"), default=1)
 
     @property
     def inbound_ids(self):

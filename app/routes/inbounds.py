@@ -10,9 +10,7 @@ from app.models.proxy import Inbound, InboundHost, InboundHostResponse
 
 HOST_NOT_FOUND_ERROR_MSG = "Host not found"
 
-router = APIRouter(
-    prefix="/inbounds", dependencies=[Depends(sudo_admin)], tags=["Inbounds"]
-)
+router = APIRouter(prefix="/inbounds", dependencies=[Depends(sudo_admin)], tags=["Inbounds"])
 
 
 @router.get("", response_model=Page[Inbound])
@@ -100,9 +98,7 @@ def get_inbound_hosts(id: int, db: DBDep):
     if not inbound:
         raise HTTPException(status_code=404, detail="Inbound not found")
 
-    return paginate(
-        db, db.query(DBInboundHost).filter(DBInboundHost.inbound_id == id)
-    )
+    return paginate(db, db.query(DBInboundHost).filter(DBInboundHost.inbound_id == id))
 
 
 @router.post("/{id}/hosts", response_model=InboundHostResponse)

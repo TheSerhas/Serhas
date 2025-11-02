@@ -65,23 +65,18 @@ subscription_handlers: dict[str, Type[BaseConfig]] = {
 handlers_templates = {
     LinksConfig: None,
     WireGuardConfig: None,
-    XrayConfig: XRAY_SUBSCRIPTION_TEMPLATE
-    or resources.files("app.templates") / "xray.json",
+    XrayConfig: XRAY_SUBSCRIPTION_TEMPLATE or resources.files("app.templates") / "xray.json",
     ClashConfig: CLASH_SUBSCRIPTION_TEMPLATE,
     ClashMetaConfig: CLASH_SUBSCRIPTION_TEMPLATE,
-    SingBoxConfig: SINGBOX_SUBSCRIPTION_TEMPLATE
-    or resources.files("app.templates") / "sing-box.json",
+    SingBoxConfig: SINGBOX_SUBSCRIPTION_TEMPLATE or resources.files("app.templates") / "sing-box.json",
 }
 
 
-def generate_subscription_template(
-    db_user, subscription_settings: SubscriptionSettings
-):
+def generate_subscription_template(db_user, subscription_settings: SubscriptionSettings):
     links = generate_subscription(
         user=db_user,
         config_format="links",
-        use_placeholder=not db_user.is_active
-        and subscription_settings.placeholder_if_disabled,
+        use_placeholder=not db_user.is_active and subscription_settings.placeholder_if_disabled,
         placeholder_remark=subscription_settings.placeholder_remark,
         shuffle=subscription_settings.shuffle_configs,
     ).split()
@@ -99,9 +94,7 @@ def generate_subscription(
     placeholder_remark: str = "disabled",
     shuffle: bool = False,
 ) -> str:
-    extra_data = UserResponse.model_validate(user).model_dump(
-        exclude={"subscription_url", "services", "inbounds"}
-    )
+    extra_data = UserResponse.model_validate(user).model_dump(exclude={"subscription_url", "services", "inbounds"})
     format_variables = setup_format_variables(extra_data)
 
     if config_format not in subscription_handlers.keys():
@@ -109,9 +102,7 @@ def generate_subscription(
 
     subscription_handler_class = subscription_handlers[config_format]
     if template_path := handlers_templates[subscription_handler_class]:
-        subscription_handler = subscription_handler_class(
-            template_path=template_path
-        )
+        subscription_handler = subscription_handler_class(template_path=template_path)
     else:
         subscription_handler = subscription_handler_class()
 
@@ -136,9 +127,7 @@ def generate_subscription(
     subscription_handler.add_proxies(configs)
     config = subscription_handler.render(sort=True, shuffle=shuffle)
 
-    return (
-        config if not as_base64 else base64.b64encode(config.encode()).decode()
-    )
+    return config if not as_base64 else base64.b64encode(config.encode()).decode()
 
 
 def format_time_left(seconds_left: int) -> str:
@@ -253,17 +242,13 @@ def generate_user_configs(
         chained_hosts = [c.chained_host for c in host.chain]
         if chained_hosts and not chaining_support:
             continue
-        data = create_config(
-            host, key, format_variables, salt, user_id, chained_hosts
-        )
+        data = create_config(host, key, format_variables, salt, user_id, chained_hosts)
         configs.append(data)
 
     return configs
 
 
-def create_config(
-    host, key, format_variables, salt, user_id, next_hosts: list | None = None
-):
+def create_config(host, key, format_variables, salt, user_id, next_hosts: list | None = None):
     if next_hosts is None:
         next_hosts = []
 
@@ -276,19 +261,9 @@ def create_config(
         auth_uuid, auth_password = UUID(gen_uuid(key)), gen_password(key)
     else:
         inbound, protocol, network = {}, host.host_protocol, host.host_network
-        auth_uuid, auth_password = (
-            UUID(host.uuid) if host.uuid else None
-        ), host.password
+        auth_uuid, auth_password = (UUID(host.uuid) if host.uuid else None), host.password
 
-    format_variables.update(
-        {
-            "PROTOCOL": (
-                host.inbound.protocol.value
-                if host.inbound
-                else host.host_protocol
-            )
-        }
-    )
+    format_variables.update({"PROTOCOL": (host.inbound.protocol.value if host.inbound else host.host_protocol)})
     format_variables.update({"TRANSPORT": network or "<missing>"})
 
     host_snis = host.sni.split(",") if host.sni else []
@@ -305,21 +280,9 @@ def create_config(
     else:
         req_host = ""
 
-    host_tls = (
-        None
-        if host.security == InboundHostSecurity.inbound_default
-        else host.security.value
-    )
-    splithttp_settings = (
-        SplitHttpSettings.model_validate(host.splithttp_settings)
-        if host.splithttp_settings
-        else None
-    )
-    mux_settings = (
-        MuxSettings.model_validate(host.mux_settings)
-        if host.mux_settings
-        else None
-    )
+    host_tls = None if host.security == InboundHostSecurity.inbound_default else host.security.value
+    splithttp_settings = SplitHttpSettings.model_validate(host.splithttp_settings) if host.splithttp_settings else None
+    mux_settings = MuxSettings.model_validate(host.mux_settings) if host.mux_settings else None
 
     data = V2Data(
         host.inbound.protocol.value if host.inbound else host.host_protocol,
@@ -332,25 +295,15 @@ def create_config(
         tls=host_tls or inbound.get("tls"),
         header_type=host.header_type or inbound.get("header_type"),
         alpn=host.alpn if host.alpn != "none" else None,
-        path=(
-            host.path.format_map(format_variables)
-            if host.path
-            else inbound.get("path")
-        ),
+        path=(host.path.format_map(format_variables) if host.path else inbound.get("path")),
         fingerprint=host.fingerprint.value or inbound.get("fp"),
         reality_pbk=inbound.get("pbk"),
         reality_sid=inbound.get("sid"),
-        client_address=calculate_client_address(
-            inbound.get("address"), user_id
-        ),
+        client_address=calculate_client_address(inbound.get("address"), user_id),
         flow=host.flow or inbound.get("flow"),
         dns_servers=(host.dns_servers.split(",") if host.dns_servers else []),
         mtu=host.mtu,
-        allowed_ips=(
-            list(map(str.strip, host.allowed_ips.split(",")))
-            if host.allowed_ips
-            else None
-        ),
+        allowed_ips=(list(map(str.strip, host.allowed_ips.split(","))) if host.allowed_ips else None),
         allow_insecure=host.allowinsecure,
         uuid=auth_uuid,
         password=auth_password,
@@ -361,11 +314,7 @@ def create_config(
                 mode=splithttp_settings.mode,
                 no_grpc_header=splithttp_settings.no_grpc_header,
                 padding_bytes=splithttp_settings.padding_bytes,
-                xmux=(
-                    V2XMuxSettings(**splithttp_settings.xmux.model_dump())
-                    if splithttp_settings.xmux
-                    else None
-                ),
+                xmux=(V2XMuxSettings(**splithttp_settings.xmux.model_dump()) if splithttp_settings.xmux else None),
             )
             if splithttp_settings
             else None
@@ -374,18 +323,12 @@ def create_config(
             V2MuxSettings(
                 protocol=mux_settings.protocol,
                 sing_box_mux_settings=(
-                    V2SingBoxMuxSettings(
-                        **mux_settings.sing_box_mux_settings.model_dump()
-                    )
+                    V2SingBoxMuxSettings(**mux_settings.sing_box_mux_settings.model_dump())
                     if mux_settings.sing_box_mux_settings
                     else None
                 ),
                 mux_cool_settings=(
-                    V2MuxCoolSettings(
-                        **mux_settings.mux_cool_settings.model_dump()
-                    )
-                    if mux_settings.mux_cool_settings
-                    else None
+                    V2MuxCoolSettings(**mux_settings.mux_cool_settings.model_dump()) if mux_settings.mux_cool_settings else None
                 ),
             )
             if mux_settings
@@ -393,14 +336,9 @@ def create_config(
         ),
         http_headers=host.http_headers,
         shadowsocks_method=host.shadowsocks_method or "chacha20-ietf-poly1305",
-        shadowtls_version=host.shadowtls_version
-        or inbound.get("shadowtls_version"),
+        shadowtls_version=host.shadowtls_version or inbound.get("shadowtls_version"),
         weight=host.weight,
-        xray_noises=(
-            [XrayNoise(**noise) for noise in host.udp_noises]
-            if host.udp_noises
-            else None
-        ),
+        xray_noises=([XrayNoise(**noise) for noise in host.udp_noises] if host.udp_noises else None),
         next=(
             create_config(
                 next_hosts[0],

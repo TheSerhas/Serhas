@@ -24,9 +24,7 @@ temp_type = sa.Enum(*new_values, name=temp_enum_name)
 # Describing of table
 table_name = "inbounds"
 column_name = "protocol"
-temp_table = sa.sql.table(
-    table_name, sa.Column(column_name, new_type, nullable=False)
-)
+temp_table = sa.sql.table(table_name, sa.Column(column_name, new_type, nullable=False))
 
 
 # revision identifiers, used by Alembic.

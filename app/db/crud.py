@@ -74,20 +74,13 @@ def ensure_node_backends(db: Session, backends, node_id: int):
 
 
 def ensure_node_inbounds(db: Session, inbounds: List[Inbound], node_id: int):
-    current_tags = [
-        i[0]
-        for i in db.execute(
-            select(Inbound.tag).filter(Inbound.node_id == node_id)
-        ).all()
-    ]
+    current_tags = [i[0] for i in db.execute(select(Inbound.tag).filter(Inbound.node_id == node_id)).all()]
     updated_tags = set(i.tag for i in list(inbounds))
     inbound_additions, tag_deletions = list(), set()
     for tag in current_tags:
         if tag not in updated_tags:
             tag_deletions.add(tag)
-    removals = db.query(Inbound).where(
-        and_(Inbound.node_id == node_id, Inbound.tag.in_(tag_deletions))
-    )
+    removals = db.query(Inbound).where(and_(Inbound.node_id == node_id, Inbound.tag.in_(tag_deletions)))
     for i in removals:
         db.delete(i)
 
@@ -95,9 +88,7 @@ def ensure_node_inbounds(db: Session, inbounds: List[Inbound], node_id: int):
         if inb.tag in current_tags:
             stmt = (
                 update(Inbound)
-                .where(
-                    and_(Inbound.node_id == node_id, Inbound.tag == inb.tag)
-                )
+                .where(and_(Inbound.node_id == node_id, Inbound.tag == inb.tag))
                 .values(
                     protocol=json.loads(inb.config)["protocol"],
                     config=inb.config,
@@ -150,14 +141,10 @@ def get_user_hosts(db: Session, user_id: int):
     )
 
 
-def get_inbounds_hosts(
-    db: Session, inbound_ids: list[int]
-) -> list[InboundHost]:
+def get_inbounds_hosts(db: Session, inbound_ids: list[int]) -> list[InboundHost]:
     return (
         db.query(InboundHost)
-        .options(
-            joinedload(InboundHost.chain).joinedload(HostChain.chained_host)
-        )
+        .options(joinedload(InboundHost.chain).joinedload(HostChain.chained_host))
         .filter(InboundHost.inbound_id.in_(inbound_ids))
         .filter(InboundHost.is_disabled == False)
         .all()
@@ -175,21 +162,13 @@ def get_hosts_for_user(session, user_id):
             InboundHost.is_disabled.is_(False),
             or_(
                 # Case 1: Host has an inbound linked to a service of the user
-                InboundHost.inbound.has(
-                    Inbound.services.any(
-                        Service.id.in_([s.id for s in user.services])
-                    )
-                ),
+                InboundHost.inbound.has(Inbound.services.any(Service.id.in_([s.id for s in user.services]))),
                 # Case 2: Host has no inbound
                 and_(
-                    InboundHost.inbound_id.is_(
-                        None
-                    ),  # Host does not have an inbound
+                    InboundHost.inbound_id.is_(None),  # Host does not have an inbound
                     or_(
                         # Host is directly related to a service of the user
-                        InboundHost.services.any(
-                            Service.id.in_([s.id for s in user.services])
-                        ),
+                        InboundHost.services.any(Service.id.in_([s.id for s in user.services])),
                         # Host is available to all
                         InboundHost.universal.is_(True),
                     ),
@@ -229,41 +208,26 @@ def add_host(db: Session, inbound: Inbound | None, host: InboundHostModify):
         alpn=host.alpn.value,
         fingerprint=host.fingerprint,
         fragment=host.fragment.model_dump() if host.fragment else None,
-        udp_noises=(
-            [noise.model_dump() for noise in host.noise]
-            if host.noise
-            else None
-        ),
+        udp_noises=([noise.model_dump() for noise in host.noise] if host.noise else None),
         header_type=host.header_type,
         reality_public_key=host.reality_public_key,
         reality_short_ids=host.reality_short_ids,
         flow=host.flow,
         shadowtls_version=host.shadowtls_version,
         shadowsocks_method=host.shadowsocks_method,
-        splithttp_settings=(
-            host.splithttp_settings.model_dump()
-            if host.splithttp_settings
-            else None
-        ),
+        splithttp_settings=(host.splithttp_settings.model_dump() if host.splithttp_settings else None),
         early_data=host.early_data,
         http_headers=host.http_headers,
         mtu=host.mtu,
         dns_servers=host.dns_servers,
         allowed_ips=host.allowed_ips,
-        mux_settings=(
-            host.mux_settings.model_dump() if host.mux_settings else None
-        ),
+        mux_settings=(host.mux_settings.model_dump() if host.mux_settings else None),
         allowinsecure=host.allowinsecure,
         weight=host.weight,
         universal=host.universal,
-        services=(
-            db.query(Service).filter(Service.id.in_(host.service_ids)).all()
-        ),
+        services=(db.query(Service).filter(Service.id.in_(host.service_ids)).all()),
         chain=[
-            HostChain(chained_host_id=ch[0])
-            for ch in db.query(InboundHost.id)
-            .filter(InboundHost.id.in_(host.chain_ids))
-            .all()
+            HostChain(chained_host_id=ch[0]) for ch in db.query(InboundHost.id).filter(InboundHost.id.in_(host.chain_ids)).all()
         ],
     )
     if inbound:
@@ -290,46 +254,28 @@ def update_host(db: Session, db_host: InboundHost, host: InboundHostModify):
     db_host.alpn = host.alpn.value
     db_host.fingerprint = host.fingerprint
     db_host.fragment = host.fragment.model_dump() if host.fragment else None
-    db_host.mux_settings = (
-        host.mux_settings.model_dump() if host.mux_settings else None
-    )
+    db_host.mux_settings = host.mux_settings.model_dump() if host.mux_settings else None
     db_host.is_disabled = host.is_disabled
     db_host.allowinsecure = host.allowinsecure
-    db_host.udp_noises = (
-        [noise.model_dump() for noise in host.noise] if host.noise else None
-    )
+    db_host.udp_noises = [noise.model_dump() for noise in host.noise] if host.noise else None
     db_host.header_type = host.header_type
     db_host.reality_public_key = host.reality_public_key
     db_host.reality_short_ids = host.reality_short_ids
     db_host.flow = host.flow
     db_host.shadowtls_version = host.shadowtls_version
     db_host.shadowsocks_method = host.shadowsocks_method
-    db_host.splithttp_settings = (
-        host.splithttp_settings.model_dump()
-        if host.splithttp_settings
-        else None
-    )
+    db_host.splithttp_settings = host.splithttp_settings.model_dump() if host.splithttp_settings else None
     db_host.early_data = host.early_data
 
-    chain_ids = [
-        int(i[0])
-        for i in db.query(InboundHost.id)
-        .filter(InboundHost.id.in_(host.chain_ids))
-        .all()
-    ]
-    chain_nodes = [
-        HostChain(host_id=db_host.id, chained_host_id=chain_id)
-        for chain_id in chain_ids
-    ]
+    chain_ids = [int(i[0]) for i in db.query(InboundHost.id).filter(InboundHost.id.in_(host.chain_ids)).all()]
+    chain_nodes = [HostChain(host_id=db_host.id, chained_host_id=chain_id) for chain_id in chain_ids]
     db_host.chain = chain_nodes
     db_host.http_headers = host.http_headers
     db_host.mtu = host.mtu
     db_host.dns_servers = host.dns_servers
     db_host.allowed_ips = host.allowed_ips
     db_host.universal = host.universal
-    db_host.services = (
-        db.query(Service).filter(Service.id.in_(host.service_ids)).all()
-    )
+    db_host.services = db.query(Service).filter(Service.id.in_(host.service_ids)).all()
     db_host.weight = host.weight
     db.commit()
     db.refresh(db_host)
@@ -369,9 +315,7 @@ def get_users(
     sort: Optional[List[UsersSortingOptions]] = None,
     admin: Optional[Admin] = None,
     reset_strategy: Optional[Union[UserDataUsageResetStrategy, list]] = None,
-    expire_strategy: (
-        UserExpireStrategy | list[UserExpireStrategy] | None
-    ) = None,
+    expire_strategy: UserExpireStrategy | list[UserExpireStrategy] | None = None,
     is_active: bool | None = None,
     activated: bool | None = None,
     expired: bool | None = None,
@@ -388,13 +332,9 @@ def get_users(
 
     if reset_strategy:
         if isinstance(reset_strategy, list):
-            query = query.filter(
-                User.data_limit_reset_strategy.in_(reset_strategy)
-            )
+            query = query.filter(User.data_limit_reset_strategy.in_(reset_strategy))
         else:
-            query = query.filter(
-                User.data_limit_reset_strategy == reset_strategy
-            )
+            query = query.filter(User.data_limit_reset_strategy == reset_strategy)
 
     if expire_strategy:
         if isinstance(expire_strategy, list):
@@ -432,17 +372,11 @@ def get_users(
     return query.all()
 
 
-def get_user_total_usage(
-    db: Session, user: User, start: datetime, end: datetime, per_day=False
-):
+def get_user_total_usage(db: Session, user: User, start: datetime, end: datetime, per_day=False):
     usages = defaultdict(int)
 
     query = db.query(
-        (
-            cast(NodeUserUsage.created_at, Date).label("day")
-            if per_day
-            else NodeUserUsage.created_at
-        ),
+        (cast(NodeUserUsage.created_at, Date).label("day") if per_day else NodeUserUsage.created_at),
         func.sum(NodeUserUsage.used_traffic),
     ).filter(
         and_(
@@ -458,19 +392,13 @@ def get_user_total_usage(
 
     for date, used_traffic in query:
         if per_day:
-            timestamp = datetime(
-                date.year, date.month, date.day, tzinfo=timezone.utc
-            ).timestamp()
+            timestamp = datetime(date.year, date.month, date.day, tzinfo=timezone.utc).timestamp()
             usages[timestamp] += int(used_traffic)
         else:
-            usages[date.replace(tzinfo=timezone.utc).timestamp()] += int(
-                used_traffic
-            )
+            usages[date.replace(tzinfo=timezone.utc).timestamp()] += int(used_traffic)
 
     result = TrafficUsageSeries(usages=[])
-    current = start.astimezone(timezone.utc).replace(
-        minute=0, second=0, microsecond=0
-    )
+    current = start.astimezone(timezone.utc).replace(minute=0, second=0, microsecond=0)
     if per_day:
         current = current.replace(hour=0)
 
@@ -485,15 +413,11 @@ def get_user_total_usage(
     return result
 
 
-def get_total_usages(
-    db: Session, admin: Admin, start: datetime, end: datetime
-) -> TrafficUsageSeries:
+def get_total_usages(db: Session, admin: Admin, start: datetime, end: datetime) -> TrafficUsageSeries:
     usages = defaultdict(int)
 
     query = (
-        db.query(
-            NodeUserUsage.created_at, func.sum(NodeUserUsage.used_traffic)
-        )
+        db.query(NodeUserUsage.created_at, func.sum(NodeUserUsage.used_traffic))
         .group_by(NodeUserUsage.created_at)
         .filter(
             and_(
@@ -517,9 +441,7 @@ def get_total_usages(
         usages[timestamp] += int(used_traffic)
 
     result = TrafficUsageSeries(usages=[], total=0)
-    current = start.astimezone(timezone.utc).replace(
-        minute=0, second=0, microsecond=0
-    )
+    current = start.astimezone(timezone.utc).replace(minute=0, second=0, microsecond=0)
 
     while current <= end.replace(tzinfo=timezone.utc):
         usage = usages.get(current.timestamp()) or 0
@@ -552,17 +474,11 @@ def get_user_usages(
     nodes = db.query(Node).where(Node.id.in_(node_ids))
     node_id_names = {node.id: node.name for node in nodes}
 
-    result = UserUsageSeriesResponse(
-        username=db_user.username, node_usages=[], total=0
-    )
+    result = UserUsageSeriesResponse(username=db_user.username, node_usages=[], total=0)
 
     for node_id, rows in usages.items():
-        node_usages = UserNodeUsageSeries(
-            node_id=node_id, node_name=node_id_names[node_id], usages=[]
-        )
-        current = start.astimezone(timezone.utc).replace(
-            minute=0, second=0, microsecond=0
-        )
+        node_usages = UserNodeUsageSeries(node_id=node_id, node_name=node_id_names[node_id], usages=[])
+        current = start.astimezone(timezone.utc).replace(minute=0, second=0, microsecond=0)
 
         while current <= end:
             usage = rows.get(current.timestamp()) or 0
@@ -596,13 +512,9 @@ def get_users_count(
     if enabled:
         query = query.filter(User.enabled == enabled)
     if online is True:
-        query = query.filter(
-            User.online_at > (datetime.utcnow() - timedelta(seconds=30))
-        )
+        query = query.filter(User.online_at > (datetime.utcnow() - timedelta(seconds=30)))
     elif online is False:
-        query = query.filter(
-            User.online_at < (datetime.utcnow() - timedelta(seconds=30))
-        )
+        query = query.filter(User.online_at < (datetime.utcnow() - timedelta(seconds=30)))
     if expire_strategy:
         query = query.filter(User.expire_strategy == expire_strategy)
 
@@ -616,9 +528,7 @@ def create_user(
     allowed_services: list | None = None,
 ):
     service_ids = (
-        [sid for sid in user.service_ids if sid in allowed_services]
-        if allowed_services is not None
-        else user.service_ids
+        [sid for sid in user.service_ids if sid in allowed_services] if allowed_services is not None else user.service_ids
     )
     dbuser = User(
         username=user.username,
@@ -627,9 +537,7 @@ def create_user(
         expire_date=user.expire_date,
         usage_duration=user.usage_duration,
         activation_deadline=user.activation_deadline,
-        services=db.query(Service)
-        .filter(Service.id.in_(service_ids))
-        .all(),  # user.services,
+        services=db.query(Service).filter(Service.id.in_(service_ids)).all(),  # user.services,
         data_limit=(user.data_limit or None),
         admin=admin,
         data_limit_reset_strategy=user.data_limit_reset_strategy,
@@ -688,15 +596,11 @@ def update_user(
 
     if modify.service_ids is not None:
         if allowed_services is not None:
-            service_ids = [
-                sid for sid in modify.service_ids if sid in allowed_services
-            ]
+            service_ids = [sid for sid in modify.service_ids if sid in allowed_services]
         else:
             service_ids = modify.service_ids
 
-        dbuser.services = (
-            db.query(Service).filter(Service.id.in_(service_ids)).all()
-        )
+        dbuser.services = db.query(Service).filter(Service.id.in_(service_ids)).all()
     dbuser.edit_at = datetime.utcnow()
 
     db.commit()
@@ -786,9 +690,7 @@ def create_admin(db: Session, admin: AdminCreate):
         enabled=admin.enabled,
         all_services_access=admin.all_services_access,
         modify_users_access=admin.modify_users_access,
-        services=db.query(Service)
-        .filter(Service.id.in_(admin.service_ids))
-        .all(),
+        services=db.query(Service).filter(Service.id.in_(admin.service_ids)).all(),
         subscription_url_prefix=admin.subscription_url_prefix,
     )
     db.add(dbadmin)
@@ -797,9 +699,7 @@ def create_admin(db: Session, admin: AdminCreate):
     return dbadmin
 
 
-def update_admin(
-    db: Session, dbadmin: Admin, modifications: AdminPartialModify
-):
+def update_admin(db: Session, dbadmin: Admin, modifications: AdminPartialModify):
     for attribute in [
         "is_sudo",
         "hashed_password",
@@ -813,25 +713,16 @@ def update_admin(
             if attribute == "hashed_password":
                 dbadmin.password_reset_at = datetime.utcnow()
     if isinstance(modifications.service_ids, list):
-        dbadmin.services = (
-            db.query(Service)
-            .filter(Service.id.in_(modifications.service_ids))
-            .all()
-        )
+        dbadmin.services = db.query(Service).filter(Service.id.in_(modifications.service_ids)).all()
     db.commit()
     db.refresh(dbadmin)
     return dbadmin
 
 
-def partial_update_admin(
-    db: Session, dbadmin: Admin, modified_admin: AdminPartialModify
-):
+def partial_update_admin(db: Session, dbadmin: Admin, modified_admin: AdminPartialModify):
     if modified_admin.is_sudo is not None:
         dbadmin.is_sudo = modified_admin.is_sudo
-    if (
-        modified_admin.password is not None
-        and dbadmin.hashed_password != modified_admin.hashed_password
-    ):
+    if modified_admin.password is not None and dbadmin.hashed_password != modified_admin.hashed_password:
         dbadmin.hashed_password = modified_admin.hashed_password
         dbadmin.password_reset_at = datetime.utcnow()
 
@@ -865,9 +756,7 @@ def get_admins(
 def create_service(db: Session, service: ServiceCreate) -> Service:
     dbservice = Service(
         name=service.name,
-        inbounds=db.query(Inbound)
-        .filter(Inbound.id.in_(service.inbound_ids))
-        .all(),
+        inbounds=db.query(Inbound).filter(Inbound.id.in_(service.inbound_ids)).all(),
         users=[],
     )
     db.add(dbservice)
@@ -884,18 +773,12 @@ def get_services(db: Session) -> List[Service]:
     return db.query(Service).all()
 
 
-def update_service(
-    db: Session, db_service: Service, modification: ServiceModify
-):
+def update_service(db: Session, db_service: Service, modification: ServiceModify):
     if modification.name is not None:
         db_service.name = modification.name
 
     if modification.inbound_ids is not None:
-        db_service.inbounds = (
-            db.query(Inbound)
-            .filter(Inbound.id.in_(modification.inbound_ids))
-            .all()
-        )
+        db_service.inbounds = db.query(Inbound).filter(Inbound.id.in_(modification.inbound_ids)).all()
 
     db.commit()
     db.refresh(db_service)
@@ -935,15 +818,11 @@ def get_nodes(
     return query.all()
 
 
-def get_node_usage(
-    db: Session, start: datetime, end: datetime, node: Node
-) -> TrafficUsageSeries:
+def get_node_usage(db: Session, start: datetime, end: datetime, node: Node) -> TrafficUsageSeries:
     usages = defaultdict(int)
 
     query = (
-        db.query(
-            NodeUserUsage.created_at, func.sum(NodeUserUsage.used_traffic)
-        )
+        db.query(NodeUserUsage.created_at, func.sum(NodeUserUsage.used_traffic))
         .group_by(NodeUserUsage.created_at)
         .filter(
             and_(
@@ -955,14 +834,10 @@ def get_node_usage(
     )
 
     for created_at, used_traffic in query.all():
-        usages[created_at.replace(tzinfo=timezone.utc).timestamp()] += int(
-            used_traffic
-        )
+        usages[created_at.replace(tzinfo=timezone.utc).timestamp()] += int(used_traffic)
 
     result = TrafficUsageSeries(usages=[], total=0)
-    current = start.astimezone(timezone.utc).replace(
-        minute=0, second=0, microsecond=0
-    )
+    current = start.astimezone(timezone.utc).replace(minute=0, second=0, microsecond=0)
 
     while current <= end.replace(tzinfo=timezone.utc):
         usage = usages.get(current.timestamp()) or 0

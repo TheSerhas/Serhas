@@ -36,43 +36,25 @@ def upgrade() -> None:
         "hosts",
         sa.Column("host_protocol", sa.String(length=32), nullable=True),
     )
-    op.add_column(
-        "hosts", sa.Column("host_network", sa.String(length=32), nullable=True)
-    )
-    op.add_column(
-        "hosts", sa.Column("uuid", sa.String(length=36), nullable=True)
-    )
-    op.add_column(
-        "hosts", sa.Column("password", sa.String(length=128), nullable=True)
-    )
-    op.add_column(
-        "hosts", sa.Column("header_type", sa.String(length=32), nullable=True)
-    )
+    op.add_column("hosts", sa.Column("host_network", sa.String(length=32), nullable=True))
+    op.add_column("hosts", sa.Column("uuid", sa.String(length=36), nullable=True))
+    op.add_column("hosts", sa.Column("password", sa.String(length=128), nullable=True))
+    op.add_column("hosts", sa.Column("header_type", sa.String(length=32), nullable=True))
     op.add_column(
         "hosts",
         sa.Column("reality_public_key", sa.String(length=128), nullable=True),
     )
-    op.add_column(
-        "hosts", sa.Column("reality_short_ids", sa.JSON(), nullable=True)
-    )
-    op.add_column(
-        "hosts", sa.Column("flow", sa.String(length=32), nullable=True)
-    )
-    op.add_column(
-        "hosts", sa.Column("shadowtls_version", sa.Integer(), nullable=True)
-    )
+    op.add_column("hosts", sa.Column("reality_short_ids", sa.JSON(), nullable=True))
+    op.add_column("hosts", sa.Column("flow", sa.String(length=32), nullable=True))
+    op.add_column("hosts", sa.Column("shadowtls_version", sa.Integer(), nullable=True))
     op.add_column(
         "hosts",
         sa.Column("shadowsocks_method", sa.String(length=32), nullable=True),
     )
-    op.add_column(
-        "hosts", sa.Column("splithttp_settings", sa.JSON(), nullable=True)
-    )
+    op.add_column("hosts", sa.Column("splithttp_settings", sa.JSON(), nullable=True))
     op.drop_column("hosts", "mux")
     op.add_column("hosts", sa.Column("mux_settings", sa.JSON(), nullable=True))
-    op.add_column(
-        "hosts", sa.Column("early_data", sa.Integer(), nullable=True)
-    )
+    op.add_column("hosts", sa.Column("early_data", sa.Integer(), nullable=True))
     op.add_column(
         "hosts",
         sa.Column(
@@ -83,9 +65,7 @@ def upgrade() -> None:
         ),
     )
     if op.get_bind().dialect.name == "sqlite":
-        op.add_column(
-            "hosts", sa.Column("inbound_id_new", sa.Integer, nullable=True)
-        )
+        op.add_column("hosts", sa.Column("inbound_id_new", sa.Integer, nullable=True))
 
         # Copy data from the old column to the new column
         op.execute(
@@ -100,13 +80,9 @@ def upgrade() -> None:
             batch_op.drop_column("inbound_id")
 
         # Rename the new column to the old column's name
-        op.alter_column(
-            "hosts", "inbound_id_new", new_column_name="inbound_id"
-        )
+        op.alter_column("hosts", "inbound_id_new", new_column_name="inbound_id")
     else:
-        op.alter_column(
-            "hosts", "inbound_id", existing_type=sa.INTEGER(), nullable=True
-        )
+        op.alter_column("hosts", "inbound_id", existing_type=sa.INTEGER(), nullable=True)
     # ### end Alembic commands ###
 
 
@@ -116,9 +92,7 @@ def downgrade() -> None:
     op.drop_column("hosts", "early_data")
     op.add_column(
         "hosts",
-        sa.Column(
-            "mux", sa.Boolean(), server_default=sa.sql.true(), nullable=False
-        ),
+        sa.Column("mux", sa.Boolean(), server_default=sa.sql.true(), nullable=False),
     )
     op.drop_column("hosts", "mux_settings")
     op.drop_column("hosts", "splithttp_settings")
@@ -134,9 +108,7 @@ def downgrade() -> None:
     op.drop_column("hosts", "host_protocol")
     op.drop_table("hosts_services")
     if op.get_bind().dialect.name == "sqlite":
-        op.add_column(
-            "hosts", sa.Column("inbound_id_old", sa.Integer, nullable=False)
-        )
+        op.add_column("hosts", sa.Column("inbound_id_old", sa.Integer, nullable=False))
 
         # Copy data from the new column back to the old column
         op.execute(
@@ -151,11 +123,7 @@ def downgrade() -> None:
             batch_op.drop_column("inbound_id")
 
         # Rename the old column back to the original name
-        op.alter_column(
-            "hosts", "inbound_id_old", new_column_name="inbound_id"
-        )
+        op.alter_column("hosts", "inbound_id_old", new_column_name="inbound_id")
     else:
-        op.alter_column(
-            "hosts", "inbound_id", existing_type=sa.INTEGER(), nullable=False
-        )
+        op.alter_column("hosts", "inbound_id", existing_type=sa.INTEGER(), nullable=False)
     # ### end Alembic commands ###

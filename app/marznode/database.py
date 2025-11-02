@@ -9,16 +9,12 @@ class MarzNodeDB:
             users = dict()
             for rel in relations:
                 if not users.get(rel[0]):
-                    users[rel[0]] = dict(
-                        username=rel[1], id=rel[0], key=rel[2], inbounds=[]
-                    )
+                    users[rel[0]] = dict(username=rel[1], id=rel[0], key=rel[2], inbounds=[])
                 users[rel[0]]["inbounds"].append(rel[3].tag)
         return list(users.values())
 
     def store_backends(self, backends):
-        inbounds = [
-            inbound for backend in backends for inbound in backend.inbounds
-        ]
+        inbounds = [inbound for backend in backends for inbound in backend.inbounds]
         with GetDB() as db:
             crud.ensure_node_backends(db, backends, self.id)
             crud.ensure_node_inbounds(db, inbounds, self.id)

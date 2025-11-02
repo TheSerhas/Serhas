@@ -12,9 +12,7 @@ if TYPE_CHECKING:
     from app.db import User as DBUser
 
 
-def update_user(
-    user: "DBUser", old_inbounds: set | None = None, remove: bool = False
-):
+def update_user(user: "DBUser", old_inbounds: set | None = None, remove: bool = False):
     """updates a user on all related nodes"""
     if old_inbounds is None:
         old_inbounds = set()
@@ -32,11 +30,7 @@ def update_user(
 
     for node_id, tags in node_inbounds.items():
         if marznode.nodes.get(node_id):
-            asyncio.ensure_future(
-                marznode.nodes[node_id].update_user(
-                    user=User.model_validate(user), inbounds=tags
-                )
-            )
+            asyncio.ensure_future(marznode.nodes[node_id].update_user(user=User.model_validate(user), inbounds=tags))
 
 
 async def remove_user(user: "DBUser"):
@@ -44,9 +38,7 @@ async def remove_user(user: "DBUser"):
 
     for node_id in node_ids:
         if marznode.nodes.get(node_id):
-            asyncio.ensure_future(
-                marznode.nodes[node_id].update_user(user=user, inbounds=[])
-            )
+            asyncio.ensure_future(marznode.nodes[node_id].update_user(user=user, inbounds=[]))
 
 
 async def remove_node(node_id: int):

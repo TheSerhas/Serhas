@@ -45,36 +45,18 @@ def create_text(notif: Notification) -> str:
 
 def prepare_data(notif: Notification) -> dict:
     user = UserResponse.model_validate(notif.user)
-    by: Optional[Admin] = (
-        Admin.model_validate(notif.by)
-        if hasattr(notif, "by") and notif.by
-        else None
-    )
+    by: Optional[Admin] = Admin.model_validate(notif.by) if hasattr(notif, "by") and notif.by else None
     data = {
         "username": html.quote(user.username),
-        "data_limit": (
-            readable_size(user.data_limit) if user.data_limit else "Unlimited"
-        ),
-        "remaining_traffic": (
-            readable_size(max(user.data_limit - user.used_traffic, 0))
-            if user.data_limit
-            else "Unlimited"
-        ),
+        "data_limit": (readable_size(user.data_limit) if user.data_limit else "Unlimited"),
+        "remaining_traffic": (readable_size(max(user.data_limit - user.used_traffic, 0)) if user.data_limit else "Unlimited"),
         "usage_percent": (
             f"{round(min((user.used_traffic / user.data_limit) * 100, 100),2)}%"
             if isinstance(user.data_limit, int) and user.data_limit > 0
             else "0%"
         ),
-        "expire_date": (
-            user.expire_date.strftime("%H:%M:%S %Y-%m-%d")
-            if user.expire_date
-            else "Never"
-        ),
-        "remaining_days": (
-            (user.expire_date - datetime.now()).days
-            if user.expire_date
-            else "Never"
-        ),
+        "expire_date": (user.expire_date.strftime("%H:%M:%S %Y-%m-%d") if user.expire_date else "Never"),
+        "remaining_days": ((user.expire_date - datetime.now()).days if user.expire_date else "Never"),
         "services": user.service_ids if user.service_ids else "",
         "owner_username": user.owner_username,
         "by": html.quote(by.username) if by else None,

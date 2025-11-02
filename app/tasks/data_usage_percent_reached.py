@@ -25,10 +25,7 @@ async def data_usage_percent_reached(db: Session, users_usage: list) -> None:
     users_usage_dict = {user["id"]: user["value"] for user in users_usage}
 
     case_stmt = case(
-        *[
-            (User.id == user_id, User.used_traffic + increase_amount)
-            for user_id, increase_amount in users_usage_dict.items()
-        ],
+        *[(User.id == user_id, User.used_traffic + increase_amount) for user_id, increase_amount in users_usage_dict.items()],
         else_=User.used_traffic,
     )
 
@@ -38,8 +35,7 @@ async def data_usage_percent_reached(db: Session, users_usage: list) -> None:
             User.id.in_(users_usage_dict.keys()),
             User.data_limit.isnot(None),
             User.data_limit > 0,
-            (User.used_traffic / User.data_limit) * 100
-            < NOTIFY_REACHED_USAGE_PERCENT,
+            (User.used_traffic / User.data_limit) * 100 < NOTIFY_REACHED_USAGE_PERCENT,
             (case_stmt / User.data_limit) * 100 > NOTIFY_REACHED_USAGE_PERCENT,
         )
         .all()

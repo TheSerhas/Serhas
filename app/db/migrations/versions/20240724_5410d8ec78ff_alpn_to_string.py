@@ -23,9 +23,7 @@ def upgrade() -> None:
         op.alter_column(
             "hosts",
             "alpn",
-            existing_type=postgresql.ENUM(
-                "none", "h2", "http/1.1", "h2,http/1.1", name="proxyhostalpn"
-            ),
+            existing_type=postgresql.ENUM("none", "h2", "http/1.1", "h2,http/1.1", name="proxyhostalpn"),
             type_=sa.String(length=32),
             existing_nullable=False,
             nullable=True,
@@ -49,9 +47,7 @@ def downgrade() -> None:
             "hosts",
             "alpn",
             existing_type=sa.String(length=32),
-            type_=postgresql.ENUM(
-                "none", "h2", "http/1.1", "h2,http/1.1", name="proxyhostalpn"
-            ),
+            type_=postgresql.ENUM("none", "h2", "http/1.1", "h2,http/1.1", name="proxyhostalpn"),
             existing_nullable=True,
             nullable=False,
             existing_server_default=None,

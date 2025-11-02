@@ -59,9 +59,7 @@ async def add_node(new_node: NodeCreate, db: DBDep, admin: SudoAdminDep):
         db_node = crud.create_node(db, new_node)
     except sqlalchemy.exc.IntegrityError:
         db.rollback()
-        raise HTTPException(
-            status_code=409, detail=f'Node "{new_node.name}" already exists'
-        )
+        raise HTTPException(status_code=409, detail=f'Node "{new_node.name}" already exists')
     certificate = get_tls_certificate(db)
 
     await marznode.operations.add_node(db_node, certificate)
@@ -94,9 +92,7 @@ async def node_logs(
     db: DBDep,
     include_buffer: bool = True,
 ):
-    token = websocket.query_params.get("token", "") or websocket.headers.get(
-        "Authorization", ""
-    ).removeprefix("Bearer ")
+    token = websocket.query_params.get("token", "") or websocket.headers.get("Authorization", "").removeprefix("Bearer ")
     admin = get_admin(db, token)
 
     if not admin or not admin.is_sudo:
@@ -107,9 +103,7 @@ async def node_logs(
 
     await websocket.accept()
     try:
-        async for line in marznode.nodes[node_id].get_logs(
-            name=backend, include_buffer=include_buffer
-        ):
+        async for line in marznode.nodes[node_id].get_logs(name=backend, include_buffer=include_buffer):
             await websocket.send_text(line)
     except WebSocketDisconnect:
         logger.debug("websocket disconnected")
@@ -121,9 +115,7 @@ async def node_logs(
 
 
 @router.put("/{node_id}", response_model=NodeResponse)
-async def modify_node(
-    node_id: int, modified_node: NodeModify, db: DBDep, admin: SudoAdminDep
-):
+async def modify_node(node_id: int, modified_node: NodeModify, db: DBDep, admin: SudoAdminDep):
     db_node = crud.get_node_by_id(db, node_id)
     if not db_node:
         raise HTTPException(status_code=404, detail="Node not found")
@@ -180,9 +172,7 @@ def get_usage(
 
 
 @router.get("/{node_id}/{backend}/stats", response_model=BackendStats)
-async def get_backend_stats(
-    node_id: int, backend: str, db: DBDep, admin: SudoAdminDep
-):
+async def get_backend_stats(node_id: int, backend: str, db: DBDep, admin: SudoAdminDep):
     if not (node := marznode.nodes.get(node_id)):
         raise HTTPException(status_code=404, detail="Node not found")
 
@@ -195,9 +185,7 @@ async def get_backend_stats(
 
 
 @router.get("/{node_id}/{backend}/config", response_model=BackendConfig)
-async def get_node_xray_config(
-    node_id: int, backend: str, admin: SudoAdminDep
-):
+async def get_node_xray_config(node_id: int, backend: str, admin: SudoAdminDep):
     if not (node := marznode.nodes.get(node_id)):
         raise HTTPException(status_code=404, detail="Node not found")
 
@@ -229,7 +217,5 @@ async def alter_node_xray_config(
             5,
         )
     except:
-        raise HTTPException(
-            status_code=502, detail="No response from the node."
-        )
+        raise HTTPException(status_code=502, detail="No response from the node.")
     return {}

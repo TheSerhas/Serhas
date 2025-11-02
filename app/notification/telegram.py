@@ -48,9 +48,7 @@ async def send_message(
     if not (bot := await BotManager.get_instance()):
         return
 
-    for recipient_id in (TELEGRAM_ADMIN_ID or []) + [
-        TELEGRAM_LOGGER_CHANNEL_ID
-    ]:
+    for recipient_id in (TELEGRAM_ADMIN_ID or []) + [TELEGRAM_LOGGER_CHANNEL_ID]:
         if not recipient_id:
             continue
         try:

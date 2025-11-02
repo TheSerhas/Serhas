@@ -3,9 +3,7 @@ from passlib.context import CryptContext
 from pydantic import ConfigDict, BaseModel
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-oauth2_scheme = OAuth2PasswordBearer(
-    tokenUrl="/api/admins/token"
-)  # Admin view url
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/admins/token")  # Admin view url
 
 
 class Token(BaseModel):
@@ -46,11 +44,7 @@ class AdminModify(Admin):
 
     @property
     def hashed_password(self):
-        return (
-            pwd_context.hash(self.password)
-            if self.password is not None
-            else None
-        )
+        return pwd_context.hash(self.password) if self.password is not None else None
 
 
 class AdminPartialModify(AdminModify):
