@@ -68,18 +68,6 @@ def upgrade() -> None:
         sa.UniqueConstraint("name"),
         sa.UniqueConstraint("address", "port"),
     )
-    op.bulk_insert(
-        nodestable,
-        [
-            {
-                "name": "local",
-                "address": "127.0.0.1",
-                "port": 53042,
-                "connection_backend": "grpcio",
-                "status": "unhealthy",
-            }
-        ],
-    )
     op.create_table(
         "services",
         sa.Column("id", sa.Integer(), nullable=False),
