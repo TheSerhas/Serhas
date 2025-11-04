@@ -66,7 +66,7 @@ export function SelectableEntityTable<T extends { id: number }>({
         { filters: filters.columnsFilter }
     ];
 
-    const { data, isFetching } = useQuery({
+    const { data, isPending } = useQuery({
         queryFn: fetchEntity,
         queryKey: query,
         initialData: { entities: [], pageCount: 1 },
@@ -110,8 +110,8 @@ export function SelectableEntityTable<T extends { id: number }>({
 
 
     const contextValue = useMemo(
-        () => ({ entityKey, table, data: data.entities, primaryFilter: columnPrimaryFilter, filters, isLoading: isFetching }),
-        [entityKey, table, data.entities, filters, columnPrimaryFilter, isFetching],
+        () => ({ entityKey, table, data: data.entities, primaryFilter: columnPrimaryFilter, filters, isLoading: isPending }),
+        [entityKey, table, data.entities, filters, columnPrimaryFilter, isPending],
     );
 
     return (
