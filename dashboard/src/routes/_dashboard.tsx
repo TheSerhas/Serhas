@@ -33,7 +33,7 @@ export const DashboardLayout = () => {
         toggleCollapse,
     } = usePanelToggle(isDesktop);
     const { isSudo } = useAuth();
-    const { data: stats } = useGithubRepoStatsQuery()
+    const { data: stats } = useGithubRepoStatsQuery();
 
     return (
         <div className="flex flex-col w-screen h-screen">
@@ -95,6 +95,7 @@ export const DashboardLayout = () => {
                                 <Outlet />
                             </Suspense>
                         </main>
+                        <DashboardBottomMenu variant={isSudo() ? "sudo-admin" : "admin"} />
                     </div>
                 )}
             </div>

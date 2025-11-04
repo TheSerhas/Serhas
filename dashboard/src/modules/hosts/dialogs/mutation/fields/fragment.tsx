@@ -9,24 +9,33 @@ import {
     PopoverContent,
     PopoverTrigger,
 } from "@serhas/common/components";
-import type { FieldErrors, FieldError } from "react-hook-form";
 import { useWatch, useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { MailWarning, TrashIcon } from "lucide-react";
 import type { FC } from "react";
 
-interface FragmentForm {
-    fragment: {
-        packets: FieldError;
-        length: FieldError;
-        interval: FieldError;
-    };
-}
+type FragmentValue = {
+    packets: string;
+    length: string;
+    interval: string;
+};
+
+type FragmentFormValues = {
+    fragment: FragmentValue | null;
+} & Record<string, unknown>;
 
 const FragmentErrorPopover: FC = () => {
-    const form = useFormContext();
+    const form = useFormContext<FragmentFormValues>();
     const { t } = useTranslation();
-    const errors = form.formState.errors as FieldErrors<FragmentForm>;
+    const fragmentErrors = form.formState.errors.fragment;
+
+    const translate = (message: unknown) =>
+        typeof message === "string" ? t(message) : null;
+
+    const lengthMessage = translate(fragmentErrors?.length?.message);
+    const packetsMessage = translate(fragmentErrors?.packets?.message);
+    const intervalMessage = translate(fragmentErrors?.interval?.message);
+
     return (
         <Popover>
             <PopoverTrigger>
@@ -34,19 +43,19 @@ const FragmentErrorPopover: FC = () => {
             </PopoverTrigger>
             <PopoverContent className="bg-destructive-accent text-sm">
                 <ul className="my-6 ml-3 list-disc [&>li]:mt-1 mt-0">
-                    {errors.fragment?.length?.message && (
+                    {lengthMessage && (
                         <li>
-                            <b>Length:</b> {t(errors.fragment.length.message as string)}
+                            <b>Length:</b> {lengthMessage}
                         </li>
                     )}
-                    {errors.fragment?.packets?.message && (
+                    {packetsMessage && (
                         <li>
-                            <b>Packets:</b> {t(errors.fragment.packets.message as string)}
+                            <b>Packets:</b> {packetsMessage}
                         </li>
                     )}
-                    {errors.fragment?.interval?.message && (
+                    {intervalMessage && (
                         <li>
-                            <b>Interval:</b> {t(errors.fragment.interval.message as string)}
+                            <b>Interval:</b> {intervalMessage}
                         </li>
                     )}
                 </ul>
@@ -57,10 +66,13 @@ const FragmentErrorPopover: FC = () => {
 
 export const FragmentField = () => {
     const { t } = useTranslation();
-    const form = useFormContext();
-    const errors = form.formState.errors as FieldErrors<FragmentForm>;
-    const fragment = useWatch({ name: "fragment" });
-    const disabled = fragment === null || fragment === undefined;
+    const form = useFormContext<FragmentFormValues>();
+    const fragmentErrors = form.formState.errors.fragment;
+    const fragment = useWatch<FragmentFormValues>({
+        control: form.control,
+        name: "fragment",
+    });
+    const disabled = fragment == null;
 
     const enable = () => {
         form.setValue(
@@ -84,10 +96,10 @@ export const FragmentField = () => {
         });
     };
 
-    const hasFragmentErrors = (errors: FieldErrors<FragmentForm>) =>
-        errors.fragment?.packets ||
-        errors.fragment?.length ||
-        errors.fragment?.interval;
+    const hasFragmentErrors =
+        Boolean(fragmentErrors?.packets) ||
+        Boolean(fragmentErrors?.length) ||
+        Boolean(fragmentErrors?.interval);
 
     return (
         <FormField
@@ -98,7 +110,7 @@ export const FragmentField = () => {
                     <FormLabel className="flex flex-row justify-between items-center">
                         {t("fragment")}
                         <div className="flex flex-row items-center gap-2">
-                            {hasFragmentErrors(errors) && <FragmentErrorPopover />}
+                            {hasFragmentErrors && <FragmentErrorPopover />}
                             {!disabled && (
                                 <Button
                                     variant="destructive"

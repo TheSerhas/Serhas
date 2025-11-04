@@ -1,4 +1,3 @@
-import { routeTree } from "@serhas/routeTree.gen";
-import { RoutePaths } from "@tanstack/react-router";
+import type { FileRouteTypes } from "@serhas/routeTree.gen";
 
-export type AppRouterPaths = RoutePaths<typeof routeTree>;
+export type AppRouterPaths = FileRouteTypes["to"];
