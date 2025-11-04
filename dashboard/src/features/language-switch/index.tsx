@@ -40,13 +40,7 @@ export const LanguageSwitchMenu: FC = () => {
             <DropdownMenuPortal>
                 <DropdownMenuSubContent>
                     <LanguageItem language="en" title="English" />
-                    <LanguageItem language="kmr" title="Kurdî Kurmancî" />
-                    <LanguageItem language="kur" title="Kurdî Soranî" />
-                    <LanguageItem language="ckb" title="کوردی سورانی" />
                     <LanguageItem language="fa" title="فارسی" />
-                    <LanguageItem language="ru" title="Русский" />
-                    <LanguageItem language="ar" title="العربیة" />
-                    <LanguageItem language="zh-cn" title="简体中文" />
                 </DropdownMenuSubContent>
             </DropdownMenuPortal>
         </DropdownMenuSub>

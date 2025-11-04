@@ -39,11 +39,13 @@ i18n
     .then(() => {
         dayjs.locale(i18n.language);
         document.documentElement.lang = i18n.language;
+        document.documentElement.dir = i18n.dir(i18n.language);
     });
 
-i18n.on('languageChanged', (lng) => {
+i18n.on('languageChanged', (lng: string) => {
     dayjs.locale(lng);
     document.documentElement.lang = lng;
+    document.documentElement.dir = i18n.dir(lng);
 });
 
 export default i18n;
