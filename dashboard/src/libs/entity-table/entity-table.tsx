@@ -27,6 +27,7 @@ export interface EntityTableProps<T> {
     fetchEntity: ({ queryKey }: EntityQueryKeyType) => FetchEntityReturn<T>;
     onCreate?: () => void;
     onOpen?: (entity: any) => void;
+    additionalActions?: React.ReactNode;
 }
 
 export function EntityTable<T>({
@@ -37,6 +38,7 @@ export function EntityTable<T>({
     entityKey,
     onCreate,
     onOpen,
+    additionalActions,
 }: EntityTableProps<T>) {
     const { t } = useTranslation();
     const columnPrimaryFilter = usePrimaryFiltering({ column: primaryFilter });
@@ -86,6 +88,7 @@ export function EntityTable<T>({
             <div className="flex w-full flex-col">
                 <div className="flex flex-col md:flex-row-reverse items-center py-4 gap-2 w-full">
                     <div className="flex flex-row items-center w-full">
+                        {additionalActions}
                         <DataTableViewOptions table={table} />
                         {onCreate && (
                             <Button aria-label={`create-${entityKey}`} onClick={onCreate}>

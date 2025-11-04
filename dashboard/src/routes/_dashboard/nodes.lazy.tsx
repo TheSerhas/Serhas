@@ -1,6 +1,6 @@
-import { AlertCard, Page, Loading } from '@serhas/common/components'
+import { Page, Loading } from '@serhas/common/components'
 import { NodesTable } from '@serhas/modules/nodes'
-import { Link, createLazyFileRoute, Outlet } from '@tanstack/react-router'
+import { createLazyFileRoute, Outlet } from '@tanstack/react-router'
 import { type FC, Suspense } from 'react'
 import { useTranslation } from 'react-i18next'
 import { SudoRoute } from '@serhas/libs/sudo-routes'
@@ -11,22 +11,6 @@ export const NodesPage: FC = () => {
     <Page
       title={t('nodes')}
       className="sm:w-screen md:w-full"
-      footer={
-        <AlertCard
-          title={t('page.nodes.certificate-alert.title')}
-          desc={
-            <>
-              {t('page.nodes.certificate-alert.desc')}
-              <Link
-                className="m-1 font-semibold text-secondary-foreground"
-                to="/settings"
-              >
-                {t('page.nodes.certificate-alert.click')}
-              </Link>
-            </>
-          }
-        />
-      }
     >
       <NodesTable />
       <Suspense fallback={<Loading />}>

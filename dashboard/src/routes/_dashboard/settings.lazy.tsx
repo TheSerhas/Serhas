@@ -1,5 +1,4 @@
 import { Page, VStack } from '@serhas/common/components'
-import { CertificateWidget } from '@serhas/modules/settings'
 import { SubscriptionSettingsWidget } from '@serhas/modules/settings/subscription'
 import { createLazyFileRoute } from '@tanstack/react-router'
 import { useTranslation } from 'react-i18next'
@@ -15,7 +14,6 @@ export const Settings = () => {
       {/* <ConfigurationWidget /> */}
       <VStack className="gap-3">
         <SubscriptionSettingsWidget />
-        <CertificateWidget />
       </VStack>
     </Page>
   )
