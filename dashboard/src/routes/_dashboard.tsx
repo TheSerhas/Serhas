@@ -22,7 +22,6 @@ import {
 } from "@tanstack/react-router";
 import { useGithubRepoStatsQuery, GithubRepo } from "@serhas/features/github-repo";
 import { CommandBox } from "@serhas/features/search-command";
-import { DashboardBottomMenu } from "@serhas/features/bottom-menu";
 
 export const DashboardLayout = () => {
     const isDesktop = useScreenBreakpoint("md");
@@ -32,7 +31,6 @@ export const DashboardLayout = () => {
         setCollapsed,
         toggleCollapse,
     } = usePanelToggle(isDesktop);
-    const { isSudo } = useAuth();
     const { data: stats } = useGithubRepoStatsQuery();
 
     return (
@@ -95,7 +93,6 @@ export const DashboardLayout = () => {
                                 <Outlet />
                             </Suspense>
                         </main>
-                        <DashboardBottomMenu variant={isSudo() ? "sudo-admin" : "admin"} />
                     </div>
                 )}
             </div>
