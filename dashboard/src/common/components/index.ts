@@ -20,3 +20,4 @@ export * from "./skeletons";
 export * from "./no-propogation-button";
 export * from "./form-fields";
 export * from "./alert-card";
+export * from "./welcome-header";

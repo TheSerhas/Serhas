@@ -1,3 +1,4 @@
+from datetime import datetime
 from fastapi import APIRouter
 
 from app.db import crud
@@ -13,6 +14,7 @@ from app.dependencies import (
 from app.models.node import NodeStatus
 from app.models.settings import SubscriptionSettings, TelegramSettings
 from app.models.system import (
+    CurrentStats,
     UsersStats,
     NodesStats,
     AdminsStats,
@@ -89,4 +91,25 @@ def get_users_stats(db: DBDep, admin: AdminDep):
             data_limit_reached=True,
         ),
         online=crud.get_users_count(db, admin=admin if not admin.is_sudo else None, online=True),
+    )
+
+
+@router.get("/stats/current", response_model=CurrentStats)
+def get_users_stats(db: DBDep, admin: AdminDep):
+    users = crud.get_users(db, admin_id=admin.id if not admin.is_sudo else None)
+    today = datetime.utcnow().date()
+    return CurrentStats(
+        username=admin.username,
+        today_new_users=sum(1 for user in users if user.created_at.date() == today),
+        today_removed_users=sum(1 for user in users if user.removed and user.edit_at.date() == today),
+        today_revoked_users=sum(1 for user in users if user.sub_revoked_at and user.sub_revoked_at.date() == today),
+        today_sub_updated_users=sum(1 for user in users if user.sub_updated_at and user.sub_updated_at.date() == today),
+        today_online_users=sum(1 for user in users if user.online_at and user.online_at.date() == today),
+        today_traffic_reset_users=sum(1 for user in users if user.traffic_reset_at and user.traffic_reset_at.date() == today),
+        total_users=len(users),
+        active_users=sum(1 for user in users if user.is_active),
+        on_hold_users=sum(1 for user in users if user.expire_strategy == UserExpireStrategy.START_ON_FIRST_USE),
+        expired_users=sum(1 for user in users if user.expired),
+        limited_users=sum(1 for user in users if user.data_limit_reached),
+        online_users=sum(1 for user in users if user.online),
     )

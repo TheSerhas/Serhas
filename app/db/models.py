@@ -1,6 +1,6 @@
 import os
 import secrets
-from datetime import datetime
+from datetime import datetime, timedelta
 
 import sqlalchemy.sql
 from sqlalchemy import (
@@ -256,6 +256,12 @@ class User(Base):
     @hybrid_property
     def owner_username(self):
         return self.admin.username if self.admin else None
+
+    @property
+    def online(self):
+        if self.online_at:
+            return self.online_at < (datetime.utcnow() - timedelta(seconds=30))
+        return False
 
 
 class Backend(Base):

@@ -16,7 +16,7 @@ export const UsersStatsWidget: FC<UsersStatsProps> = ({ total, limited, active, 
     const { t } = useTranslation();
 
     return (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             <UserStatCard
                 title={t('users_stats.total')}
                 value={total}

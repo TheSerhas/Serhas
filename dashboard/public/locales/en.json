@@ -434,6 +434,7 @@
     "error": "Error"
   },
   "users_stats": {
+    "title": "Overall Users Statistics",
     "total": "Total Users",
     "total_desc": "Total number of users in the system",
     "active": "Active",
@@ -446,5 +447,24 @@
     "expired_desc": "Users with expired subscriptions",
     "limited": "Limited",
     "limited_desc": "Users who exceeded their data limit"
+  },
+  "today_stats": {
+    "title": "Today's Statistics",
+    "new_users": "New Users",
+    "new_users_desc": "Users created today",
+    "removed_users": "Removed Users",
+    "removed_users_desc": "Users removed today",
+    "revoked_users": "Revoked Users",
+    "revoked_users_desc": "Users with revoked subscriptions today",
+    "sub_updated_users": "Subscriptions Updated",
+    "sub_updated_users_desc": "Users with updated subscriptions today",
+    "online_users": "Online Users",
+    "online_users_desc": "Users connected today",
+    "traffic_reset_users": "Traffic Reset",
+    "traffic_reset_users_desc": "Users with reset traffic today"
+  },
+  "welcome": {
+    "greeting": "Hi, {{username}}! 👋",
+    "subtitle": "Welcome to your management dashboard"
   }
 }
