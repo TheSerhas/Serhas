@@ -1,86 +1,88 @@
 {
-  "view": "نما",
-  "certificate": "سرتیفیکت",
-  "mux": "ماکس",
-  "fragment": "فرگمنت",
-  "enable": "فعال کردن",
-  "enabled": "فعال شده",
-  "activated": "کارا",
-  "unlimited": "نامحدود",
-  "left": "مانده",
-  "reached": "رسیده",
-  "inactive": "ناکارا",
-  "active": "کارا",
-  "disable": "غیرفعال کردن",
-  "close": "بستن",
-  "save": "ذخیره",
-  "days": "روز",
-  "cancel": "لغو",
-  "dark": "دارک",
-  "light": "لایت",
-  "system": "سیستم",
-  "disabled": "غیرفعال شده",
-  "advanced-options": "پیشرفته",
-  "language": "زبان",
-  "theme": "تم",
-  "pattern": "الگو",
-  "result": "نتیجه",
-  "support-us": {
-    "title": "حمایت از ما",
-    "desc": "مرزنشین نرم‌افزار رایگان و آزاد است. با دونیت کردن حمایت خود را نشان دهید.",
-    "donate": "دونیت"
-  },
-  "deselect": "لغو انتخاب",
-  "home": "خانه",
   "name": "نام",
   "info": "اطلاعات",
-  "status": "حالت",
+  "status": "وضعیت",
   "address": "آدرس",
   "users": "کاربران",
-  "nodes": "نود",
+  "nodes": "نودها",
   "services": "سرویس‌ها",
-  "hosts": "هاست",
-  "username": "یوزرنیم",
-  "password": "پسوورد",
-  "inbounds": "اینباند ها",
+  "hosts": "هاست‌ها",
+  "username": "نام کاربری",
+  "password": "رمز عبور",
+  "inbounds": "اینباندها",
   "submit": "ارسال",
   "login": "ورود",
   "edit": "ویرایش",
-  "actions": "فعالیت‌ها",
+  "actions": "عملیات",
   "settings": "تنظیمات",
-  "logs": "لاگ",
+  "logs": "لاگ‌ها",
   "note": "یادداشت",
-  "config": "کانفیگ",
+  "config": "پیکربندی",
   "tag": "تگ",
   "protocol": "پروتکل",
   "online": "آنلاین",
   "offline": "آفلاین",
-  "not_connected": "وصل نشده",
+  "not_connected": "متصل نیست",
   "apply": "اعمال",
   "open": "باز کردن",
   "delete": "حذف",
   "port": "پورت",
-  "create": "ساخت",
+  "create": "ایجاد",
   "path": "مسیر",
   "host": "هاست",
   "alpn": "ALPN",
+  "security": "امنیت",
+  "user_info": "اطلاعات کاربر",
   "admin_info": "اطلاعات ادمین",
+  "subscription": "اشتراک",
+  "subscription_link": "لینک اشتراک",
+  "fingerprint": "اثر انگشت",
+  "mux": "Mux",
+  "fragment": "قطعه",
+  "enable": "فعال کردن",
+  "enabled": "فعال",
+  "activated": "فعال شده",
+  "unlimited": "نامحدود",
+  "left": "باقیمانده",
+  "reached": "رسیده",
+  "inactive": "غیرفعال",
+  "active": "فعال",
+  "disable": "غیرفعال کردن",
+  "close": "بستن",
+  "save": "ذخیره",
+  "days": "روز",
+  "home": "خانه",
+  "cancel": "لغو",
+  "dark": "تیره",
+  "light": "روشن",
+  "system": "سیستم",
+  "dashboard": "داشبورد",
+  "management": "مدیریت",
+  "disabled": "غیرفعال شده",
+  "advanced-options": "گزینه‌های پیشرفته",
+  "language": "زبان",
+  "theme": "پوسته",
+  "pattern": "الگو",
+  "result": "نتیجه",
+  "deselect": "لغو انتخاب",
+  "view": "نمایش",
+  "certificate": "گواهینامه",
+  "valid": "معتبر",
+  "finished": "تمام شده",
+  "expired": "منقضی شده",
   "change": "تغییر",
   "admins": "ادمین‌ها",
   "normal": "عادی",
-  "sudo": "ادمین سودو",
+  "sudo": "Sudo",
   "owner": "مالک",
   "running": "در حال اجرا",
-  "down": "غیرفعال",
+  "down": "خاموش",
   "weight": "وزن",
-  "security": "امنیت",
-  "user_info": "اطلاعات کاربر",
-  "subscription": "اشتراک",
-  "subscription_link": "لینک اشتراک",
-  "fingerprint": "فینگرپرینت",
-  "expired": "انقضا",
-  "finished": "اتمام",
-  "valid": "مانده",
+  "support-us": {
+    "title": "حمایت از ما",
+    "desc": "Serhas یک نرم‌افزار آزاد و متن‌باز (FOSS) است، به ما بپیوندید و با حمایت مالی خود از ما پشتیبانی کنید.",
+    "donate": "حمایت مالی"
+  },
   "page": {
     "home": {
       "users-stats": {
@@ -93,40 +95,40 @@
     },
     "settings": {
       "subscription-settings": {
-        "template-on-acceptance": "تمپلیت در صورت پذیرش",
-        "placeholder-remark": "نام کانفیگ جایگزین",
-        "placeholder-if-disabled": "کانفیگ جایگزین در صورت غیرفعالی",
-        "shuffle-configs": "مخلوط کردن کانفیگ‌ها",
+        "template-on-acceptance": "قالب در زمان پذیرش",
+        "placeholder-remark": "مکان‌نما برای ملاحظات",
+        "placeholder-if-disabled": "مکان‌نما در صورت غیرفعال بودن",
+        "shuffle-configs": "درهم‌سازی پیکربندی‌ها",
         "url-prefix": "پیشوند URL",
         "profile-title": "عنوان پروفایل",
         "support-link": "لینک پشتیبانی",
-        "update-interval": "بازه آپدیت",
+        "update-interval": "فاصله زمانی به‌روزرسانی",
         "add-rule": "افزودن قانون",
-        "reset-local-changes": "بازنشانی",
+        "reset-local-changes": "بازنشانی تغییرات",
         "title": "اشتراک",
-        "description": "تنظیمات اشتراک را با قوانین قابل تنظیم و گزینه‌های به‌روزرسانی، مدیریت و شخصی‌سازی کنید.",
+        "description": "تنظیمات اشتراک را با قوانین قابل تنظیم و گزینه‌های به‌روزرسانی مدیریت و سفارشی کنید.",
         "subscription-title": "قوانین اشتراک",
         "subscription-desc": "قوانین اشتراک خود را به ترتیب اولویت اضافه کنید.",
         "alert": {
-          "title": "قانونی وجود ندارد",
-          "desc": "هیچ قانونی برای اشتراک تنظیم نشده"
+          "title": "هیچ قانونی وجود ندارد",
+          "desc": "هیچ قانونی برای اشتراک تعریف نشده است"
         }
       },
       "certificate": {
-        "copy": "کپی سرتیفیکت",
-        "error": "سرتیفیکت در دسترس نیست",
-        "copied": "سرتیفیکت کپی شد"
+        "copy": "کپی گواهینامه",
+        "error": "گواهینامه در دسترس نیست",
+        "copied": "گواهینامه کپی شد"
       }
     },
     "login": {
       "username": {
         "error": {
-          "isRequired": "نام کاربری را وارد کنید"
+          "isRequired": "نام کاربری الزامی است"
         }
       },
       "password": {
         "error": {
-          "is-required": "رمز عبور را وارد کنید"
+          "is-required": "رمز عبور الزامی است"
         }
       }
     },
@@ -137,13 +139,13 @@
       },
       "settings": {
         "no-backend-alert": {
-          "title": "هیچ بکندی برای این نود تنظیم نشده است.",
-          "desc": "لطفا اقدامات لازم جهت افزودن بکندی به این نود را انجام دهید."
+          "title": "هیچ بک‌اندی برای این نود پیکربندی نشده است",
+          "desc": "لطفاً اقدامات لازم را انجام دهید و یک بک‌اند برای این نود پیکربندی کنید."
         },
-        "title": "تنظیمات نود",
+        "title": "تنظیمات نودها",
         "detail": "جزئیات",
         "log-container": {
-          "title": "لاگ اکسری"
+          "title": "لاگ‌های Xray"
         }
       },
       "dialogs": {
@@ -158,11 +160,11 @@
         }
       },
       "usage_coefficient": "ضریب مصرف",
-      "connection_backend": "بکند اتصال",
-      "connection_backend_desc": "نوع اتصال را مشخص می‌کند",
+      "connection_backend": "بک‌اند اتصال",
+      "connection_backend_desc": "برای اتصال ریموت استفاده می‌شود",
       "certificate-alert": {
-        "title": "کانفیگ سرتیفیکت نود",
-        "desc": "اگر قصد برداشت سرتیفیکت نود را دارید، صفحه تنظیمات را بررسی کنید",
+        "title": "پیکربندی گواهینامه نودها",
+        "desc": "اگر قصد دارید گواهینامه نودهای خود را پیکربندی کنید، به صفحه تنظیمات مراجعه کنید.",
         "click": "اینجا کلیک کنید"
       }
     },
@@ -173,7 +175,7 @@
       },
       "dialogs": {
         "creation": {
-          "title": "ساخت سرویس"
+          "title": "ایجاد سرویس"
         },
         "deletion": {
           "title": "حذف سرویس"
@@ -186,62 +188,61 @@
     "users": {
       "created_at": "ایجاد شده در",
       "no_use": "بدون استفاده",
-      "data_limit_reached": "به محدودیت دیتا رسیده",
-      "sub_updated_at": "آخرین به روزرسانی اشتراک",
+      "data_limit_reached": "محدودیت داده تمام شده",
+      "sub_updated_at": "آخرین به‌روزرسانی اشتراک",
       "sub_last_user_agent": "آخرین عامل کاربری",
-      "traffic_reset_at": "آخرین ریست ترافیک",
-      "lifetime_used_traffic": "ترافیک مصرفی کل",
-      "note-placeholder": "یادداشتی در مورد کاربر",
-      "data_limit": "محدودیت حجم",
+      "traffic_reset_at": "آخرین بازنشانی ترافیک",
+      "lifetime_used_traffic": "ترافیک مصرفی کل دوره",
+      "note-placeholder": "اطلاعات بیشتر درباره کاربر",
+      "data_limit": "محدودیت داده",
       "traffic": "ترافیک",
       "used_traffic": "ترافیک مصرفی",
-      "data_limit_reset_strategy": "بازه ریست حجم مصرفی",
+      "data_limit_reset_strategy": "دوره بازنشانی داده",
       "online_at": "آخرین استفاده",
       "expire_date": "تاریخ انقضا",
-      "unlimited": "نامحدود",
       "never": "هرگز",
       "limited": "محدود شده",
-      "data_limit_method": "محدودیت دیتا",
-      "fixed_date": "تاریخ مشخص",
+      "data_limit_method": "روش محدودیت داده",
+      "fixed_date": "تاریخ ثابت",
       "expire_method": "انقضا",
-      "on_first_use": "از اولین استفاده",
-      "reset_usage": "ریست حجم مصرفی",
-      "revoke_subscription": "ابطال اشتراک",
-      "usage_duration": "مدت استفاده",
-      "activation_deadline": "انقضای تعلیق",
-      "nodes-usage": "مصرف از نودها",
+      "on_first_use": "در اولین استفاده",
+      "reset_usage": "بازنشانی مصرف",
+      "revoke_subscription": "لغو اشتراک",
+      "usage_duration": "مدت زمان استفاده",
+      "activation_deadline": "مهلت فعال‌سازی",
+      "nodes-usage": "مصرف نودها",
       "settings": {
         "nodes-usage": {
-          "last-days": "روز گذشته {{count}} طی",
-          "last-months": "ماه گذشته {{count}} طی",
-          "last-hours": "ساعت گذشته {{count}} طی",
-          "title": "مصرف کاربر از نودها",
-          "desc": "میزان مصرف کاربر از هر یک از نودها در طول زمان مشخص."
+          "last-days": "{{count}} روز گذشته",
+          "last-months": "{{count}} ماه گذشته",
+          "last-hours": "{{count}} ساعت گذشته",
+          "title": "مصرف نودهای کاربر",
+          "desc": "میزان مصرف کاربر در هر نود در طول زمان."
         },
         "subscription_link": {
           "copied": "لینک اشتراک کپی شد",
-          "copy": "کپی لینک اشتراک",
-          "error": "لینک اشتراک کپی نشد"
+          "copy": "لینک اشتراک",
+          "error": "امکان کپی لینک اشتراک وجود ندارد"
         }
       },
       "services-alert": {
-        "title": "سرویسی یافت نشد",
-        "desc": "برای ساخت یوزر ابتدا سرویسی ایجاد کنید",
-        "click": "اینجا را کلیک کنید"
+        "title": "هیچ سرویسی یافت نشد",
+        "desc": "اطمینان حاصل کنید که سرویس‌هایی ایجاد کرده‌اید تا کاربران شما بتوانند با اینباندها متصل شوند.",
+        "click": "اینجا کلیک کنید"
       },
       "dialogs": {
         "edition": {
           "title": "ویرایش کاربر"
         },
         "creation": {
-          "title": "افزودن کاربر"
+          "title": "ایجاد کاربر"
         },
         "deletion": {
           "title": "حذف کاربر"
         },
         "mutation": {
           "note": {
-            "desc": "یادداشت"
+            "desc": "یادداشتی درباره کاربر خود بنویسید"
           }
         }
       }
@@ -249,7 +250,7 @@
     "admins": {
       "disable_users": "غیرفعال کردن کاربران",
       "enable_users": "فعال کردن کاربران",
-      "permission": "دسترسی ها",
+      "permission": "دسترسی",
       "dialogs": {
         "creation": {
           "title": "ایجاد ادمین"
@@ -263,27 +264,27 @@
       },
       "modify-users-access": "تغییر دسترسی کاربران",
       "subscription-url-prefix": "پیشوند URL اشتراک",
-      "sudo-privilage": "دسترسی سوپر ادمین",
-      "all-services-access": "دسترسی به کلیه سرویس ها",
-      "users-data-usage": "مصرف کاربران"
+      "sudo-privilage": "امتیاز Sudo",
+      "all-services-access": "دسترسی به تمام سرویس‌ها",
+      "users-data-usage": "مصرف داده کاربران"
     },
     "hosts": {
       "xmux-settings": "تنظیمات Xmux",
       "split-http-settings": "تنظیمات Split HTTP",
       "no-grpc-header": "بدون هدر GRPC",
-      "early-data": "Early Data",
+      "early-data": "داده‌های اولیه",
       "http_headers": "هدرهای HTTP",
       "no-http-headers": "بدون هدر HTTP",
       "mux-settings": "تنظیمات Mux",
       "dns-servers": "سرورهای DNS",
-      "obfuscation-password": "رمز عبور Obfuscation",
+      "obfuscation-password": "رمز عبور مبهم‌سازی",
       "server-public-key": "کلید عمومی سرور",
       "tls-config": "پیکربندی TLS",
       "network-settings": "تنظیمات شبکه",
       "security-settings": "تنظیمات امنیتی",
-      "allowed-ips": "IP های مجاز",
+      "allowed-ips": "IPهای مجاز",
       "allowed-ips-placeholder": "127.0.0.1,...",
-      "camouflage-settings": "تنظیمات Camouflage",
+      "camouflage-settings": "تنظیمات استتار",
       "fragment": {
         "interval": "فاصله",
         "length": "طول",
@@ -346,7 +347,7 @@
       "settings": {
         "title": "تنظیمات هاست"
       },
-      "allowinsecure": "پذیرش کانکشن ناامن",
+      "allowinsecure": "اجازه اتصال ناامن",
       "dialogs": {
         "edition": {
           "title": "ویرایش هاست"
@@ -359,7 +360,7 @@
         },
         "mutation": {
           "allowinsecure": {
-            "alert": "فعال کردن این گزینه پیشنهاد نمی‌شود."
+            "alert": "به دلایل امنیتی، فعال کردن اجازه اتصال ناامن توصیه نمی‌شود"
           }
         }
       }
@@ -367,70 +368,70 @@
   },
   "events": {
     "delete": {
-      "error": "خطا در حذف {{name}}",
+      "error": "حذف {{name}} ناموفق بود",
       "success": {
-        "title": "با موفقیت حذف شد {{name}}",
+        "title": "{{name}} با موفقیت حذف شد",
         "desc": ""
       }
     },
     "create": {
-      "error": "خطا در حذف {{name}}",
+      "error": "ایجاد {{name}} ناموفق بود",
       "success": {
-        "title": "{{name}} با موفقیت افزوده شد",
+        "title": "{{name}} با موفقیت ایجاد شد",
         "desc": ""
       }
     },
     "update": {
-      "error": "خطا در آپدیت {{name}}",
+      "error": "به‌روزرسانی {{name}} ناموفق بود",
       "success": {
-        "title": "{{name}} با موفقیت آپدیت شد",
+        "title": "{{name}} با موفقیت به‌روزرسانی شد",
         "desc": ""
       }
     },
     "user_revoke": {
-      "error": "خطا در ابطال اشتراک {{name}}",
+      "error": "لغو اشتراک {{name}} ناموفق بود",
       "success": {
-        "title": "با موفقیت ایجاد شد.{{name}}",
+        "title": "اشتراک {{name}} با موفقیت لغو شد",
         "desc": ""
       }
     },
     "user_reset": {
-      "error": "خطا در ریست مصرف دیتای {{name}}",
+      "error": "بازنشانی مصرف داده {{name}} ناموفق بود",
       "success": {
-        "title": "مصرف دیتای {{name}} با موفقیت ریست شد",
+        "title": "مصرف داده {{name}} با موفقیت بازنشانی شد",
         "desc": ""
       }
     },
     "user_status": {
-      "error": "خطا در تغییر وضعیت {{name}}",
+      "error": "تغییر وضعیت {{name}} ناموفق بود",
       "success": {
-        "title": "وضعیت {{name}} با موفقیت تغییر کرد",
+        "title": "وضعیت {{name}} با موفقیت به‌روزرسانی شد",
         "desc": ""
       }
     }
   },
   "delete-confirmation": {
-    "title": "آیا از انجام این کار مطمئنید؟",
-    "desc": "حذف اطلاعات بازگشت ناپذیر است."
+    "title": "آیا از این کار مطمئن هستید؟",
+    "desc": "این عمل قابل بازگشت نیست."
   },
   "table": {
-    "no-result-found": "نتیجه‌ای یافت نشد.",
-    "row-per-page": "ردیف در صفحه",
+    "no-result-found": "هیچ نتیجه‌ای یافت نشد.",
+    "row-per-page": "ردیف در هر صفحه",
     "no-result": "بدون نتیجه",
     "selected": "انتخاب شده",
-    "toggle-column": "سویچ ستون",
+    "toggle-column": "تغییر ستون‌ها",
     "filter-placeholder": "فیلتر {{name}}"
   },
   "statuses": {
     "active": "فعال",
-    "connected": "متصل شده",
+    "connected": "متصل",
     "healthy": "سالم",
     "disabled": "غیرفعال",
     "expired": "منقضی",
-    "on_hold": "شروع از اولین اتصال",
+    "on_hold": "در انتظار",
     "connecting": "در حال اتصال",
     "unhealthy": "ناسالم",
-    "limited": "محدود شده",
+    "limited": "محدود",
     "error": "خطا"
   }
 }

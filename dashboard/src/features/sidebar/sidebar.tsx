@@ -4,10 +4,11 @@ import {
 } from "@serhas/common/components";
 import { useIsCurrentRoute } from "@serhas/common/hooks";
 import type { FC } from "react";
-import { sidebarItems as sidebarItemsSudoAdmin, sidebarItemsNonSudoAdmin } from ".";
+import { getSidebarItems, getSidebarItemsNonSudoAdmin } from ".";
 import { projectInfo, cn } from "@serhas/common/utils";
 import { useAuth } from "@serhas/modules/auth";
 import { SupportUs } from "@serhas/features/support-us";
+import { useTranslation } from "react-i18next";
 
 interface DashboardSidebarProps {
     collapsed: boolean;
@@ -23,8 +24,9 @@ export const DashboardSidebar: FC<DashboardSidebarProps> = ({
     open,
 }) => {
     const { isSudo } = useAuth();
+    const { t } = useTranslation()
     const { isCurrentRouteActive } = useIsCurrentRoute()
-    const sidebarItems = isSudo() ? sidebarItemsSudoAdmin : sidebarItemsNonSudoAdmin
+    const sidebarItems = isSudo() ? getSidebarItems(t) : getSidebarItemsNonSudoAdmin(t)
     return (
         <aside className="size-full py-4  px-4 ">
             <nav className="size-full">

@@ -1,72 +1,73 @@
 import { SidebarObject } from '@serhas/common/components';
 import { Box, Home, ShieldCheck, Server, ServerCog, Settings, UsersIcon } from 'lucide-react';
+import { TFunction } from 'i18next';
 
-export const sidebarItems: SidebarObject = {
-    Dashboard: [
+export const getSidebarItems = (t: TFunction): SidebarObject => ({
+    [t('dashboard')]: [
         {
-            title: 'Home',
+            title: t('home'),
             to: '/',
             icon: <Home />,
             isParent: false,
         },
     ],
-    Management: [
+    [t('management')]: [
         {
-            title: 'Users',
+            title: t('users'),
             to: '/users',
             icon: <UsersIcon />,
             isParent: false,
         },
         {
-            title: 'Services',
+            title: t('services'),
             to: '/services',
             icon: <Server />,
             isParent: false,
         },
         {
-            title: 'Nodes',
+            title: t('nodes'),
             to: '/nodes',
             icon: <Box />,
             isParent: false,
         },
         {
-            title: 'Hosts',
+            title: t('hosts'),
             to: '/hosts',
             icon: <ServerCog />,
             isParent: false,
         },
     ],
-    System: [
+    [t('system')]: [
         {
-            title: 'Admins',
+            title: t('admins'),
             to: '/admins',
             icon: <ShieldCheck />,
             isParent: false,
         },
         {
-            title: 'Settings',
+            title: t('settings'),
             to: '/settings',
             icon: <Settings />,
             isParent: false,
         },
     ]
-};
+});
 
-export const sidebarItemsNonSudoAdmin: SidebarObject = {
-    Dashboard: [
+export const getSidebarItemsNonSudoAdmin = (t: TFunction): SidebarObject => ({
+    [t('dashboard')]: [
         {
-            title: 'Home',
+            title: t('home'),
             to: '/',
             icon: <Home />,
             isParent: false,
         },
     ],
-    Management: [
+    [t('management')]: [
         {
-            title: 'Users',
+            title: t('users'),
             to: '/users',
             icon: <UsersIcon />,
             isParent: false,
         },
     ],
-};
+});

@@ -62,7 +62,7 @@ export const DashboardLayout = () => {
             />
             <div className="flex flex-1 overflow-hidden">
                 {isDesktop ? (
-                    <ResizablePanelGroup direction="horizontal" className="flex h-full w-full">
+                    <ResizablePanelGroup direction="horizontal" className="flex h-full w-full rtl:flex-row-reverse">
                         <ResizablePanel
                             collapsible
                             collapsedSize={2}
