@@ -16,6 +16,18 @@ declare module '@tanstack/react-router' {
     }
 }
 
+const originalFetch = window.fetch;
+
+window.fetch = async (input: RequestInfo | URL, init?: RequestInit) => {
+    let url = typeof input === "string" ? input : input.toString();
+
+    if (!url.startsWith("http://") && !url.startsWith("https://") && !url.startsWith("/api") && !url.startsWith("/locales") && !url.startsWith("/static")) {
+        url = "/api" + (url.startsWith("/") ? url : `/${url}`);
+    }
+
+    return originalFetch(url, init);
+};
+
 const rootElement = document.getElementById('app')!
 if (!rootElement.innerHTML) {
     const root = ReactDOM.createRoot(rootElement)

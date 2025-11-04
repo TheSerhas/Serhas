@@ -1,39 +1,7 @@
 import { FC } from 'react';
-import { UsersIcon } from 'lucide-react';
+import { UsersIcon, ActivityIcon, ClockIcon, XCircleIcon, ShieldAlertIcon, WifiIcon } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import {
-    SectionWidget,
-    ChartConfig,
-    ChartContainer,
-    ChartTooltip,
-    ChartTooltipContent,
-    ChartLegend,
-    ChartLegendContent,
-} from "@serhas/common/components";
-import { Label, Pie, PieChart } from "recharts"
-
-const chartConfig = {
-    active: {
-        label: "Active",
-        color: "#3b82f6",
-    },
-    online: {
-        label: "Online",
-        color: "#10b981",
-    },
-    expired: {
-        label: "Expired",
-        color: "#4b5563",
-    },
-    onHold: {
-        label: "On Hold",
-        color: "#A855F7",
-    },
-    limited: {
-        label: "Limited",
-        color: "#ef4444",
-    },
-} satisfies ChartConfig;
+import { UserStatCard } from "../user-stat-card";
 
 interface UsersStatsProps {
     limited: number;
@@ -47,70 +15,51 @@ interface UsersStatsProps {
 export const UsersStatsWidget: FC<UsersStatsProps> = ({ total, limited, active, expired, on_hold, online }) => {
     const { t } = useTranslation();
 
-    const stats = [
-        { type: "limited", total: limited, fill: "var(--color-limited)" },
-        { type: "active", total: active, fill: "var(--color-active)" },
-        { type: "expired", total: expired, fill: "var(--color-expired)" },
-        { type: "onHold", total: on_hold, fill: "var(--color-onHold)" },
-        { type: "online", total: online, fill: "var(--color-online)" },
-    ]
-
     return (
-        <SectionWidget
-            title={<> <UsersIcon /> {t('users')} </>}
-            description={t('page.home.users-stats.desc')}
-            className="h-full"
-        >
-            <ChartContainer
-                config={chartConfig}
-                className="mx-auto aspect-square min-h-[300px]  w-full"
-            >
-                <PieChart>
-                    <ChartTooltip
-                        cursor={false}
-                        content={<ChartTooltipContent hideLabel />}
-                    />
-                    <Pie
-                        data={stats}
-                        dataKey="total"
-                        nameKey="type"
-                        innerRadius={60}
-                        strokeWidth={5}
-                    >
-                        <Label
-                            content={({ viewBox }) => {
-                                if (viewBox && "cx" in viewBox && "cy" in viewBox) {
-                                    return (
-                                        <text
-                                            x={viewBox.cx}
-                                            y={viewBox.cy}
-                                            textAnchor="middle"
-                                            dominantBaseline="middle"
-                                        >
-                                            <tspan
-                                                x={viewBox.cx}
-                                                y={viewBox.cy}
-                                                className="fill-foreground text-3xl font-bold"
-                                            >
-                                                {total || 0}
-                                            </tspan>
-                                            <tspan
-                                                x={viewBox.cx}
-                                                y={(viewBox.cy || 0) + 24}
-                                                className="fill-muted-foreground"
-                                            >
-                                                {t('users')}
-                                            </tspan>
-                                        </text>
-                                    )
-                                }
-                            }}
-                        />
-                    </Pie>
-                    <ChartLegend className="flex -translate-y-2 flex-wrap gap-2 [&>*]:basis-1/5 [&>*]:justify-center text-md" content={<ChartLegendContent />} />
-                </PieChart>
-            </ChartContainer>
-        </SectionWidget>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <UserStatCard
+                title={t('users_stats.total')}
+                value={total}
+                icon={UsersIcon}
+                iconColor="text-blue-600"
+                description={t('users_stats.total_desc')}
+            />
+            <UserStatCard
+                title={t('users_stats.active')}
+                value={active}
+                icon={ActivityIcon}
+                iconColor="text-green-600"
+                description={t('users_stats.active_desc')}
+            />
+            <UserStatCard
+                title={t('users_stats.online')}
+                value={online}
+                icon={WifiIcon}
+                iconColor="text-emerald-600"
+                description={t('users_stats.online_desc')}
+            />
+            <UserStatCard
+                title={t('users_stats.on_hold')}
+                value={on_hold}
+                icon={ClockIcon}
+                iconColor="text-purple-600"
+                description={t('users_stats.on_hold_desc')}
+            />
+            <UserStatCard
+                title={t('users_stats.expired')}
+                value={expired}
+                icon={XCircleIcon}
+                iconColor="text-gray-600"
+                description={t('users_stats.expired_desc')}
+            />
+            <UserStatCard
+                title={t('users_stats.limited')}
+                value={limited}
+                icon={ShieldAlertIcon}
+                iconColor="text-red-600"
+                description={t('users_stats.limited_desc')}
+            />
+        </div>
     );
 };
 

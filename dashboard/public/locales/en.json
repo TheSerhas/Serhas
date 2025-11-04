@@ -432,5 +432,19 @@
     "unhealthy": "Unhealthy",
     "limited": "Limited",
     "error": "Error"
+  },
+  "users_stats": {
+    "total": "Total Users",
+    "total_desc": "Total number of users in the system",
+    "active": "Active",
+    "active_desc": "Users with active subscriptions",
+    "online": "Online",
+    "online_desc": "Currently connected users",
+    "on_hold": "On Hold",
+    "on_hold_desc": "Users in waiting state",
+    "expired": "Expired",
+    "expired_desc": "Users with expired subscriptions",
+    "limited": "Limited",
+    "limited_desc": "Users who exceeded their data limit"
   }
 }
