@@ -1,9 +1,9 @@
-import { Page, VStack } from '@marzneshin/common/components'
-import { CertificateWidget } from '@marzneshin/modules/settings'
-import { SubscriptionSettingsWidget } from '@marzneshin/modules/settings/subscription'
+import { Page, VStack } from '@serhas/common/components'
+import { CertificateWidget } from '@serhas/modules/settings'
+import { SubscriptionSettingsWidget } from '@serhas/modules/settings/subscription'
 import { createLazyFileRoute } from '@tanstack/react-router'
 import { useTranslation } from 'react-i18next'
-import { SudoRoute } from '@marzneshin/libs/sudo-routes'
+import { SudoRoute } from '@serhas/libs/sudo-routes'
 
 export const Settings = () => {
   const { t } = useTranslation()

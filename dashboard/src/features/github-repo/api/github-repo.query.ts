@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { projectInfo } from "@marzneshin/common/utils";
+import { projectInfo } from "@serhas/common/utils";
 import { ofetch } from "ofetch";
 
 /**

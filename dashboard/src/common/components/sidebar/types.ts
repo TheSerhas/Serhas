@@ -1,4 +1,4 @@
-import { AppRouterPaths } from "@marzneshin/common/types";
+import { AppRouterPaths } from "@serhas/common/types";
 import { ReactNode } from "react";
 
 export interface SidebarItem {

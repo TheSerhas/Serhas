@@ -11,15 +11,15 @@ import {
     ScrollArea,
     Skeleton,
     Awaiting
-} from "@marzneshin/common/components";
+} from "@serhas/common/components";
 import { Link } from "@tanstack/react-router";
 import { ExclamationTriangleIcon } from '@radix-ui/react-icons';
 import {
     useServicesQuery,
     type ServiceType,
-} from "@marzneshin/modules/services";
-import { ServiceCard } from "@marzneshin/modules/users";
-import { cn } from "@marzneshin/common/utils";
+} from "@serhas/modules/services";
+import { ServiceCard } from "@serhas/modules/users";
+import { cn } from "@serhas/common/utils";
 import type { FC } from "react";
 import {
     useFormContext,

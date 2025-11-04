@@ -1,5 +1,5 @@
 import { type FC } from 'react'
-import { UserProp } from "@marzneshin/modules/users";
+import { UserProp } from "@serhas/modules/users";
 import { useTranslation } from "react-i18next";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";

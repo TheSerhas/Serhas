@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import { Badge, BadgeVariantKeys } from "@marzneshin/common/components";
+import { Badge, BadgeVariantKeys } from "@serhas/common/components";
 
 interface BooleanPillProps {
     active: boolean;

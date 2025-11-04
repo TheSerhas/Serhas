@@ -4,13 +4,13 @@ import {
     CardContent,
     CardDescription,
     Button,
-} from "@marzneshin/common/components"
+} from "@serhas/common/components"
 import { type FC } from "react";
 import {
     GithubIcon,
     StarIcon,
 } from "lucide-react";
-import { projectInfo } from "@marzneshin/common/utils";
+import { projectInfo } from "@serhas/common/utils";
 
 interface GithubRepoProps {
     variant?: "full" | "mini"

@@ -1,7 +1,7 @@
 import * as React from "react"
 import { type Column } from "@tanstack/react-table";
 import { useEntityTableContext } from "../contexts";
-import { useScreenBreakpoint } from "@marzneshin/common/hooks";
+import { useScreenBreakpoint } from "@serhas/common/hooks";
 import { useTranslation } from "react-i18next";
 import {
     Button,
@@ -17,8 +17,8 @@ import {
     DrawerTrigger,
     PopoverContent,
     PopoverTrigger,
-} from "@marzneshin/common/components"
-import { cn } from "@marzneshin/common/utils";
+} from "@serhas/common/components"
+import { cn } from "@serhas/common/utils";
 import { Filter, FilterX } from "lucide-react";
 
 interface DataTableColumnHeaderFilterOptionProps<TData, TValue>

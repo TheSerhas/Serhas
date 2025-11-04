@@ -1,4 +1,4 @@
-import { useDialog } from "@marzneshin/common/hooks";
+import { useDialog } from "@serhas/common/hooks";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { UseMutationResult } from "@tanstack/react-query";
 import { useEffect } from "react";

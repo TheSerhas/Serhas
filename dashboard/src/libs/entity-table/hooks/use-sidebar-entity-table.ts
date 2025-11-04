@@ -13,10 +13,10 @@ import {
     type SidebarQueryKey,
     type UseRowSelectionReturn
 } from ".";
-import { useScreenBreakpoint } from "@marzneshin/common/hooks";
+import { useScreenBreakpoint } from "@serhas/common/hooks";
 import {
     type SidebarEntityCardSectionsProps
-} from "@marzneshin/libs/entity-table/components";
+} from "@serhas/libs/entity-table/components";
 
 interface UseSidebarEntityTableParams<T, S> {
     fetchEntity: ({ queryKey }: EntitySidebarQueryKeyType) => FetchEntityReturn<T>;

@@ -1,7 +1,7 @@
 import { type FC, useEffect, useState } from "react";
 import { format } from "date-fns";
 import { CalendarIcon } from "@radix-ui/react-icons";
-import { cn } from "@marzneshin/common/utils";
+import { cn } from "@serhas/common/utils";
 import { useFormContext, type FieldValues } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import {
@@ -15,7 +15,7 @@ import {
     FormItem,
     FormField,
     FormMessage,
-} from "@marzneshin/common/components";
+} from "@serhas/common/components";
 
 interface DateFieldProps {
     name: keyof FieldValues;

@@ -5,8 +5,8 @@ import {
 import {
     useRouterServiceContext,
     ServiceSettingsDialog,
-} from "@marzneshin/modules/services";
-import { useDialog } from "@marzneshin/common/hooks";
+} from "@serhas/modules/services";
+import { useDialog } from "@serhas/common/hooks";
 
 const ServiceOpen = () => {
     const [settingsDialogOpen, setSettingsDialogOpen] = useDialog(true);

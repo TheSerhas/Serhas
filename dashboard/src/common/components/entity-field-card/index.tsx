@@ -1,5 +1,5 @@
 import { LucideIcon } from 'lucide-react';
-import { Label, Separator } from '@marzneshin/common/components';
+import { Label, Separator } from '@serhas/common/components';
 import { FC } from 'react'
 
 interface EntityFieldCardProps {

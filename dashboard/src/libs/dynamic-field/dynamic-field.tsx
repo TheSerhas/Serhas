@@ -1,6 +1,6 @@
 import React from "react";
 import { useFormContext, Controller } from "react-hook-form";
-import { Input, Button, Separator } from "@marzneshin/common/components";
+import { Input, Button, Separator } from "@serhas/common/components";
 import { ListX } from "lucide-react";
 
 interface DynamicFieldProps {

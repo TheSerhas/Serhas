@@ -5,8 +5,8 @@ import {
 import {
     useRouterAdminContext,
     AdminsSettingsDialog,
-} from "@marzneshin/modules/admins";
-import { useDialog } from "@marzneshin/common/hooks";
+} from "@serhas/modules/admins";
+import { useDialog } from "@serhas/common/hooks";
 
 const AdminOpen = () => {
     const [settingsDialogOpen, setSettingsDialogOpen] = useDialog(true);

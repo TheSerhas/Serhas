@@ -3,13 +3,13 @@ import {
     Tooltip,
     TooltipContent,
     TooltipTrigger,
-} from "@marzneshin/common/components";
+} from "@serhas/common/components";
 import CopyToClipboard from "react-copy-to-clipboard";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { CopyCheck, CopyX, ClipboardCopy, LucideIcon } from "lucide-react";
 import { toast } from "sonner";
-import { cn } from "@marzneshin/common/utils";
+import { cn } from "@serhas/common/utils";
 
 interface CopyToClipboardButtonProps {
     text: string;

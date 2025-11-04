@@ -1,8 +1,8 @@
 
 import { FC } from "react";
-import { DoubleEntityTable } from "@marzneshin/libs/entity-table";
+import { DoubleEntityTable } from "@serhas/libs/entity-table";
 import { columns } from "./columns";
-import { fetchServiceUsers, type ServiceType } from "@marzneshin/modules/services";
+import { fetchServiceUsers, type ServiceType } from "@serhas/modules/services";
 
 interface ServicesUsersTableProps {
     service: ServiceType

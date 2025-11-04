@@ -7,7 +7,7 @@ import {
     DialogTitle,
     Form,
     ScrollArea,
-} from "@marzneshin/common/components";
+} from "@serhas/common/components";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslation } from "react-i18next";
@@ -16,14 +16,14 @@ import {
     type HostWithProfileType,
     useHostsCreationMutation,
     useHostsUpdateMutation,
-} from "@marzneshin/modules/hosts";
-import { type MutationDialogProps, useDialog } from "@marzneshin/common/hooks";
-import { ProtocolType } from "@marzneshin/modules/inbounds";
+} from "@serhas/modules/hosts";
+import { type MutationDialogProps, useDialog } from "@serhas/common/hooks";
+import { ProtocolType } from "@serhas/modules/inbounds";
 import { useProfileStrategy } from "./profiles";
 import {
     transformToDictionary,
     transformToFields,
-} from "@marzneshin/libs/dynamic-field";
+} from "@serhas/libs/dynamic-field";
 
 interface HostMutationDialogProps
     extends MutationDialogProps<HostWithProfileType> {

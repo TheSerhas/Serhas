@@ -5,8 +5,8 @@ import {
 import {
     AdminsDeleteConfirmationDialog,
     useRouterAdminContext,
-} from "@marzneshin/modules/admins";
-import { useDialog } from "@marzneshin/common/hooks";
+} from "@serhas/modules/admins";
+import { useDialog } from "@serhas/common/hooks";
 
 const AdminDelete = () => {
     const [deleteDialogOpen, setDeleteDialogOpen] = useDialog(true);

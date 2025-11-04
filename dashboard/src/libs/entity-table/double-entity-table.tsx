@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { Button } from "@marzneshin/common/components";
+import { Button } from "@serhas/common/components";
 import { DataTableViewOptions } from "./components";
 import { useTranslation } from "react-i18next";
 import { useQuery } from "@tanstack/react-query";

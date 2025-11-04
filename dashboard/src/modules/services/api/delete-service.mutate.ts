@@ -1,8 +1,8 @@
-import { ServiceType, ServicesQueryFetchKey } from "@marzneshin/modules/services";
+import { ServiceType, ServicesQueryFetchKey } from "@serhas/modules/services";
 import { useMutation } from "@tanstack/react-query";
-import { fetch, queryClient } from "@marzneshin/common/utils";
+import { fetch, queryClient } from "@serhas/common/utils";
 import { toast } from "sonner";
-import i18n from "@marzneshin/features/i18n";
+import i18n from "@serhas/features/i18n";
 
 export async function fetchDeleteService(service: ServiceType): Promise<ServiceType> {
     return fetch(`/services/${service.id}`, { method: 'delete' }).then((service) => {

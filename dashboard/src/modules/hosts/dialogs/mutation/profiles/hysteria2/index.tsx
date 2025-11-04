@@ -1,6 +1,6 @@
 import { CommonFields } from "../../fields";
 import { TlsFields } from "../../sections";
-import { Accordion, ClearableTextField } from "@marzneshin/common/components";
+import { Accordion, ClearableTextField } from "@serhas/common/components";
 import { useTranslation } from "react-i18next";
 
 export const Hysteria2ProfileFields = () => {

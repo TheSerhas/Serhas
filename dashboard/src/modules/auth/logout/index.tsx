@@ -1,4 +1,4 @@
-import { Button } from "@marzneshin/common/components";
+import { Button } from "@serhas/common/components";
 import { useNavigate } from "@tanstack/react-router";
 import { LogOut } from "lucide-react";
 import { FC, useCallback } from "react";

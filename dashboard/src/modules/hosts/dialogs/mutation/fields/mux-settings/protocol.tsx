@@ -8,7 +8,7 @@ import {
     SelectItem,
     SelectTrigger,
     SelectValue,
-} from "@marzneshin/common/components";
+} from "@serhas/common/components";
 import { useTranslation } from "react-i18next";
 
 export const ProtocolField = ({

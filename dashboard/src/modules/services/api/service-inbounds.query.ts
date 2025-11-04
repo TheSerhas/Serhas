@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
-import { fetch } from "@marzneshin/common/utils";
-import { InboundType } from "@marzneshin/modules/inbounds";
+import { fetch } from "@serhas/common/utils";
+import { InboundType } from "@serhas/modules/inbounds";
 import {
     FetchEntityReturn,
     SelectableEntityQueryKeyType
-} from "@marzneshin/libs/entity-table";
+} from "@serhas/libs/entity-table";
 
 interface FetchServiceInboundsType {
     queryKey: [string, number, number, number]

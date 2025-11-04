@@ -3,8 +3,8 @@ import {
     columns as columnsFn,
     fetchNodes,
     NodeType
-} from '@marzneshin/modules/nodes';
-import { EntityTable } from "@marzneshin/libs/entity-table";
+} from '@serhas/modules/nodes';
+import { EntityTable } from "@serhas/libs/entity-table";
 import { useNavigate } from "@tanstack/react-router";
 
 export const NodesTable: FC = () => {

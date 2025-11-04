@@ -1,13 +1,13 @@
 
-import { Button } from "@marzneshin/common/components";
-import { SelectableEntityTable, useRowSelection } from "@marzneshin/libs/entity-table";
+import { Button } from "@serhas/common/components";
+import { SelectableEntityTable, useRowSelection } from "@serhas/libs/entity-table";
 import { columns } from "./columns";
 import {
     type UserType,
     useUsersUpdateMutation,
-} from "@marzneshin/modules/users";
+} from "@serhas/modules/users";
 import { useTranslation } from "react-i18next";
-import { fetchUserServices } from "@marzneshin/modules/services";
+import { fetchUserServices } from "@serhas/modules/services";
 import { useState, useCallback, FC } from "react";
 
 interface UserServicesTableProps {

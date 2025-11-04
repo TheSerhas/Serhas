@@ -6,8 +6,8 @@ import {
     CardFooter,
     CardHeader,
     CardTitle,
-} from '@marzneshin/common/components';
-import { cn } from '@marzneshin/common/utils';
+} from '@serhas/common/components';
+import { cn } from '@serhas/common/utils';
 
 interface PageProps {
     title: JSX.Element | string;

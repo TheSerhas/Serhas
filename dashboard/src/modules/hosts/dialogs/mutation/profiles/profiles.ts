@@ -21,7 +21,7 @@ import {
 import { TuicSchema, TuicProfileFields, tuicProfileDefaultValue } from "./tuic";
 import { FC } from "react";
 import { z } from "zod";
-import { ProtocolType } from "@marzneshin/modules/inbounds";
+import { ProtocolType } from "@serhas/modules/inbounds";
 
 export type ProfileConfig = [z.ZodTypeAny, FC, object];
 

@@ -1,11 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
-import { fetch } from "@marzneshin/common/utils";
-import { UserType } from "@marzneshin/modules/users";
+import { fetch } from "@serhas/common/utils";
+import { UserType } from "@serhas/modules/users";
 import type {
     DoubleEntityQueryKeyType,
     UseEntityQueryProps,
     FetchEntityReturn
-} from "@marzneshin/libs/entity-table";
+} from "@serhas/libs/entity-table";
 
 interface UseServiceUsersQueryProps extends UseEntityQueryProps {
     serviceId: number;

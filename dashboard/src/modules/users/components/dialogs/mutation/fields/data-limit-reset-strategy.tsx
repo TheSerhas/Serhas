@@ -9,7 +9,7 @@ import {
     SelectContent,
     SelectItem,
     SelectValue,
-} from '@marzneshin/common/components';
+} from '@serhas/common/components';
 import { FC } from 'react'
 import { useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';

@@ -2,7 +2,7 @@ import { Row } from "@tanstack/react-table"
 import { type PropsWithChildren, useCallback } from 'react'
 import {
     type ColumnActions
-} from "@marzneshin/libs/entity-table";
+} from "@serhas/libs/entity-table";
 
 interface NoPropogationButtonProps<T> {
     actions: ColumnActions<T>,

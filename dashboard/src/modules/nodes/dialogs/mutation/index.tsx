@@ -19,7 +19,7 @@ import {
     SelectValue,
     FormDescription,
     HStack,
-} from "@marzneshin/common/components";
+} from "@serhas/common/components";
 import { useTranslation } from "react-i18next";
 import {
     NodeSchema,
@@ -27,7 +27,7 @@ import {
     useNodesUpdateMutation,
 } from "../..";
 import type { NodeType } from "../..";
-import { useMutationDialog, MutationDialogProps } from "@marzneshin/common/hooks";
+import { useMutationDialog, MutationDialogProps } from "@serhas/common/hooks";
 
 export const MutationDialog: FC<MutationDialogProps<NodeType>> = ({
     entity,

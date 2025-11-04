@@ -1,4 +1,4 @@
-import { Button } from "@marzneshin/common/components";
+import { Button } from "@serhas/common/components";
 
 export const columnsFnBasicEntityTable = ({ onEdit, onDelete, onOpen }: any) => [
     {

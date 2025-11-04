@@ -8,8 +8,8 @@ import {
     Accordion,
     ClearableTextField,
     HStack,
-} from "@marzneshin/common/components";
-import { SettingSection } from "@marzneshin/modules/hosts";
+} from "@serhas/common/components";
+import { SettingSection } from "@serhas/modules/hosts";
 import { useTranslation } from "react-i18next";
 
 export const WireguardProfileFields = () => {

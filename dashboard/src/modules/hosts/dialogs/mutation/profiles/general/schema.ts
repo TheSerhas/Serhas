@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { HostSchema, TlsSchema } from "@marzneshin/modules/hosts";
+import { HostSchema, TlsSchema } from "@serhas/modules/hosts";
 import { SplitHttpSettingsSchema } from "./split-http-settings.schema";
 import { MuxSettingsSchema } from "./mux-settings.schema";
 import i18n from "i18next";

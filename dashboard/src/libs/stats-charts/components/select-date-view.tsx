@@ -3,7 +3,7 @@ import {
     RadioGroup,
     RadioGroupItem,
     Label
-} from "@marzneshin/common/components";
+} from "@serhas/common/components";
 
 const SelectDateViewItem: FC<PropsWithChildren & { interval: string }> = ({ interval, children }) => (
     <div className="flex gap-2 justify-center items-center relative rounded-full py-0.5 px-1 cursor-pointer">

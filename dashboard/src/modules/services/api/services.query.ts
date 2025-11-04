@@ -1,11 +1,11 @@
-import { fetch } from "@marzneshin/common/utils";
+import { fetch } from "@serhas/common/utils";
 import { ServiceType } from "../types";
 import {
     EntityQueryKeyType,
     SelectableEntityQueryKeyType,
     FetchEntityReturn,
     UseEntityQueryProps
-} from "@marzneshin/libs/entity-table";
+} from "@serhas/libs/entity-table";
 import { useQuery } from "@tanstack/react-query";
 
 export async function fetchServices({ queryKey }: EntityQueryKeyType): FetchEntityReturn<ServiceType> {

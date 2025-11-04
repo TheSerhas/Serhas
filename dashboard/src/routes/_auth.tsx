@@ -1,5 +1,5 @@
 import { Outlet, createFileRoute } from '@tanstack/react-router'
-import network from '@marzneshin/assets/undraw_connected_world_wuay.svg'
+import network from '@serhas/assets/undraw_connected_world_wuay.svg'
 
 const AuthLayout = () => {
   return (

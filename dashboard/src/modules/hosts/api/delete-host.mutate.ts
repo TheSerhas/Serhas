@@ -1,8 +1,8 @@
-import { HostType } from "@marzneshin/modules/hosts";
+import { HostType } from "@serhas/modules/hosts";
 import { useMutation } from "@tanstack/react-query";
-import { fetch, queryClient } from "@marzneshin/common/utils";
+import { fetch, queryClient } from "@serhas/common/utils";
 import { toast } from "sonner";
-import i18n from "@marzneshin/features/i18n";
+import i18n from "@serhas/features/i18n";
 
 export async function fetchDeleteHost(host: HostType): Promise<HostType> {
     return fetch(`/inbounds/hosts/${host.id}`, { method: 'delete' }).then((host) => {

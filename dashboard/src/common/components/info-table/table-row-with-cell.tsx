@@ -1,4 +1,4 @@
-import { TableCell, TableRow } from "@marzneshin/common/components";
+import { TableCell, TableRow } from "@serhas/common/components";
 import { FC } from "react";
 
 interface TableRowWithCellProps {

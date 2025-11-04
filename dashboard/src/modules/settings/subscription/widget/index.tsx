@@ -1,7 +1,7 @@
 import {
     SectionWidget
-} from "@marzneshin/common/components";
-import { SubscriptionRulesForm } from "@marzneshin/modules/settings/subscription";
+} from "@serhas/common/components";
+import { SubscriptionRulesForm } from "@serhas/modules/settings/subscription";
 import { useTranslation } from "react-i18next";
 
 export const SubscriptionSettingsWidget = () => {

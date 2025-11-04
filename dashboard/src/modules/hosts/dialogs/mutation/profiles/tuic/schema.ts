@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { HostSchema, TlsSchema } from "@marzneshin/modules/hosts";
+import { HostSchema, TlsSchema } from "@serhas/modules/hosts";
 
 export const TuicSchema = HostSchema.merge(TlsSchema);
 

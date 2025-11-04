@@ -1,6 +1,6 @@
 
 import { FetchOptions, ofetch } from 'ofetch';
-import { useAuth } from '@marzneshin/modules/auth';
+import { useAuth } from '@serhas/modules/auth';
 
 export const $fetch = ofetch.create({
     baseURL: import.meta.env.VITE_BASE_API,

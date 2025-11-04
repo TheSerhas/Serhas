@@ -10,9 +10,9 @@ import {
     TableHeader,
     TableRow,
     Skeleton
-} from "@marzneshin/common/components";
+} from "@serhas/common/components";
 import { useTranslation } from "react-i18next";
-import { useEntityTableContext } from "@marzneshin/libs/entity-table/contexts";
+import { useEntityTableContext } from "@serhas/libs/entity-table/contexts";
 import { type FC } from "react";
 
 interface DataTableProps<TData, TValue> {

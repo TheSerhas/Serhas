@@ -8,12 +8,12 @@ import {
     SettingsInfoSkeleton,
     SettingsDialogProps,
     SettingsDialog,
-} from "@marzneshin/common/components";
+} from "@serhas/common/components";
 import {
     UserServicesTable,
     UserNodesUsageWidget,
     type UserType,
-} from "@marzneshin/modules/users";
+} from "@serhas/modules/users";
 import { type FC } from "react";
 import { useTranslation } from "react-i18next";
 import {

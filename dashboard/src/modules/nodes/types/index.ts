@@ -1,4 +1,4 @@
-import type { StatusType } from "@marzneshin/common/types/status";
+import type { StatusType } from "@serhas/common/types/status";
 import { PowerOff, Zap, ZapOff } from "lucide-react";
 import { z } from "zod";
 

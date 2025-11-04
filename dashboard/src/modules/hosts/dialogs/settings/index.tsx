@@ -5,7 +5,7 @@ import {
     Table,
     TableBody,
     TableRowWithCell,
-} from "@marzneshin/common/components";
+} from "@serhas/common/components";
 import { useTranslation } from "react-i18next";
 
 interface HostWithProfileSchemaType {

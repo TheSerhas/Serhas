@@ -11,7 +11,7 @@
     "prefix": ""
   },
   "aliases": {
-    "components": "@marzneshin/components",
-    "utils": "@marzneshin/utils"
+    "components": "@serhas/components",
+    "utils": "@serhas/utils"
   }
 }

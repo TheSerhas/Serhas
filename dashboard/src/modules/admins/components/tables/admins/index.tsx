@@ -1,8 +1,8 @@
 import type { FC } from "react";
 import { ColumnDef } from "@tanstack/react-table";
-import { fetchAdmins, AdminType, AdminsQueryFetchKey } from "@marzneshin/modules/admins";
+import { fetchAdmins, AdminType, AdminsQueryFetchKey } from "@serhas/modules/admins";
 import { columns as columnsFn } from "./columns";
-import { EntityTable } from "@marzneshin/libs/entity-table";
+import { EntityTable } from "@serhas/libs/entity-table";
 import { useNavigate } from "@tanstack/react-router";
 
 export const AdminsTable: FC = () => {

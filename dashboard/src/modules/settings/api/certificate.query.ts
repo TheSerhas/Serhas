@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { fetch } from "@marzneshin/common/utils";
-import { NodesQueryFetchKey } from "@marzneshin/modules/nodes";
+import { fetch } from "@serhas/common/utils";
+import { NodesQueryFetchKey } from "@serhas/modules/nodes";
 
 export async function fetchCertificate(): Promise<string> {
     return fetch('/nodes/settings').then((settings) => {

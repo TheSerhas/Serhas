@@ -12,8 +12,8 @@ import {
     SelectTrigger,
     SelectValue,
     DeleteConfirmation
-} from "@marzneshin/common/components";
-import { useDialog } from "@marzneshin/common/hooks";
+} from "@serhas/common/components";
+import { useDialog } from "@serhas/common/hooks";
 import {
     Schema
 } from "./schema"

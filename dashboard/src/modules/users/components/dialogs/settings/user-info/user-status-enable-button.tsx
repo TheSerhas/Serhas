@@ -1,6 +1,6 @@
-import { Button } from "@marzneshin/common/components";
-import { cn } from "@marzneshin/common/utils";
-import { UserType, useUserStatusEnable } from "@marzneshin/modules/users";
+import { Button } from "@serhas/common/components";
+import { cn } from "@serhas/common/utils";
+import { UserType, useUserStatusEnable } from "@serhas/modules/users";
 import { LoaderIcon, UserCheck, UserX } from "lucide-react";
 import { FC, useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";

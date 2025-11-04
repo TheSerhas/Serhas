@@ -1,4 +1,4 @@
-import { useAuth } from "@marzneshin/modules/auth";
+import { useAuth } from "@serhas/modules/auth";
 import { useNavigate } from "@tanstack/react-router";
 import { useEffect , PropsWithChildren, FC} from "react";
 

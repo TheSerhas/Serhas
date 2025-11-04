@@ -3,7 +3,7 @@ import { useMemo } from "react";
 import { SidebarContext } from "./sidebar-provider";
 import type { SidebarItemGroup } from "./types";
 import { type VariantProps, cva } from "class-variance-authority";
-import { cn } from "@marzneshin/common/utils";
+import { cn } from "@serhas/common/utils";
 import { SidebarHeader } from "./sidebar-header";
 import { SidebarFooter } from "./sidebar-footer";
 import { SidebarBody } from "./sidebar-body";

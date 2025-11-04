@@ -3,8 +3,8 @@ import {
   SettingsInfoSkeleton,
   SettingsDialogProps,
   SettingsDialog,
-} from "@marzneshin/common/components";
-import { type AdminType } from "@marzneshin/modules/admins";
+} from "@serhas/common/components";
+import { type AdminType } from "@serhas/modules/admins";
 import { type FC } from "react";
 import { AdminInfoTable } from "./admin-info";
 

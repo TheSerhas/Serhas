@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { DATA_LIMIT_METRIC } from "@marzneshin/modules/users";
+import { DATA_LIMIT_METRIC } from "@serhas/modules/users";
 
 export const UserSchema = z.object({
     username: z.string().min(1, { message: "Username is required" }),

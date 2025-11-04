@@ -7,13 +7,13 @@ import {
 import {
     RouterServiceContext,
     fetchService,
-} from "@marzneshin/modules/services";
+} from "@serhas/modules/services";
 import { Suspense } from "react";
 import {
     AlertDialog,
     AlertDialogContent,
     Loading
-} from "@marzneshin/common/components";
+} from "@serhas/common/components";
 
 const ServiceProvider = () => {
     const { service } = Route.useLoaderData()

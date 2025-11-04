@@ -1,13 +1,13 @@
 import { ColumnDef } from "@tanstack/react-table"
-import { DataTableColumnHeader } from "@marzneshin/libs/entity-table"
-import i18n from "@marzneshin/features/i18n"
+import { DataTableColumnHeader } from "@serhas/libs/entity-table"
+import i18n from "@serhas/features/i18n"
 import {
     UserType,
     UserActivatedPill,
     UserUsedTraffic,
     UserExpirationValue,
     userTrafficSortingFn,
-} from "@marzneshin/modules/users"
+} from "@serhas/modules/users"
 
 export const columns: ColumnDef<UserType>[] = [
     {

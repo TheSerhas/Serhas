@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { Badge, Separator } from '@marzneshin/common/components';
+import { Badge, Separator } from '@serhas/common/components';
 
 const CommandGuide = ({ command, desc }: { command: string, desc: string }) => {
     return (<div className="m-1">

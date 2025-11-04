@@ -1,7 +1,7 @@
 import { type FC } from "react";
-import { BooleanPill } from "@marzneshin/common/components";
+import { BooleanPill } from "@serhas/common/components";
 import { useTranslation } from "react-i18next";
-import { UserProp } from "@marzneshin/modules/users";
+import { UserProp } from "@serhas/modules/users";
 
 export const UserEnabledPill: FC<UserProp> = ({ user }) => {
     const { t } = useTranslation();

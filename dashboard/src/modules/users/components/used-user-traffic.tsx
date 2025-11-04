@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { UserType } from '@marzneshin/modules/users';
+import { UserType } from '@serhas/modules/users';
 import { CircularProgress } from '@nextui-org/progress';
 import { format } from '@chbphone55/pretty-bytes';
 import { useTranslation } from 'react-i18next';

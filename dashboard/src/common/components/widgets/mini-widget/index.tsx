@@ -4,7 +4,7 @@ import {
     CardFooter,
     CardHeader,
     CardTitle,
-} from '@marzneshin/common/components';
+} from '@serhas/common/components';
 import type { FC, PropsWithChildren } from 'react';
 
 export interface MiniWidgetProps extends PropsWithChildren {

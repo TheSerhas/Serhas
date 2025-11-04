@@ -1,5 +1,5 @@
 import type { FC, PropsWithChildren, HTMLAttributes } from "react";
-import { cn } from "@marzneshin/common/utils";
+import { cn } from "@serhas/common/utils";
 
 export const HStack: FC<PropsWithChildren & HTMLAttributes<HTMLDivElement>> = ({
     children,

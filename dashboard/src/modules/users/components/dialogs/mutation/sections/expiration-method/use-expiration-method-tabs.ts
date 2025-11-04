@@ -1,4 +1,4 @@
-import { UserMutationType, ExpireStrategy } from "@marzneshin/modules/users";
+import { UserMutationType, ExpireStrategy } from "@serhas/modules/users";
 import { useState, useEffect } from "react";
 import { useFormContext } from "react-hook-form";
 import { strategies } from "./expiration-method.strategy"

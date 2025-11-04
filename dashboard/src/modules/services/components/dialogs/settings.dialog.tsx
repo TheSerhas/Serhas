@@ -5,14 +5,14 @@ import {
   TabsContent,
   TabsList,
   TabsTrigger,
-} from "@marzneshin/common/components";
+} from "@serhas/common/components";
 import { type FC } from "react";
 import { useTranslation } from "react-i18next";
 import {
   ServicesUsersTable,
   ServiceInboundsTable,
   ServiceType,
-} from "@marzneshin/modules/services";
+} from "@serhas/modules/services";
 
 interface ServicecSettingsDialogProps extends SettingsDialogProps {
   entity: ServiceType;

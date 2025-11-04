@@ -5,8 +5,8 @@ import {
 import {
     NodesDeleteConfirmationDialog,
     useRouterNodeContext,
-} from "@marzneshin/modules/nodes";
-import { useDialog } from "@marzneshin/common/hooks";
+} from "@serhas/modules/nodes";
+import { useDialog } from "@serhas/common/hooks";
 
 const NodeDelete = () => {
     const [deleteDialogOpen, setDeleteDialogOpen] = useDialog(true);

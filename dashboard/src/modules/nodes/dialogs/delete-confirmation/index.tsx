@@ -1,7 +1,7 @@
 
-import { DeleteConfirmation } from '@marzneshin/common/components'
+import { DeleteConfirmation } from '@serhas/common/components'
 import { FC, useEffect } from 'react'
-import { NodeType, useNodesDeletionMutation } from '@marzneshin/modules/nodes'
+import { NodeType, useNodesDeletionMutation } from '@serhas/modules/nodes'
 
 interface NodesDeleteConfirmationDialogProps {
     onOpenChange: (state: boolean) => void

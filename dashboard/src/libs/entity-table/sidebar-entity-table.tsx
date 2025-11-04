@@ -1,4 +1,4 @@
-import { Button, ResizableHandle, ResizablePanel, ResizablePanelGroup, HStack } from "@marzneshin/common/components";
+import { Button, ResizableHandle, ResizablePanel, ResizablePanelGroup, HStack } from "@serhas/common/components";
 import { Table } from "@tanstack/react-table"
 import { DataTableViewOptions } from "./components";
 import { Server } from "lucide-react";

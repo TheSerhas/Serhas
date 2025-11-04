@@ -1,4 +1,4 @@
-import { fetch } from '@marzneshin/common/utils';
+import { fetch } from '@serhas/common/utils';
 import { create } from 'zustand';
 import { subscribeWithSelector } from 'zustand/middleware';
 

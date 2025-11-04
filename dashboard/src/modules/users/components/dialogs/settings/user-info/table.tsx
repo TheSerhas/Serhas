@@ -9,7 +9,7 @@ import {
     Table,
     TableBody,
     TableRowWithCell,
-} from "@marzneshin/common/components";
+} from "@serhas/common/components";
 import type { FC } from "react";
 import { UserStatusEnableButton } from "./user-status-enable-button";
 import {
@@ -20,7 +20,7 @@ import {
     type UserProp,
     UserUsedTraffic,
     useUserUsageResetCmd,
-} from "@marzneshin/modules/users";
+} from "@serhas/modules/users";
 import { useTranslation } from "react-i18next";
 import { formatDistanceToNow } from "date-fns";
 import { format } from "@chbphone55/pretty-bytes";

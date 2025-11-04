@@ -1,4 +1,4 @@
-import { Badge } from "@marzneshin/common/components";
+import { Badge } from "@serhas/common/components";
 
 export const VersionIndicator = () => {
     return (

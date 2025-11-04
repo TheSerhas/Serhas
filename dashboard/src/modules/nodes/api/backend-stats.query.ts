@@ -1,6 +1,6 @@
-import type { NodeType } from "@marzneshin/modules/nodes";
+import type { NodeType } from "@serhas/modules/nodes";
 import { useQuery } from "@tanstack/react-query";
-import { fetch } from "@marzneshin/common/utils";
+import { fetch } from "@serhas/common/utils";
 
 type NodeBackendStatsQueryKey = [string, number, string, string];
 

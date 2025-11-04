@@ -7,13 +7,13 @@ import {
 import {
     fetchNode,
     RouterNodeContext
-} from "@marzneshin/modules/nodes";
+} from "@serhas/modules/nodes";
 import { Suspense } from "react";
 import {
     AlertDialog,
     AlertDialogContent,
     Loading,
-} from "@marzneshin/common/components";
+} from "@serhas/common/components";
 
 const NodeProvider = () => {
     const { node } = Route.useLoaderData()

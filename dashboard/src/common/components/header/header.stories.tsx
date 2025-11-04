@@ -1,6 +1,6 @@
 import { HeaderMenu, Header } from ".";
-import { CommandBox } from "@marzneshin/features/search-command";
-import { HeaderLogo } from "@marzneshin/common/components";
+import { CommandBox } from "@serhas/features/search-command";
+import { HeaderLogo } from "@serhas/common/components";
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 

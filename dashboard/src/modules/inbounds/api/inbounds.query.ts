@@ -1,11 +1,11 @@
 
 import { useQuery } from "@tanstack/react-query";
-import { fetch } from "@marzneshin/common/utils";
+import { fetch } from "@serhas/common/utils";
 import {
     FetchEntityReturn,
     UseEntityQueryProps,
     EntityQueryKeyType
-} from "@marzneshin/libs/entity-table";
+} from "@serhas/libs/entity-table";
 import { InboundType } from "../types";
 
 export async function fetchInbounds({ queryKey }: EntityQueryKeyType): FetchEntityReturn<InboundType> {

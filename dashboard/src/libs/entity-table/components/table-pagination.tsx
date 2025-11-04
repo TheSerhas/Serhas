@@ -11,7 +11,7 @@ import {
     SelectItem,
     SelectTrigger,
     SelectValue,
-} from "@marzneshin/common/components";
+} from "@serhas/common/components";
 import { useTranslation } from "react-i18next";
 import { Table } from "@tanstack/react-table"
 import { useLocalStorage } from "@uidotdev/usehooks";
@@ -20,7 +20,7 @@ import { useEntityTableContext } from "../contexts";
 export function DataTablePagination<TData>({ table }: { table: Table<TData> }) {
     const { t } = useTranslation();
     const { entityKey } = useEntityTableContext();
-    const [,setRowPerPageLocal] = useLocalStorage<number>(`marzneshin-table-row-per-page-${entityKey}`, 10);
+    const [,setRowPerPageLocal] = useLocalStorage<number>(`serhas-table-row-per-page-${entityKey}`, 10);
 
     return (
         <div className="flex justify-between items-center p-2 w-full">

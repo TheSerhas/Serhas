@@ -1,11 +1,11 @@
 
 import { ColumnDef } from "@tanstack/react-table"
-import { InboundType } from "@marzneshin/modules/inbounds"
+import { InboundType } from "@serhas/modules/inbounds"
 import {
     DataTableColumnHeader
-} from "@marzneshin/libs/entity-table"
-import i18n from "@marzneshin/features/i18n"
-import { Badge, Checkbox } from "@marzneshin/common/components"
+} from "@serhas/libs/entity-table"
+import i18n from "@serhas/features/i18n"
+import { Badge, Checkbox } from "@serhas/common/components"
 
 export const columns: ColumnDef<InboundType>[] = [
     {

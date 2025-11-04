@@ -1,4 +1,4 @@
-import { NodeType } from "@marzneshin/modules/nodes";
+import { NodeType } from "@serhas/modules/nodes";
 
 export type ProtocolType =
     "wireguard"

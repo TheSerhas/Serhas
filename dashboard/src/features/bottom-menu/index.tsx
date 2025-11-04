@@ -1,10 +1,10 @@
-import { Button, SidebarItem } from "@marzneshin/common/components";
-import i18n from "@marzneshin/features/i18n";
+import { Button, SidebarItem } from "@serhas/common/components";
+import i18n from "@serhas/features/i18n";
 import { Link } from "@tanstack/react-router";
 import { FC } from "react";
 import { Box, Home, Server, ServerCog, UsersIcon } from 'lucide-react';
-import { useIsCurrentRoute } from "@marzneshin/common/hooks";
-import { cn } from "@marzneshin/common/utils";
+import { useIsCurrentRoute } from "@serhas/common/hooks";
+import { cn } from "@serhas/common/utils";
 
 type BottomMenuItemProps = Omit<SidebarItem, 'isParent' | 'subItem'>
 

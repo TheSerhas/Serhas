@@ -1,8 +1,8 @@
 
 export const projectInfo = {
-    repo: "marzneshin/marzneshin",
-    github: "https://github.com/marzneshin/marzneshin",
-    donationLink: "https://github.com/marzneshin/marzneshin#donation",
-    website: "marzneshin.com",
+    repo: "serhas/serhas",
+    github: "https://github.com/serhas/serhas",
+    donationLink: "https://github.com/serhas/serhas#donation",
+    website: "serhas.com",
     authors: ["Mardin", "Dawsh"]
 }

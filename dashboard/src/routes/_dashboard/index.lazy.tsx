@@ -1,7 +1,7 @@
 import { createLazyFileRoute } from '@tanstack/react-router'
-import { Page } from '@marzneshin/common/components'
-import { UsersStatsWidget, useUsersStatsQuery } from '@marzneshin/modules/users'
-import { TotalTrafficsWidget } from '@marzneshin/features/total-traffic-widget'
+import { Page } from '@serhas/common/components'
+import { UsersStatsWidget, useUsersStatsQuery } from '@serhas/modules/users'
+import { TotalTrafficsWidget } from '@serhas/features/total-traffic-widget'
 import { useTranslation } from 'react-i18next'
 import { FC } from 'react'
 

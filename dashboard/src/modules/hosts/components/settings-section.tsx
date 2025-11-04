@@ -1,4 +1,4 @@
-import { AccordionItem, AccordionTrigger, AccordionContent } from '@marzneshin/common/components';
+import { AccordionItem, AccordionTrigger, AccordionContent } from '@serhas/common/components';
 import { FC, PropsWithChildren } from "react";
 
 interface SettingSectionProps {

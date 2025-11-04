@@ -4,7 +4,7 @@ import {
     CommandGroup,
     CommandItem,
     CommandSeparator,
-} from "@marzneshin/common/components";
+} from "@serhas/common/components";
 import { useNavigate } from "@tanstack/react-router";
 import { useTranslation } from "react-i18next";
 import { CommandGroupConfig, CommandItemConfig } from "./commands";

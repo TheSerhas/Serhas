@@ -1,15 +1,15 @@
 import {
     HostType,
     fetchHosts
-} from '@marzneshin/modules/hosts';
+} from '@serhas/modules/hosts';
 import { useNavigate } from "@tanstack/react-router";
 import { useState } from 'react';
 import {
     useInboundsQuery,
-} from '@marzneshin/modules/inbounds';
-import { SidebarEntityTable } from '@marzneshin/libs/entity-table';
+} from '@serhas/modules/inbounds';
+import { SidebarEntityTable } from '@serhas/libs/entity-table';
 import { columns } from './columns';
-import { useDialog } from '@marzneshin/common/hooks';
+import { useDialog } from '@serhas/common/hooks';
 import {
     InboundNotSelectedAlertDialog
 } from './inbound-not-selected-alert-dialog';

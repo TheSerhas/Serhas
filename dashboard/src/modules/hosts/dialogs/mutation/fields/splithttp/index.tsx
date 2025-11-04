@@ -4,7 +4,7 @@ import {
     FormItem,
     FormLabel,
     Switch,
-} from "@marzneshin/common/components";
+} from "@serhas/common/components";
 import { useFormContext, useWatch } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { SplitHttpModeField } from "./mode";

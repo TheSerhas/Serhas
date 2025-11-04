@@ -24,7 +24,7 @@
     /* Paths */
     "baseUrl": ".",
     "paths": {
-      "@marzneshin/*": [
+      "@serhas/*": [
         "./src/*"
       ]
     }

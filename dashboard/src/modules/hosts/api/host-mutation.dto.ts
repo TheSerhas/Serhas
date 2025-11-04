@@ -1,4 +1,4 @@
-import { HostWithProfileSchemaType } from "@marzneshin/modules/hosts";
+import { HostWithProfileSchemaType } from "@serhas/modules/hosts";
 
 export interface HostRequestDto {
     inboundId: number

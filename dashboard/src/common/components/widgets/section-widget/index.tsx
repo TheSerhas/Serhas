@@ -6,7 +6,7 @@ import {
     CardHeader,
     CardTitle,
     Separator,
-} from '@marzneshin/common/components';
+} from '@serhas/common/components';
 import type { FC, PropsWithChildren } from 'react';
 
 export interface SectionWidgetProps {

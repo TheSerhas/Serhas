@@ -2,7 +2,7 @@ import {
     Alert,
     AlertDescription,
     AlertTitle,
-} from "@marzneshin/common/components";
+} from "@serhas/common/components";
 import { Info } from 'lucide-react';
 import { useTranslation } from "react-i18next";
 

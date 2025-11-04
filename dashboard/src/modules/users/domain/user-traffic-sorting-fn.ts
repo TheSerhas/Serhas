@@ -1,4 +1,4 @@
-import { UserType } from "@marzneshin/modules/users";
+import { UserType } from "@serhas/modules/users";
 
 export const userTrafficSortingFn = (userA: UserType, userB: UserType) => {
     if (userA.data_limit && userB.data_limit) {

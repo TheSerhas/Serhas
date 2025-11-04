@@ -1,4 +1,4 @@
-import type { UserType } from "@marzneshin/modules/users";
+import type { UserType } from "@serhas/modules/users";
 import QRCode from "react-qr-code";
 import { QrCodeIcon } from "lucide-react";
 import type { FC } from "react";
@@ -7,9 +7,9 @@ import {
     CardContent,
     CardHeader,
     CardTitle,
-} from "@marzneshin/common/components";
+} from "@serhas/common/components";
 import { useTranslation } from "react-i18next";
-import { getSubscriptionLink } from "@marzneshin/common/utils";
+import { getSubscriptionLink } from "@serhas/common/utils";
 
 export interface QRCodeProps {
     entity: UserType;

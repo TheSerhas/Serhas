@@ -5,8 +5,8 @@ import {
 import {
     ServicesDeleteConfirmationDialog,
     useRouterServiceContext,
-} from "@marzneshin/modules/services";
-import { useDialog } from "@marzneshin/common/hooks";
+} from "@serhas/modules/services";
+import { useDialog } from "@serhas/common/hooks";
 
 const ServiceDelete = () => {
     const [deleteDialogOpen, setDeleteDialogOpen] = useDialog(true);

@@ -1,4 +1,4 @@
-import { UserType } from "@marzneshin/modules/users";
+import { UserType } from "@serhas/modules/users";
 
 /**
  * Checks whether the user has been online recently.
