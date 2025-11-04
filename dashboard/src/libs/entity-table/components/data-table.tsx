@@ -68,7 +68,7 @@ export function DataTable<TData, TValue>({
     const { t } = useTranslation();
     return (
         <div>
-            <div className="flex items-center py-4 rtl:flex-row-reverse">
+            <div className="flex items-center py-4">
                 <TableSearch />
                 <DataTableViewOptions table={table} />
                 {onCreate && (<Button onClick={onCreate}>{t('create')}</Button>)}
