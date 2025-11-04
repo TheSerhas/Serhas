@@ -16,7 +16,7 @@ type Story = StoryObj<typeof GithubRepo>;
  * */
 export const GithubRepoStats: Story = {
     args: {
-        full_name: "serhas/serhas",
+        full_name: "theserhas/serhas",
         description: "Scalable and Comprehensive Backend Proxy Management",
         stargazers_count: 1000,
     }
