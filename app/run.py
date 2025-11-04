@@ -50,7 +50,7 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
 
 
 app = FastAPI(
-    title="CyrusianAPI",
+    title="SerhasAPI",
     description="Unified GUI Censorship Resistant Solution Powered by Xray",
     version=__version__,
     lifespan=lifespan,

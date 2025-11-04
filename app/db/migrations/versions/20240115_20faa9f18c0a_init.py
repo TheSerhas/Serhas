@@ -1,4 +1,4 @@
-"""Initiate Cyrusian database
+"""Initiate Serhas database
 
 Revision ID: 20faa9f18c0a
 Revises:

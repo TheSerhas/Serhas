@@ -6,11 +6,9 @@ on:
       - 'v*.*.*'
     branches:
       - 'master'
-      - 'main'
   pull_request:
     branches:
       - 'master'
-      - 'main'
 
 jobs:
   build-docker-image:
@@ -69,10 +67,10 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: |
-            ghcr.io/cyrusian/panel:latest
-            ghcr.io/cyrusian/panel:${{ github.ref_name }}
+            ghcr.io/theserhas/serhas:latest
+            ghcr.io/theserhas/serhas:${{ github.ref_name }}
           labels: |
-            org.opencontainers.image.source=https://github.com/cyrusian/panel
+            org.opencontainers.image.source=https://github.com/theserhas/serhas
 
       - name: Build and push for Branch Push
         if: ${{ github.event_name == 'push' && !startsWith(github.ref, 'refs/tags/') }}
@@ -82,9 +80,9 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: |
-            ghcr.io/cyrusian/panel:ga
+            ghcr.io/theserhas/serhas:ga
           labels: |
-            org.opencontainers.image.source=https://github.com/cyrusian/panel
+            org.opencontainers.image.source=https://github.com/theserhas/serhas
 
       - name: Build and push for PR
         if: ${{ github.event_name == 'pull_request' }}
@@ -94,6 +92,6 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: |
-            ghcr.io/cyrusian/panel:pr-${{ github.event.number }}
+            ghcr.io/theserhas/serhas:pr-${{ github.event.number }}
           labels: |
-            org.opencontainers.image.source=https://github.com/cyrusian/panel
+            org.opencontainers.image.source=https://github.com/theserhas/serhas
