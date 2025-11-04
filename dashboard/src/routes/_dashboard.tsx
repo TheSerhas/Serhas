@@ -38,7 +38,6 @@ export const DashboardLayout = () => {
     return (
         <div className="flex flex-col w-screen h-screen">
             <Header
-                className="shrink-0"
                 start={
                     <>
                         <Link to="/">
@@ -91,14 +90,11 @@ export const DashboardLayout = () => {
                     </ResizablePanelGroup>
                 ) : (
                     <div className="flex flex-col h-full w-full">
-                        <main className="flex-1 overflow-y-auto pb-safe-bottom">
+                        <main className="flex flex-col h-full overflow-y-auto">
                             <Suspense fallback={<Loading />}>
                                 <Outlet />
                             </Suspense>
                         </main>
-                        <footer className="border-t bg-background shrink-0 pb-safe-bottom">
-                            <DashboardBottomMenu variant={isSudo() ? "sudo-admin" : "admin"} />
-                        </footer>
                     </div>
                 )}
             </div>
