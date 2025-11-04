@@ -4,5 +4,5 @@ export const projectInfo = {
     github: "https://github.com/serhas/serhas",
     donationLink: "https://github.com/serhas/serhas#donation",
     website: "serhas.com",
-    authors: ["Mardin", "Dawsh"]
+    authors: ["ben-aslan", "erfjab"]
 }
