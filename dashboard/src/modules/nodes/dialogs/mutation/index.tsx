@@ -18,7 +18,6 @@ import {
     SelectTrigger,
     SelectValue,
     FormDescription,
-    HStack,
 } from "@serhas/common/components";
 import { useTranslation } from "react-i18next";
 import {
@@ -109,7 +108,7 @@ export const MutationDialog: FC<MutationDialogProps<NodeType>> = ({
                                 )}
                             />
                         </div>
-                        <HStack>
+                        <div className="flex flex-col sm:flex-row gap-2 items-start sm:items-center">
                             <FormField
                                 control={form.control}
                                 name="connection_backend"
@@ -141,7 +140,7 @@ export const MutationDialog: FC<MutationDialogProps<NodeType>> = ({
                                 control={form.control}
                                 name="usage_coefficient"
                                 render={({ field }) => (
-                                    <FormItem className="w-1/2">
+                                    <FormItem className="w-full sm:w-1/2">
                                         <FormLabel>{t("page.nodes.usage_coefficient")}</FormLabel>
                                         <FormControl>
                                             <Input {...field} />
@@ -150,7 +149,7 @@ export const MutationDialog: FC<MutationDialogProps<NodeType>> = ({
                                     </FormItem>
                                 )}
                             />
-                        </HStack>
+                        </div>
                         <Button
                             className="mt-3 w-full font-semibold"
                             type="submit"

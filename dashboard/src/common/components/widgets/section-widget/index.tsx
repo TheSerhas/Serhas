@@ -24,16 +24,16 @@ export const SectionWidget: FC<SectionWidgetProps & PropsWithChildren> = ({
     return (
         <Card className={className}>
             <CardHeader className="flex flex-col items-stretch space-y-0 border-b p-0 sm:flex-row">
-                <div className="flex flex-1 flex-col justify-center gap-1 px-6 py-5 sm:py-6">
-                    <CardTitle className="flex flex-row justify-start items-center gap-3 text-xl">
+                <div className="flex flex-1 flex-col justify-center gap-1 px-4 py-4 sm:px-6 sm:py-5">
+                    <CardTitle className="flex flex-row justify-start items-center gap-3 text-lg sm:text-xl">
                         {title}
                     </CardTitle>
-                    <CardDescription>
+                    <CardDescription className="text-xs sm:text-sm">
                         {description}
                     </CardDescription>
                 </div>
                 {options &&
-                    <div className="flex items-center flex-col justify-center gap-1 px-6 py-5 sm:py-6">
+                    <div className="flex items-center flex-col justify-center gap-1 px-4 py-4 sm:px-6 sm:py-5">
                         {options}
                     </div>
                 }
