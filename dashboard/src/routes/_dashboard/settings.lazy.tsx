@@ -6,6 +6,7 @@ import { SudoRoute } from '@serhas/libs/sudo-routes'
 
 export const Settings = () => {
   const { t } = useTranslation()
+  
   return (
     <Page
       title={t('settings')}

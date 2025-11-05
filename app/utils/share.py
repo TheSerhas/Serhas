@@ -77,7 +77,7 @@ def generate_subscription_template(db_user, subscription_settings: SubscriptionS
         user=db_user,
         config_format="links",
         use_placeholder=not db_user.is_active and subscription_settings.placeholder_if_disabled,
-        placeholder_remark=subscription_settings.placeholder_remark,
+        placeholder_remarks=subscription_settings.placeholder_remarks,
         shuffle=subscription_settings.shuffle_configs,
     ).split()
     return render_template(
@@ -91,7 +91,7 @@ def generate_subscription(
     config_format: Literal["links", "xray", "clash-meta", "clash", "sing-box"],
     as_base64: bool = False,
     use_placeholder: bool = False,
-    placeholder_remark: str = "disabled",
+    placeholder_remarks: list[str] = ["Your subscription is inactive. Please contact support."],
     shuffle: bool = False,
 ) -> str:
     extra_data = UserResponse.model_validate(user).model_dump(exclude={"subscription_url", "services", "inbounds"})
@@ -107,13 +107,15 @@ def generate_subscription(
         subscription_handler = subscription_handler_class()
 
     if use_placeholder:
-        placeholder_config = V2Data(
-            "vmess",
-            placeholder_remark.format_map(format_variables),
-            "127.0.0.1",
-            80,
-        )
-        configs = [placeholder_config]
+        configs = [
+            V2Data(
+                "vmess",
+                placeholder_remark.format_map(format_variables),
+                "127.0.0.1",
+                80,
+            )
+            for placeholder_remark in placeholder_remarks
+        ]
 
     else:
         configs = generate_user_configs(

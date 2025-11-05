@@ -12,5 +12,8 @@ export type SubscriptionSettingsType = {
     profile_title: string;
     support_link: string;
     update_interval: number;
+    shuffle_configs: boolean;
+    placeholder_if_disabled: boolean;
+    placeholder_remarks: string[];
     rules: SubscriptionRuleType[];
 }
