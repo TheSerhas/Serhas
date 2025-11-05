@@ -18,6 +18,9 @@ export const useSubscriptionSettingsQuery = () => {
             profile_title: "",
             support_link: "",
             update_interval: 0,
+            shuffle_configs: false,
+            placeholder_if_disabled: true,
+            placeholder_remarks: ["Your subscription is inactive. Please contact support."],
             rules: [],
         },
     });

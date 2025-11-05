@@ -1,7 +1,7 @@
 from enum import StrEnum
 from typing import Pattern
 
-from pydantic import BaseModel
+from pydantic import BaseModel, validator
 
 
 class ConfigTypes(StrEnum):
@@ -27,8 +27,16 @@ class SubscriptionSettings(BaseModel):
     update_interval: int
     shuffle_configs: bool = False
     placeholder_if_disabled: bool = True
-    placeholder_remark: str = "disabled"
+    placeholder_remarks: list[str] = ["Your subscription is inactive. Please contact support."]
     rules: list[SubscriptionRule]
+
+    @validator("placeholder_remarks", pre=True)
+    def validate_placeholder_remarks(cls, v):
+        if isinstance(v, str):
+            v = [v]
+        if len(v) < 1:
+            raise ValueError("At least one placeholder remark is required.")
+        return v
 
 
 class TelegramSettings(BaseModel):

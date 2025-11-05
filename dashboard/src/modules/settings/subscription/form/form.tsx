@@ -12,15 +12,16 @@ import {
     FormLabel,
     Separator,
     Awaiting,
-    CheckboxField,
+    SwitchField,
 } from "@serhas/common/components";
+import { Plus, RotateCcw } from 'lucide-react';
 import { Schema } from "./schema"
 import { Overlay } from "./overlay"
 import {
     ProfileTitleField,
     SupportLinkField,
     UpdateIntervalField,
-    PlaceholderRemarkField,
+    PlaceholderRemarksField,
 } from "./fields";
 import { NoRulesAlert } from "./no-rules-alert";
 import {
@@ -72,6 +73,7 @@ export function SubscriptionRulesForm() {
     return (
         <Form {...form}>
             <form
+                id="subscription-settings-form"
                 onSubmit={form.handleSubmit(onSubmit)}
                 className="flex w-full max-w-4xl flex-col gap-2"
             >
@@ -80,19 +82,21 @@ export function SubscriptionRulesForm() {
                     <UpdateIntervalField />
                     <SupportLinkField />
                 </div>
-                <CheckboxField
+                <SwitchField
                     name="template_on_acceptance"
                     label={t("page.settings.subscription-settings.template-on-acceptance")}
                 />
-                <PlaceholderRemarkField />
-                <CheckboxField
+                <SwitchField
                     name="placeholder_if_disabled"
                     label={t("page.settings.subscription-settings.placeholder-if-disabled")}
                 />
-                <CheckboxField
+                <SwitchField
                     name="shuffle_configs"
                     label={t("page.settings.subscription-settings.shuffle-configs")}
                 />
+                
+                <PlaceholderRemarksField initialData={data?.placeholder_remarks} />
+                
                 <Separator className="my-3" />
                 <h4 className="text-lg mt-2">
                     {t("page.settings.subscription-settings.subscription-title")}
@@ -143,10 +147,11 @@ export function SubscriptionRulesForm() {
                 <HStack className="w-full flex-end">
                     <Button
                         type="button"
-                        variant="destructive"
+                        variant="outline"
                         className="w-fit"
                         onMouseDown={handleResetLocalChanges}
                     >
+                        <RotateCcw className="size-4 mr-2" />
                         {t("page.settings.subscription-settings.reset-local-changes")}
                     </Button>
                     <Button
@@ -160,10 +165,8 @@ export function SubscriptionRulesForm() {
                             })
                         }
                     >
+                        <Plus className="size-4 mr-2" />
                         {t("page.settings.subscription-settings.add-rule")}
-                    </Button>
-                    <Button type="submit" className="w-fit">
-                        {t("submit")}
                     </Button>
                 </HStack>
             </form>
