@@ -1,0 +1,3 @@
+[tool.black]
+line-length = 128
+extend-exclude = ".*_(grpc|pb2).pyi?"

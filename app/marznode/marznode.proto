@@ -1,0 +1,84 @@
+syntax = "proto3";
+
+package marznode;
+
+message Empty {}
+
+enum ConfigFormat {
+  PLAIN = 0;
+  JSON = 1;
+  YAML = 2;
+}
+
+message Backend {
+  string name = 1;
+  optional string type = 2;
+  optional string version = 3;
+  repeated Inbound inbounds = 4;
+}
+
+message BackendsResponse {
+  repeated Backend backends = 1;
+}
+
+message Inbound {
+  string tag = 1;
+  optional string config = 2;
+}
+
+message User {
+  uint32 id = 1;
+  string username = 2;
+  string key = 3;
+}
+
+message UserData {
+  User user = 1;
+  repeated Inbound inbounds = 2;
+}
+
+message UsersData {
+  repeated UserData users_data = 1;
+}
+
+message UsersStats {
+  message UserStats {
+    uint32 uid = 1;
+    uint64 usage = 2;
+  }
+  repeated UserStats users_stats = 1;
+}
+
+message LogLine {
+  string line = 1;
+}
+
+message BackendConfig {
+  string configuration = 1;
+  ConfigFormat config_format = 2;
+}
+
+message BackendLogsRequest {
+  string backend_name = 1;
+  bool include_buffer = 2;
+}
+
+message RestartBackendRequest {
+  string backend_name = 1;
+  optional BackendConfig config = 2;
+}
+
+message BackendStats {
+  bool running = 1;
+}
+
+service MarzService {
+  rpc SyncUsers(stream UserData) returns (Empty);
+  rpc RepopulateUsers(UsersData) returns (Empty);
+  rpc FetchBackends(Empty) returns (BackendsResponse);
+  rpc FetchUsersStats(Empty) returns (UsersStats);
+  rpc FetchBackendConfig(Backend) returns (BackendConfig);
+  rpc RestartBackend(RestartBackendRequest) returns (Empty);
+  rpc StreamBackendLogs(BackendLogsRequest) returns (stream LogLine);
+  rpc GetBackendStats(Backend) returns (BackendStats);
+}
