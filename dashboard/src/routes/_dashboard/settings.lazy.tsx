@@ -10,7 +10,7 @@ export const Settings = () => {
   return (
     <Page
       title={t('settings')}
-      className="sm:flex flex-col lg:grid grid-cols-2 gap-3 h-full"
+      className="sm:flex flex-col lg:grid grid-cols-1 gap-3 h-full rtl:[direction:rtl] rtl:[unicode-bidi:plaintext]"
     >
       {/* <ConfigurationWidget /> */}
       <VStack className="gap-3">
